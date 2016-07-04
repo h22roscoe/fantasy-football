@@ -23,14 +23,15 @@ type user struct {
 func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "12345"
+		port = "4200"
+
 	}
 
 	data := newDB()
 
 	http.Handle("/hello", data.helloHandler())
 	http.Handle("/auth/login", data.authHandler())
-	http.Handle("/", http.FileServer(http.Dir("src/app")))
+	http.Handle("/", http.FileServer(http.Dir("dist")))
 
 	log.Println("Server is running on port: " + port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))
