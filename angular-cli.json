@@ -3,13 +3,11 @@
     "version": "1.0.0-beta.8",
     "name": "fantasy-football"
   },
-  "apps": [
-    {
-      "main": "src/main.ts",
-      "tsconfig": "src/tsconfig.json",
-      "mobile": false
-    }
-  ],
+  "apps": [{
+    "main": "src/main.ts",
+    "tsconfig": "src/tsconfig.json",
+    "mobile": false
+  }],
   "addons": [],
   "packages": [],
   "e2e": {
