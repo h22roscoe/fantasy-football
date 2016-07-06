@@ -1,6 +1,7 @@
 import { Component }   from '@angular/core';
 import { Mongo }       from 'meteor/mongo';
 import { RouterLink }  from '@angular/router-deprecated';
+import { LoginButtons } from 'angular2-meteor-accounts-ui';
 
 import { Parties }     from '../../../collections/parties';
 import { PartiesForm } from '../parties-form/parties-form';
@@ -10,7 +11,8 @@ import { PartiesForm } from '../parties-form/parties-form';
   templateUrl: '/client/imports/parties-list/parties-list.html',
   directives: [
     PartiesForm,
-    RouterLink
+    RouterLink,
+    LoginButtons
   ]
 })
 export class PartiesList {

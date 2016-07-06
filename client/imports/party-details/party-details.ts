@@ -2,8 +2,15 @@ import { Component, NgZone } from '@angular/core';
 import { RouteParams } from '@angular/router-deprecated';
 import { Tracker } from 'meteor/tracker';
 import { Parties } from '../../../collections/parties.ts';
-import { RouterLink }  from '@angular/router-deprecated';
+import { RouterLink, CanActivate, ComponentInstruction }  from '@angular/router-deprecated';
+import { Meteor } from 'meteor/meteor';
+import { RequireUser } from 'angular2-meteor-accounts-ui';
 
+function checkPermissions(instruction: ComponentInstruction) {
+  var partyId = instruction.params['partyId'];
+  var party = Parties.findOne(partyId);
+  return (party && party.owner == Meteor.userId());
+}
 
 @Component({
   selector: 'party-details',
@@ -12,6 +19,7 @@ import { RouterLink }  from '@angular/router-deprecated';
     RouterLink
   ]
 })
+@CanActivate(checkPermissions)
 export class PartyDetails {
   private party: Party;
 
@@ -26,12 +34,16 @@ export class PartyDetails {
   }
 
   saveParty(party) {
-    Parties.update(party._id, {
-      $set: {
-        name: party.name,
-        description: party.description,
-        location: party.location
-      }
-    });
+    if (Meteor.userId()) {
+      Parties.update(party._id, {
+        $set: {
+          name: party.name,
+          description: party.description,
+          location: party.location
+        }
+      });
+    } else {
+      alert('Please log in to change this party');
+    }
   }
 }
