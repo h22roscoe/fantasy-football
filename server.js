@@ -10,9 +10,9 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 
-var route = require('./routes.js');
+var route = require('./routes');
 
-var configDB = require('./config/database.js');
+var configDB = require('./config/database');
 
 var ENV = process.env.NODE_ENV;
 if (ENV === "production") {

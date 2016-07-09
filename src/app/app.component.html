@@ -1,3 +1,8 @@
-<h1>
-  {{title}}
-</h1>
+<div class="row text-center">
+    <h1>ICUAFC FantasyFootball</h1>
+    <nav>
+        <a [routerLink]="['/login']">Login</a>
+        <a [routerLink]="['/signup']">Signup</a>
+    </nav>
+    <router-outlet></router-outlet>
+</div>
