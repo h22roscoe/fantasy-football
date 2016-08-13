@@ -1,0 +1,28 @@
+doctype html
+html
+  include ./include/head
+
+  body(style={'padding-top': '80px'})
+    div.container
+      div.col-sm-6.col-sm-offset-3
+        h1
+          span.fa.fa-sign-in
+          |  Login
+
+        include ./include/message
+
+        form(action="/login", method="post")
+          div.form-group
+            label Username
+            input.form-control(type="text", name="username")
+            label Password
+            input.form-control(type="password", name="password")
+          button.btn.btn-warning.btn-lg(type="submit")  Login
+
+        hr
+
+        p Need an account?
+          a(href="/signup")  Signup
+        p Or go &#32;
+            a(href="/") home
+            |.

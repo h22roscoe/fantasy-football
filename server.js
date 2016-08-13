@@ -1,9 +1,11 @@
 var express = require('express');
+var app = express();
+
 var mongoose = require('mongoose');
 var passport = require('passport');
 var flash = require('connect-flash');
 
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 8080;
 
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -31,21 +33,20 @@ var passConfigure = require('./config/passport');
 
 passConfigure(passport);
 
-var app = express();
-
-app.use(express.static(__dirname + '/dist'));
+app.use(express.static(__dirname + '/public'));
 
 // Logger
 app.use(morgan('dev'));
 
-// read cookies (needed for auth)
+// Read cookies (needed for auth)
 app.use(cookieParser());
 
 // Used to get info from HTML forms
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-app.use(bodyParser.json());
+
+app.set('view engine', 'pug');
 
 // Required for passport
 app.use(session({
