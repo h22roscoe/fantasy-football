@@ -3,7 +3,7 @@ html
   include ./include/head
 
   body(style={'padding-top': "80px"})
-    div.container
+    div.container-fluid
       div.col-sm-6.col-sm-offset-3
         h1
           span.fa.fa-sign-in
@@ -22,8 +22,10 @@ html
 
         hr
 
-        p Already have an account?
-          a(href="/login")  Login
+        p Already have an account?&#32;
+          a(href="/login") Login
         p Or go &#32;
           a(href="/") home
           |.
+
+    include ./include/footer

@@ -1,9 +1,9 @@
 doctype html
 html(lang="en")
   include ./include/head
-  
+
   body(style={'padding-top': '80px'})
-    div.container
+    div.container-fluid
       div.jumbotron.text-center
         h1
           span.fa.fa-lock
@@ -17,3 +17,5 @@ html(lang="en")
         a(href="/signup", class=['btn', 'btn-default'])
           span.fa.fa-user
           |  Local Signup
+
+    include ./include/footer

@@ -13,6 +13,7 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 
 var route = require('./routes');
+var api = require('./api');
 
 var configDB = require('./config/database');
 
@@ -45,6 +46,7 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+app.use(bodyParser.json());
 
 app.set('view engine', 'pug');
 
@@ -60,7 +62,8 @@ app.use(passport.session());
 // Use connect-flash for flash messages stored in session
 app.use(flash());
 
-route(app, passport);
+route.configure(app, passport);
+app.use('/api', api);
 
 app.listen(PORT, function() {
   console.log('Express app started on port: ' + PORT)

@@ -1,4 +1,6 @@
-module.exports = function(app, passport) {
+var Player = require('./models/player');
+
+function configure(app, passport) {
   app.get('/', function(req, res) {
     res.render('index');
   });
@@ -30,9 +32,24 @@ module.exports = function(app, passport) {
   }));
 
   app.get('/profile', isLoggedIn, function(req, res) {
-    res.render('profile', {
-      user : req.user // get the user out of session and pass to template
-    });
+    Player.findOne({
+      user: req.user._id
+    }, function(err, player) {
+      if (err) {
+        throw err;
+      }
+
+      if (!player) {
+        res.render('profile', {
+          user: req.user
+        });
+      } else {
+        res.render('profile', {
+          player: player,
+          user: req.user
+        });
+      }
+    })
   });
 
   app.get('/logout', isLoggedIn, function(req, res) {
@@ -47,4 +64,9 @@ function isLoggedIn(req, res, next) {
   }
 
   res.redirect('/');
+}
+
+module.exports = {
+  configure: configure,
+  isLoggedIn: isLoggedIn
 }
