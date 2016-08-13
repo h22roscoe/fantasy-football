@@ -1,0 +1,21 @@
+doctype html
+html(lang="en")
+  include ./include/head
+
+  body(style={'padding-top': '80px'})
+    div.container-fluid
+      div.jumbotron.text-center
+        h1
+          span.fa.fa-lock
+          |  ICUAFC Fantasy Football
+        p Login or Register with:
+
+        a.btn.btn-default(href="/login")
+          span.fa.fa-user
+          |  Local Login
+
+        a(href="/signup", class=['btn', 'btn-default'])
+          span.fa.fa-user
+          |  Local Signup
+
+    include ./include/footer

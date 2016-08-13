@@ -1,0 +1,31 @@
+doctype html
+include ./include/head.pug
+
+body(style={'padding-top': '80px'})
+  div.container-fluid
+    div.page-header.text-center(style={"padding-bottom": "10px"})
+      h1
+        span.fa.fa-user
+        | &#32;
+        = user.username
+
+      br
+
+      a.btn.btn-default.btn-sm(href="/logout") Logout
+
+    div.row-fluid
+      div.col-sm-6.col-sm-offset-3
+        if player
+          h2.text-center Your player
+
+          br
+
+          include ./include/player
+        else
+          h2.text-center Add your player
+
+          br
+
+          include ./mixins/playerform
+          +playerform("post")
+  include ./include/footer
