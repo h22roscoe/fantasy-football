@@ -81,6 +81,7 @@ api.post('/player', route.isLoggedIn, function(req, res) {
       newPlayer.name = req.body.player.firstname + " " + req.body.player.surname;
       newPlayer.position = req.body.player.position;
       newPlayer.xi = parseInt(req.body.player.xi);
+      newPlayer.appearances = 0;
       newPlayer.goals = 0;
       newPlayer.assists = 0;
       newPlayer.cleansheets = 0;
@@ -100,10 +101,10 @@ api.post('/player', route.isLoggedIn, function(req, res) {
           if (err) {
             throw err;
           }
+
+          res.redirect('/profile');
         });
       });
-
-      res.redirect('/profile');
     });
   } catch(e) {
     res.sendStatus(500);
