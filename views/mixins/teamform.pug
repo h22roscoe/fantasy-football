@@ -1,7 +1,7 @@
 mixin teamform(method, players)
-  - var defs = [1, 2, 3, 4]; // Represents 4 defenders at most in a team
-  - var mids = [1, 2, 3, 4, 5];
-  - var atts = [1, 2, 3];
+  - var maxdefs = [1, 2, 3, 4]; // Represents 4 defenders at most in a team
+  - var maxmids = [1, 2, 3, 4, 5];
+  - var maxatts = [1, 2, 3];
   - var subs = [1, 2, 3, 4];
   form(action="/api/team", method=method)
     div.form-group.row
@@ -30,64 +30,70 @@ mixin teamform(method, players)
           option 3-4-3
           option 3-5-2
 
-    div.form-group.row
-      label.col-sm-2.control-label(for="goalkeeper" + gk)= "Goalkeeper"
+    div.form-group.row#goalkeeper
+      label.col-sm-2.control-label(for="goalkeeper")
+        | Goalkeeper
       div.col-sm-10
         select.form-control(
           type="text",
-          id="goalkeeper" + gk,
-          name="team[goalkeeper" + gk + "]"
+          id="goalkeeper",
+          name="team[goalkeeper]"
         )
           option Select a goalkeeper
           each gk in players.goalkeepers
             option= gk.name
 
-    each def in defs
-      div.form-group.row
-        label.col-sm-2.control-label(for="defender" + def)= "Defender " + def
+    each def in maxdefs
+      div.form-group.row(id="defender" + def)
+        label.col-sm-2.control-label(for="defender" + def)
+          | Defender&#32;
+          = def
         div.col-sm-10
           select.form-control(
             type="text",
-            id="defender" + def,
             name="team[defender" + def + "]"
           )
             option Select a defender
             each defender in players.defenders
               option= defender.name
 
-    each mid in mids
-      div.form-group.row
-        label.col-sm-2.control-label(for="midfielder" + mid)= "Midfielder " + mid
+    each mid in maxmids
+      div.form-group.row(id="midfielder" + mid)
+        label.col-sm-2.control-label(for="midfielder" + mid)
+          | Midfielder&#32;
+          = mid
         div.col-sm-10
           select.form-control(
             type="text",
-            id="midfielder" + mid,
             name="team[midfielder" + mid + "]"
           )
             option Select a midfielder
             each midfielder in players.midfielders
               option= midfielder.name
 
-    each att in atts
-      div.form-group.row
-        label.col-sm-2.control-label(for="attacker" + att)= "Attacker " + att
+    each att in maxatts
+      div.form-group.row(id="attacker" + att)
+        label.col-sm-2.control-label(for="attacker" + att)
+          | Attacker&#32;
+          = att
         div.col-sm-10
           select.form-control(
             type="text",
-            id="attacker" + att,
             name="team[attacker" + att + "]"
           )
             option Select an attacker
             each attacker in players.attackers
               option= attacker.name
 
+    // TODO: Convert this repetion of these inputs into another mixin.
     each sub in subs
-      div.form-group.row
-        label.col-sm-2.control-label(for="sub" + sub)= "Substitute " + sub
+      div.form-group.row(id="sub" + sub)
+        label.col-sm-2.control-label(for="sub" + sub)
+          | Substitute&#32;
+          = sub
         div.col-sm-10
           select.form-control(
             type="text",
-            id="sub" + sub,
             name="team[sub" + sub + "]"
           )
             option Select a player from any position to be a substitute
@@ -97,7 +103,8 @@ mixin teamform(method, players)
     div.form-group.row.text-center
       button.btn.btn-warning.btn-lg(type="submit")  Submit
 
-  script.
+  // TODO: Should think about putting this into it's own file at this point.
+  script(type="text/javascript").
     function formationChosen(formation) {
       if (formation) {
         parseFormation(formation);
@@ -111,5 +118,40 @@ mixin teamform(method, players)
       if (match) {
         // TODO: Limit the number of choices to the respective groups
         // where match[1] is number of defenders in the formation etc.
+        var defenders = parseInt(match[1]);
+        var midfielders = parseInt(match[2]);
+        var attackers = parseInt(match[3]);
+        limitSelection(defenders, midfielders, attackers);
+      }
+    }
+
+    function limitSelection(defenders, midfielders, attackers) {
+      // Warning: Not connected to variables above
+      var maxdefs = maxdefs || 4
+      var maxmids = maxmids || 5
+      var maxatts = maxatts || 3
+
+      while (defenders < maxdefs) { // i.e. 3 at the back
+        defenders++;
+        var higherdef = document.getElementById("defender" + defenders);
+
+        // So to not submit it on completion.
+        higherdef.lastChild.firstChild.disabled = true;
+      }
+
+      while (midfielders < maxmids) {
+        midfielders++;
+        var highermid = document.getElementById("midfielder" + midfielders);
+
+        // So to not submit it on completion.
+        highermid.lastChild.firstChild.disabled = true;
+      }
+
+      while (attackers < maxatts) {
+        attackers++;
+        var higheratt = document.getElementById("attacker" + attackers);
+
+        // So to not submit it on completion.
+        higheratt.lastChild.firstChild.disabled = true;
       }
     }
