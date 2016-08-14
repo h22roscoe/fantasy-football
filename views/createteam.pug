@@ -1,0 +1,15 @@
+doctype html
+html
+  include ./include/head
+
+  body(style={'padding-top': '80px'})
+    div.container-fluid
+      div.col-sm-6.col-sm-offset-3
+        h2.text-center Add your team
+
+        br
+
+        include ./mixins/teamform
+        +teamform("post", players)
+
+    include ./include/footer

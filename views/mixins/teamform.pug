@@ -1,0 +1,114 @@
+mixin teamform(method, players)
+  - var defs = [1, 2, 3, 4];
+  - var mids = [1, 2, 3, 4, 5];
+  - var atts = [1, 2, 3];
+  - var subs = [1, 2, 3, 4];
+  form(action="/api/team", method=method)
+    div.form-group.row
+      label.col-sm-2.control-label(for="name") Team name
+      div.col-sm-10
+        input#name.form-control(
+          type="text",
+          name="team[name]",
+          placeholder="In it for the Mane"
+        )
+
+    div.form-group.row
+      label.col-sm-2.control-label(for="formation") Formation
+      div.col-sm-10
+        select#formation.form-control(
+          type="text",
+          onchange="formationChosen(this.value)",
+          name="team[formation]"
+        )
+          option Choose your formation
+          option 4-4-2
+          option 4-5-1
+          option 4-3-3
+          option 3-4-3
+          option 3-5-2
+
+    div.form-group.row
+      label.col-sm-2.control-label(for="goalkeeper" + gk)= "Goalkeeper"
+      div.col-sm-10
+        select.form-control(
+          type="text",
+          id="goalkeeper" + gk,
+          name="team[goalkeeper" + gk + "]"
+        )
+          option Select a goalkeeper
+          each gk in players.goalkeepers
+            option= gk.firstname + " " + gk.surname
+
+    each def in defs
+      div.form-group.row
+        label.col-sm-2.control-label(for="defender" + def)= "Defender " + def
+        div.col-sm-10
+          select.form-control(
+            type="text",
+            id="defender" + def,
+            name="team[defender" + def + "]"
+          )
+            option Select a defender
+            each defender in players.defenders
+              option= defender.firstname + " " + defender.surname
+
+    each mid in mids
+      div.form-group.row
+        label.col-sm-2.control-label(for="midfielder" + mid)= "Midfielder " + mid
+        div.col-sm-10
+          select.form-control(
+            type="text",
+            id="midfielder" + mid,
+            name="team[midfielder" + mid + "]"
+          )
+            option Select a midfielder
+            each midfielder in players.midfielders
+              option= midfielder.firstname + " " + midfielder.surname
+
+    each att in atts
+      div.form-group.row
+        label.col-sm-2.control-label(for="attacker" + att)= "Attacker " + att
+        div.col-sm-10
+          select.form-control(
+            type="text",
+            id="attacker" + att,
+            name="team[attacker" + att + "]"
+          )
+            option Select an attacker
+            each attacker in players.attackers
+              option= attacker.firstname + " " + attacker.surname
+
+    each sub in subs
+      div.form-group.row
+        label.col-sm-2.control-label(for="sub" + sub)= "Substitute " + sub
+        div.col-sm-10
+          select.form-control(
+            type="text",
+            id="sub" + sub,
+            name="team[sub" + sub + "]"
+          )
+            option Select a player from any position to be a substitute
+            each substitute in players.substitutes
+              option= substitute.firstname + " " + substitute.surname
+
+    div.form-group.row.text-center
+      button.btn.btn-warning.btn-lg(type="submit")  Submit
+
+  script.
+    function formationChosen(formation) {
+      if (formation) {
+        parseFormation(formation);
+      }
+    }
+
+    function parseFormation(formation) {
+      var myRegexp = /(\d)-(\d)-(\d)/g;
+      var match = myRegexp.exec(formation);
+
+      if (match) {
+        defenders = parseInt(match[1]);
+        midfielders = parseInt(match[2]);
+        attackers = parseInt(match[3]);
+      }
+    }

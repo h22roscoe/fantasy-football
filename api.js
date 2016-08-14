@@ -8,6 +8,62 @@ var route = require('./routes');
 
 api = express.Router();
 
+api.get('/createteam', route.isLoggedIn, function(req, res) {
+  var players = {};
+
+  Player.find({
+    position: 'Goalkeeper'
+  }, function(err, keepers) {
+    if (err) {
+      throw err;
+    }
+
+    players.goalkeepers = keepers;
+
+    Player.find({
+      position: 'Defender'
+    }, function(err, defenders) {
+      if (err) {
+        throw err;
+      }
+
+      players.defenders = defenders;
+
+      Player.find({
+        position: 'Midfielder'
+      }, function(err, midfielders) {
+        if (err) {
+          throw err;
+        }
+
+        players.midfielders = midfielders;
+
+        Player.find({
+          position: 'Attacker'
+        }, function(err, attackers) {
+          if (err) {
+            throw err;
+          }
+
+          players.attackers = attackers;
+
+          Player.find({}, function(err, substitutes) {
+            if (err) {
+              throw err;
+            }
+
+            players.substitutes = substitutes;
+
+            res.render('createteam', {
+              players: players
+            });
+          });
+        });
+      });
+    });
+  });
+})
+
 api.post('/player', route.isLoggedIn, function(req, res) {
   try {
     User.findOne({
