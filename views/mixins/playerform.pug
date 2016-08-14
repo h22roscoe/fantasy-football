@@ -13,17 +13,20 @@ mixin playerform(method)
           option 7
 
     div.form-group.row
-      label.col-sm-2.control-label(for="firstname") First name
+      label.col-sm-2.control-label(for="firstname")
+        | First name
       div.col-sm-10
         input#firstname.form-control(type="text", name="player[firstname]")
 
     div.form-group.row
-      label.col-sm-2.control-label.col-sm-2.control-label(for="surname") Surname
+      label.col-sm-2.control-label.col-sm-2.control-label(for="surname")
+        | Surname
       div.col-sm-10
         input#surname.form-control(type="text", name="player[surname]")
 
     div.form-group.row
-      label.col-sm-2.control-label(for="position") Position
+      label.col-sm-2.control-label(for="position")
+        | Position
       div.col-sm-10
         select#position.form-control(type="text", name="player[position]")
           option Goalkeeper

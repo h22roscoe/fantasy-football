@@ -10,13 +10,13 @@ var playerSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Team'
   }],
-  firstname: String,
-  surname: String,
+  name: String,
   position: {
     type: String,
     enum: ['Goalkeeper', 'Defender', 'Midfielder', 'Attacker']
   },
   xi: Number,
+  appearances: Number,
   goals: Number,
   assists: Number,
   cleansheets: Number,

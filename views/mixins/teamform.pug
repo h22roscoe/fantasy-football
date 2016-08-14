@@ -1,11 +1,12 @@
 mixin teamform(method, players)
-  - var defs = [1, 2, 3, 4];
+  - var defs = [1, 2, 3, 4]; // Represents 4 defenders at most in a team
   - var mids = [1, 2, 3, 4, 5];
   - var atts = [1, 2, 3];
   - var subs = [1, 2, 3, 4];
   form(action="/api/team", method=method)
     div.form-group.row
-      label.col-sm-2.control-label(for="name") Team name
+      label.col-sm-2.control-label(for="name")
+        | Team name
       div.col-sm-10
         input#name.form-control(
           type="text",
@@ -14,7 +15,8 @@ mixin teamform(method, players)
         )
 
     div.form-group.row
-      label.col-sm-2.control-label(for="formation") Formation
+      label.col-sm-2.control-label(for="formation")
+        | Formation
       div.col-sm-10
         select#formation.form-control(
           type="text",
@@ -38,7 +40,7 @@ mixin teamform(method, players)
         )
           option Select a goalkeeper
           each gk in players.goalkeepers
-            option= gk.firstname + " " + gk.surname
+            option= gk.name
 
     each def in defs
       div.form-group.row
@@ -51,7 +53,7 @@ mixin teamform(method, players)
           )
             option Select a defender
             each defender in players.defenders
-              option= defender.firstname + " " + defender.surname
+              option= defender.name
 
     each mid in mids
       div.form-group.row
@@ -64,7 +66,7 @@ mixin teamform(method, players)
           )
             option Select a midfielder
             each midfielder in players.midfielders
-              option= midfielder.firstname + " " + midfielder.surname
+              option= midfielder.name
 
     each att in atts
       div.form-group.row
@@ -77,7 +79,7 @@ mixin teamform(method, players)
           )
             option Select an attacker
             each attacker in players.attackers
-              option= attacker.firstname + " " + attacker.surname
+              option= attacker.name
 
     each sub in subs
       div.form-group.row
@@ -90,7 +92,7 @@ mixin teamform(method, players)
           )
             option Select a player from any position to be a substitute
             each substitute in players.substitutes
-              option= substitute.firstname + " " + substitute.surname
+              option= substitute.name
 
     div.form-group.row.text-center
       button.btn.btn-warning.btn-lg(type="submit")  Submit
@@ -107,8 +109,7 @@ mixin teamform(method, players)
       var match = myRegexp.exec(formation);
 
       if (match) {
-        defenders = parseInt(match[1]);
-        midfielders = parseInt(match[2]);
-        attackers = parseInt(match[3]);
+        // TODO: Limit the number of choices to the respective groups
+        // where match[1] is number of defenders in the formation etc.
       }
     }

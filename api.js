@@ -9,6 +9,8 @@ var route = require('./routes');
 api = express.Router();
 
 api.get('/createteam', route.isLoggedIn, function(req, res) {
+  // Holy fuck that WILT score - TODO: Refactor this method into more methods.
+  // TODO: Also handle the thrown errors within a try catch.
   var players = {};
 
   Player.find({
@@ -76,8 +78,7 @@ api.post('/player', route.isLoggedIn, function(req, res) {
       var newPlayer = new Player();
       newPlayer.user = user;
       newPlayer.teams = [];
-      newPlayer.firstname = req.body.player.firstname;
-      newPlayer.surname = req.body.player.surname;
+      newPlayer.name = req.body.player.firstname + " " + req.body.player.surname;
       newPlayer.position = req.body.player.position;
       newPlayer.xi = parseInt(req.body.player.xi);
       newPlayer.goals = 0;
