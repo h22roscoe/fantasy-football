@@ -131,6 +131,10 @@ mixin teamform(method, players)
       var maxmids = maxmids || 5
       var maxatts = maxatts || 3
 
+      for (var def = 1; def <= defenders; def++) {
+        var lowerdef = document.getElementById("defender" + def);
+        lowerdef.lastChild.firstChild.disabled = false;
+      }
       while (defenders < maxdefs) { // i.e. 3 at the back
         defenders++;
         var higherdef = document.getElementById("defender" + defenders);
@@ -139,6 +143,10 @@ mixin teamform(method, players)
         higherdef.lastChild.firstChild.disabled = true;
       }
 
+      for (var mid = 1; mid <= midfielders; mid++) {
+        var lowermid = document.getElementById("midfielder" + mid);
+        lowermid.lastChild.firstChild.disabled = false;
+      }
       while (midfielders < maxmids) {
         midfielders++;
         var highermid = document.getElementById("midfielder" + midfielders);
@@ -147,6 +155,10 @@ mixin teamform(method, players)
         highermid.lastChild.firstChild.disabled = true;
       }
 
+      for (var att = 1; att <= attackers; att++) {
+        var loweratt = document.getElementById("attacker" + att);
+        loweratt.lastChild.firstChild.disabled = false;
+      }
       while (attackers < maxatts) {
         attackers++;
         var higheratt = document.getElementById("attacker" + attackers);
