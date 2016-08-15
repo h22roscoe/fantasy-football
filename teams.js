@@ -24,11 +24,11 @@ router.post('/', function(req, res) {
 });
 
 router.get('/new', function(req, res) {
-  players.gkPromise.then(function(gks) {
-    players.defPromise.then(function(defs) {
-      players.midPromise.then(function(mids) {
-        players.attPromise.then(function(atts) {
-          players.allPromise.then(function(subs) {
+  players.gkPromise().then(function(gks) {
+    players.defPromise().then(function(defs) {
+      players.midPromise().then(function(mids) {
+        players.attPromise().then(function(atts) {
+          players.allPromise().then(function(subs) {
             res.render('teamnew', {
               players: {
                 goalkeepers: gks,
@@ -52,7 +52,6 @@ function createTeam(req, user) {
   newTeam.user = user;
   newTeam.points = 0;
 
-  console.log(req, user, newTeam);
   return newTeam;
 }
 

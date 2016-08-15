@@ -23,18 +23,14 @@ router.post('/', function(req, res) {
   });
 });
 
-var gkPromise = getPlayersInPosition('Goalkeeper');
-var defPromise = getPlayersInPosition('Defender');
-var midPromise = getPlayersInPosition('Midfielder');
-var attPromise = getPlayersInPosition('Attacker');
-var allPromise = getAll();
-
 function getPlayersInPosition(position) {
-  var promise = Player.find({
-    position: position
-  }).exec();
+  return function() {
+    var promise = Player.find({
+      position: position
+    }).exec();
 
-  return promise;
+    return promise;
+  }
 }
 
 function getAll() {
@@ -71,10 +67,10 @@ function createPlayer(req, user) {
 
 module.exports = {
   router: router,
-  gkPromise: gkPromise,
-  defPromise: defPromise,
-  midPromise: midPromise,
-  attPromise: attPromise,
-  allPromise: allPromise,
+  gkPromise: getPlayersInPosition('Goalkeeper'),
+  defPromise: getPlayersInPosition('Defender'),
+  midPromise: getPlayersInPosition('Midfielder'),
+  attPromise: getPlayersInPosition('Attacker'),
+  allPromise: getAll,
   getPlayerByUserId: getPlayerByUserId
 };

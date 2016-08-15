@@ -25,6 +25,7 @@ function limitSelection(defenders, midfielders, attackers) {
 
   for (var def = 1; def <= defenders; def++) {
     var lowerdef = document.getElementById("defender" + def);
+    lowerdef.style.display = "block";
     lowerdef.lastChild.firstChild.disabled = false;
   }
   while (defenders < maxdefs) { // i.e. 3 at the back
@@ -32,11 +33,13 @@ function limitSelection(defenders, midfielders, attackers) {
     var higherdef = document.getElementById("defender" + defenders);
 
     // So to not submit it on completion.
+    higherdef.style.display = "none";
     higherdef.lastChild.firstChild.disabled = true;
   }
 
   for (var mid = 1; mid <= midfielders; mid++) {
     var lowermid = document.getElementById("midfielder" + mid);
+    lowermid.style.display = "block";
     lowermid.lastChild.firstChild.disabled = false;
   }
   while (midfielders < maxmids) {
@@ -44,11 +47,13 @@ function limitSelection(defenders, midfielders, attackers) {
     var highermid = document.getElementById("midfielder" + midfielders);
 
     // So to not submit it on completion.
+    highermid.style.display = "none";
     highermid.lastChild.firstChild.disabled = true;
   }
 
   for (var att = 1; att <= attackers; att++) {
     var loweratt = document.getElementById("attacker" + att);
+    loweratt.style.display = "block";
     loweratt.lastChild.firstChild.disabled = false;
   }
   while (attackers < maxatts) {
@@ -56,6 +61,7 @@ function limitSelection(defenders, midfielders, attackers) {
     var higheratt = document.getElementById("attacker" + attackers);
 
     // So to not submit it on completion.
+    higheratt.style.display = "none";
     higheratt.lastChild.firstChild.disabled = true;
   }
 }
