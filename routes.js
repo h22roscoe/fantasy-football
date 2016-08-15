@@ -1,3 +1,6 @@
+var teams = require('./teams');
+var players = require('./players');
+
 var Player = require('./models/player');
 
 function configure(app, passport) {
@@ -13,7 +16,7 @@ function configure(app, passport) {
 
   // Process the login form
   app.post('/login', passport.authenticate('local-login', {
-    successRedirect : '/profile',
+    successRedirect : '/success',
     failureRedirect : '/login',
     failureFlash : true
   }));
@@ -26,28 +29,31 @@ function configure(app, passport) {
 
   // Process the signup form
   app.post('/signup', passport.authenticate('local-signup', {
-    successRedirect: '/profile',
+    successRedirect: '/success',
     failureRedirect: '/signup',
     failureFlash: true
   }));
 
-  app.get('/profile', isLoggedIn, function(req, res) {
-    Player.findOne({
-      user: req.user._id
-    }, function(err, player) {
-      if (err) {
-        throw err;
-      }
-
-      if (!player) {
-        res.render('profile', {
-          user: req.user
+  app.get('/success', isLoggedIn, function(req, res) {
+    var playerPromise = players.getPlayerByUserId(req.user._id);
+    playerPromise.then(function(player) {
+      if (player) {
+        // Since home will display their player
+        var teamPromise = teams.getTeamByUserId(req.user._id);
+        teamPromise.then(function(team) {
+          if (team) {
+            res.render('home', {
+              player: player,
+              team: team,
+              user: req.user
+            });
+          } else {
+            res.render('teamnew'); // They need to create new team.
+          }
         });
       } else {
-        res.render('profile', {
-          player: player,
-          user: req.user
-        });
+        // Else they need to create their player
+        res.render('playernew');
       }
     })
   });
@@ -56,6 +62,9 @@ function configure(app, passport) {
     req.logout();
     res.redirect('/');
   });
+
+  app.use('/teams', teams.router);
+  app.use('/players', players.router);
 };
 
 function isLoggedIn(req, res, next) {

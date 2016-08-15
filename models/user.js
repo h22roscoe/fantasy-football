@@ -14,6 +14,10 @@ var userSchema = mongoose.Schema({
   player: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Player'
+  },
+  team: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Team'
   }
 });
 

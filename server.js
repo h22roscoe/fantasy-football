@@ -13,7 +13,6 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 
 var route = require('./routes');
-var api = require('./api');
 
 var configDB = require('./config/database');
 
@@ -63,7 +62,6 @@ app.use(passport.session());
 app.use(flash());
 
 route.configure(app, passport);
-app.use('/api', api);
 
 app.listen(PORT, function() {
   console.log('Express app started on port: ' + PORT)

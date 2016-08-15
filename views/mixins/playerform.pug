@@ -1,7 +1,8 @@
 mixin playerform(method)
   form(action="/api/player", method=method)
     div.form-group.row
-      label.col-sm-2.control-label(for="xi") XI
+      label.col-sm-2.control-label(for="xi")
+        | XI
       div.col-sm-10
         select#xi.form-control(type="number", name="player[xi]")
           option 1
@@ -35,4 +36,5 @@ mixin playerform(method)
           option Attacker
 
     div.form-group.row.text-center
-      button.btn.btn-warning.btn-lg(type="submit")  Submit
+      button.btn.btn-warning.btn-lg(type="submit")
+        |  Submit

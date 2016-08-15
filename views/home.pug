@@ -14,20 +14,17 @@ body(style={'padding-top': '80px'})
       a.btn.btn-default.btn-sm(href="/logout") Logout
 
     div.row-fluid
-      div.col-sm-6.col-sm-offset-3
-        if player
-          a(href="/api/createteam") Create your team
+      div.col-sm-6
+        h2.text-center Your team
 
-          h2.text-center Your player
+        br
 
-          br
+        include ./include/team
 
-          include ./include/player
-        else
-          h2.text-center Add your player
+      div.col-sm-6
+        h2.text-center Your player
 
-          br
+        br
 
-          include ./mixins/playerform
-          +playerform("post")
+        include ./include/player
   include ./include/footer
