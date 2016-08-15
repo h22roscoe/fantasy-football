@@ -39,18 +39,7 @@ function configure(app, passport) {
     playerPromise.then(function(player) {
       if (player) {
         // Since home will display their player
-        var teamPromise = teams.getTeamByUserId(req.user._id);
-        teamPromise.then(function(team) {
-          if (team) {
-            res.render('home', {
-              player: player,
-              team: team,
-              user: req.user
-            });
-          } else {
-            res.render('teamnew'); // They need to create new team.
-          }
-        });
+        handleTeams(req, res, player);
       } else {
         // Else they need to create their player
         res.render('playernew');
@@ -66,6 +55,21 @@ function configure(app, passport) {
   app.use('/teams', teams.router);
   app.use('/players', players.router);
 };
+
+function handleTeams(req, res, player) {
+  var teamPromise = teams.getTeamByUserId(req.user._id);
+  teamPromise.then(function(team) {
+    if (team) {
+      res.render('home', {
+        player: player,
+        team: team,
+        user: req.user
+      });
+    } else {
+      res.redirect('/teams/new'); // They need to create new team.
+    }
+  });
+}
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {

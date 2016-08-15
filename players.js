@@ -6,16 +6,17 @@ var Player = require('./models/player');
 var router = express.Router();
 
 router.post('/', function(req, res) {
-  var promise = users.getUserById(req.user._id);
+  var promise = users.getUserByUsername(req.user.username);
   promise.then(function(user) {
-    var newPlayer = createPlayer(req);
+    var newPlayer = createPlayer(req, user);
 
-    var playerPromise = newPlayer.save();
-    playerPromise.then(function(player) {
+    newPlayer.save(function(err, player) {
+      if (err) throw err;
+
       user.player = player;
+      user.save(function(err) {
+        if (err) throw err;
 
-      var userPromise = user.save()
-      userPromise.then(function(user) {
         res.redirect('/success');
       });
     });
@@ -42,14 +43,14 @@ function getAll() {
 }
 
 function getPlayerByUserId(id) {
-  var promise = Player.find({
+  var promise = Player.findOne({
     user: id
   }).exec();
 
   return promise;
 }
 
-function createPlayer(req) {
+function createPlayer(req, user) {
   var newPlayer = new Player();
   newPlayer.user = user;
   newPlayer.teams = [];

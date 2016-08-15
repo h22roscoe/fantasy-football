@@ -3,7 +3,7 @@ mixin teamform(method, players)
   - var maxmids = [1, 2, 3, 4, 5];
   - var maxatts = [1, 2, 3];
   - var subs = [1, 2, 3, 4];
-  form(action="/api/team", method=method)
+  form(action="/teams", method=method)
     div.form-group.row
       label.col-sm-2.control-label(for="name")
         | Team name
