@@ -12,13 +12,13 @@ function configure(app, passport) {
     res.render('login', {
       message: req.flash('loginMessage')
     });
-  })
+  });
 
   // Process the login form
   app.post('/login', passport.authenticate('local-login', {
-    successRedirect : '/success',
-    failureRedirect : '/login',
-    failureFlash : true
+    successRedirect: '/success',
+    failureRedirect: '/login',
+    failureFlash: true
   }));
 
   app.get('/signup', function(req, res) {
@@ -44,7 +44,7 @@ function configure(app, passport) {
         // Else they need to create their player
         res.render('playernew');
       }
-    })
+    });
   });
 
   app.get('/logout', isLoggedIn, function(req, res) {
@@ -82,4 +82,4 @@ function isLoggedIn(req, res, next) {
 module.exports = {
   configure: configure,
   isLoggedIn: isLoggedIn
-}
+};

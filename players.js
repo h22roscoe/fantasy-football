@@ -11,11 +11,15 @@ router.post('/', function(req, res) {
     var newPlayer = createPlayer(req, user);
 
     newPlayer.save(function(err, player) {
-      if (err) throw err;
+      if (err) {
+        throw err;
+      }
 
       user.player = player;
       user.save(function(err) {
-        if (err) throw err;
+        if (err) {
+          throw err;
+        }
 
         res.redirect('/success');
       });
@@ -30,7 +34,7 @@ function getPlayersInPosition(position) {
     }).exec();
 
     return promise;
-  }
+  };
 }
 
 function getAll() {
@@ -50,7 +54,7 @@ function createPlayer(req, user) {
   var newPlayer = new Player();
   newPlayer.user = user;
   newPlayer.teams = [];
-  newPlayer.name = req.body.player.firstname + " " + req.body.player.surname;
+  newPlayer.name = req.body.player.firstname + ' ' + req.body.player.surname;
   newPlayer.position = req.body.player.position;
   newPlayer.xi = parseInt(req.body.player.xi);
   newPlayer.appearances = 0;

@@ -17,7 +17,7 @@ var route = require('./routes');
 var configDB = require('./config/database');
 
 var ENV = process.env.NODE_ENV;
-if (ENV === "production") {
+if (ENV === 'production') {
   mongoose.connect(configDB.production.uri, {
     user: configDB.user,
     pass: configDB.pass
@@ -64,5 +64,5 @@ app.use(flash());
 route.configure(app, passport);
 
 app.listen(PORT, function() {
-  console.log('Express app started on port: ' + PORT)
+  console.log('Express app started on port: ' + PORT);
 });

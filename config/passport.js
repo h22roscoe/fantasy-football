@@ -16,11 +16,11 @@ module.exports = function(passport) {
   });
 
   passport.use('local-signup', new LocalStrategy({
-    passReqToCallback : true
+    passReqToCallback: true
   }, signupUser));
 
   passport.use('local-login', new LocalStrategy({
-    passReqToCallback : true
+    passReqToCallback: true
   }, loginUser));
 };
 

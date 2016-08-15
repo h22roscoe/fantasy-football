@@ -11,11 +11,15 @@ router.post('/', function(req, res) {
   promise.then(function(user) {
     var newTeam = createTeam(req, user);
     newTeam.save(function(err, team) {
-      if (err) throw err;
+      if (err) {
+        throw err;
+      }
 
       user.team = team;
       user.save(function(err) {
-        if (err) throw err;
+        if (err) {
+          throw err;
+        }
 
         res.redirect('/success');
       });
@@ -37,8 +41,8 @@ router.get('/new', function(req, res) {
                 attackers: atts,
                 substitutes: subs
               }
-            })
-          })
+            });
+          });
         });
       });
     });
