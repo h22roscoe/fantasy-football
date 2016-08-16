@@ -1,16 +1,55 @@
+$(document).ready(function() {
+  setGoalkeepersOptions();
+  setDefenderOptions();
+  setMidfielderOptions();
+  setAttackerOptions();
+  setSubstituteOptions();
+});
+
+function setGoalkeepersOptions() {
+  createOptions('goalkeepers', $('.gkSelect'));
+}
+
+function setDefenderOptions() {
+  createOptions('defenders', $('.defSelect'));
+}
+
+function setMidfielderOptions() {
+  createOptions('midfielders', $('.midSelect'));
+}
+
+function setAttackerOptions() {
+  createOptions('attackers', $('.attSelect'));
+}
+
+function setSubstituteOptions() {
+  createOptions('', $('.subSelect'));
+}
+
+// Calls the players api and ask for all of certain positons
+// then adds the received players to the options of that selectElem.
+function createOptions(positions, selectElem) {
+  $.getJSON('../players/' + positions)
+    .done(function(obj) {
+      $.each(obj.players, function(idx, player) {
+        selectElem.append($('<option>').text(player.name));
+      });
+    });
+}
+
 function formationChosen(formation) {
   if (formation) {
     parseFormation(formation);
   }
 }
 
+// Makes sure that the input is in the form of a formation before limiting
+// selection to fit the given formation.
 function parseFormation(formation) {
   var myRegexp = /(\d)-(\d)-(\d)/g;
   var match = myRegexp.exec(formation);
 
   if (match) {
-    // TODO: Limit the number of choices to the respective groups
-    // where match[1] is number of defenders in the formation etc.
     var defenders = parseInt(match[1]);
     var midfielders = parseInt(match[2]);
     var attackers = parseInt(match[3]);
@@ -19,49 +58,25 @@ function parseFormation(formation) {
 }
 
 function limitSelection(defenders, midfielders, attackers) {
-  var maxdefs = maxdefs || 4;
-  var maxmids = maxmids || 5;
-  var maxatts = maxatts || 3;
+  var maxdefs = 4;
+  var maxmids = 5;
+  var maxatts = 3;
 
-  for (var def = 1; def <= defenders; def++) {
-    var lowerdef = document.getElementById('defender' + def);
-    lowerdef.style.display = 'block';
-    lowerdef.lastChild.firstChild.disabled = false;
+  enableUpToXThenDisable(maxdefs, defenders, 'defender');
+
+  enableUpToXThenDisable(maxmids, midfielders, 'midfielder');
+
+  enableUpToXThenDisable(maxatts, attackers, 'attacker');
+}
+
+// Shows and enables all elements with id + a number up to and including
+// a given xth one and then disables the rest from one after x to the max.
+function enableUpToXThenDisable(max, x, id) {
+  for (var i = 1; i <= x; i++) {
+    $('#' + id + i).show().prop('disabled', false);
   }
-  while (defenders < maxdefs) { // i.e. 3 at the back
-    defenders++;
-    var higherdef = document.getElementById('defender' + defenders);
-
-    // So to not submit it on completion.
-    higherdef.style.display = 'none';
-    higherdef.lastChild.firstChild.disabled = true;
-  }
-
-  for (var mid = 1; mid <= midfielders; mid++) {
-    var lowermid = document.getElementById('midfielder' + mid);
-    lowermid.style.display = 'block';
-    lowermid.lastChild.firstChild.disabled = false;
-  }
-  while (midfielders < maxmids) {
-    midfielders++;
-    var highermid = document.getElementById('midfielder' + midfielders);
-
-    // So to not submit it on completion.
-    highermid.style.display = 'none';
-    highermid.lastChild.firstChild.disabled = true;
-  }
-
-  for (var att = 1; att <= attackers; att++) {
-    var loweratt = document.getElementById('attacker' + att);
-    loweratt.style.display = 'block';
-    loweratt.lastChild.firstChild.disabled = false;
-  }
-  while (attackers < maxatts) {
-    attackers++;
-    var higheratt = document.getElementById('attacker' + attackers);
-
-    // So to not submit it on completion.
-    higheratt.style.display = 'none';
-    higheratt.lastChild.firstChild.disabled = true;
+  while (x < max) {
+    x++;
+    $('#' + id + x).hide().prop('disabled', true);
   }
 }

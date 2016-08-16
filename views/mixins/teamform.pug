@@ -34,14 +34,12 @@ mixin teamform(method, players)
       label.col-sm-2.control-label(for="goalkeeper")
         | Goalkeeper
       div.col-sm-10
-        select.form-control(
+        select.gkSelect.form-control(
           type="text",
           id="goalkeeper",
           name="team[goalkeeper]"
         )
           option Select a goalkeeper
-          each gk in players.goalkeepers
-            option= gk.name
 
     each def in maxdefs
       div.form-group.row(id="defender" + def)
@@ -49,13 +47,11 @@ mixin teamform(method, players)
           | Defender&#32;
           = def
         div.col-sm-10
-          select.form-control(
+          select.defSelect.form-control(
             type="text",
             name="team[defender" + def + "]"
           )
             option Select a defender
-            each defender in players.defenders
-              option= defender.name
 
     each mid in maxmids
       div.form-group.row(id="midfielder" + mid)
@@ -63,13 +59,11 @@ mixin teamform(method, players)
           | Midfielder&#32;
           = mid
         div.col-sm-10
-          select.form-control(
+          select.midSelect.form-control(
             type="text",
             name="team[midfielder" + mid + "]"
           )
             option Select a midfielder
-            each midfielder in players.midfielders
-              option= midfielder.name
 
     each att in maxatts
       div.form-group.row(id="attacker" + att)
@@ -77,13 +71,11 @@ mixin teamform(method, players)
           | Attacker&#32;
           = att
         div.col-sm-10
-          select.form-control(
+          select.attSelect.form-control(
             type="text",
             name="team[attacker" + att + "]"
           )
             option Select an attacker
-            each attacker in players.attackers
-              option= attacker.name
 
     // TODO: Convert this repetion of these inputs into another mixin.
     each sub in subs
@@ -92,13 +84,11 @@ mixin teamform(method, players)
           | Substitute&#32;
           = sub
         div.col-sm-10
-          select.form-control(
+          select.subSelect.form-control(
             type="text",
             name="team[sub" + sub + "]"
           )
             option Select a player from any position to be a substitute
-            each substitute in players.substitutes
-              option= substitute.name
 
     div.form-group.row.text-center
       button.btn.btn-warning.btn-lg(type="submit")  Submit

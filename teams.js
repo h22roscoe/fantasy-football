@@ -21,32 +21,14 @@ router.post('/', function(req, res) {
           throw err;
         }
 
-        res.redirect('/success');
+        res.redirect('/home');
       });
     });
   });
 });
 
 router.get('/new', function(req, res) {
-  players.gkPromise().then(function(gks) {
-    players.defPromise().then(function(defs) {
-      players.midPromise().then(function(mids) {
-        players.attPromise().then(function(atts) {
-          players.allPromise().then(function(subs) {
-            res.render('teamnew', {
-              players: {
-                goalkeepers: gks,
-                defenders: defs,
-                midfielders: mids,
-                attackers: atts,
-                substitutes: subs
-              }
-            });
-          });
-        });
-      });
-    });
-  });
+  res.render('teamnew');
 });
 
 function createTeam(req, user) {

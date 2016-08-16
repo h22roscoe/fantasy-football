@@ -1,7 +1,3 @@
 if (message && message.length > 0)
-  div#message.alert.alert-danger= message
-    button.close.pull-right.fa.fa-times(onclick="closeMessage()")
-  script(type='text/javascript').
-    function closeMessage() {
-      document.getElementById("message").hidden = true;
-    }
+  div#message.alert.alert-danger.alert-dismissable= message
+    button.close.pull-right.fa.fa-times(data-dismiss="alert")
