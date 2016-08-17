@@ -43,10 +43,10 @@ function configure(app, passport) {
     res.redirect('/');
   });
 
-  app.all('/teams', isLoggedIn);
+  app.all('/teams/*', isLoggedIn);
   teams(app);
 
-  app.all('/players', isLoggedIn);
+  app.all('/players/*', isLoggedIn);
   players(app);
 };
 

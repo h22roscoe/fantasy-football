@@ -39,12 +39,6 @@ module.exports = function(app) {
     res.render('playernew');
   });
 
-  app.get('/players/:id', function(req, res) {
-    players.findById(req.params.id).then(function(player) {
-      res.json(player);
-    });
-  });
-
   app.get('/players/me', function(req, res) {
     var userPromise = users.findByUsername(req.user.username);
     userPromise().then(function(user) {
@@ -84,6 +78,12 @@ module.exports = function(app) {
       res.json({
         players: attackers
       });
+    });
+  });
+
+  app.get('/players/:id', function(req, res) {
+    players.findById(req.params.id).then(function(player) {
+      res.json(player);
     });
   });
 };
