@@ -1,5 +1,5 @@
-var teams = require('./teams');
-var players = require('./players');
+var teams = require('./teams/router');
+var players = require('./players/router');
 
 function configure(app, passport) {
   app.get('/', function(req, res) {
@@ -44,10 +44,10 @@ function configure(app, passport) {
   });
 
   app.all('/teams', isLoggedIn);
-  app.use('/teams', teams.router);
+  teams(app);
 
   app.all('/players', isLoggedIn);
-  app.use('/players', players.router);
+  players(app);
 };
 
 function isLoggedIn(req, res, next) {

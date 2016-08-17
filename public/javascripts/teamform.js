@@ -31,6 +31,7 @@ function setSubstituteOptions() {
 function createOptions(positions, selectElem) {
   $.getJSON('../players/' + positions)
     .done(function(obj) {
+      console.log(obj);
       $.each(obj.players, function(idx, player) {
         selectElem.append($('<option>').text(player.name));
       });
