@@ -13,18 +13,20 @@ body(style={'padding-top': '80px'})
 
       a.btn.btn-default.btn-sm(href="/logout") Logout
 
-    div.row-fluid
+    div.row-fluid.text-center
       div.col-sm-6
-        h2.text-center Your team
-
-        br
-
-        //include ./include/team
+        button.btn.btn-primary.btn-lg(
+          type="button",
+          data-toggle="modal",
+          data-target="#teamModal") Create your team here
+      include ./include/teamModal
 
       div.col-sm-6
-        h2.text-center Your player
+        button.btn.btn-primary.btn-lg(
+          type="button",
+          data-toggle="modal",
+          data-target="#playerModal") Create your player here
+      include ./include/playerModal
 
-        br
-
-        //include ./include/player
+      // Display the table here.
   include ./include/footer

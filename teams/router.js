@@ -3,7 +3,7 @@ var users = require('../users/controller');
 
 module.exports = function(app) {
   app.post('/teams', function(req, res) {
-    var promise = users.getUserByUsername(req.user.username);
+    var promise = users.findByUsername(req.user.username);
     promise.then(function(user) {
       var newTeam = teams.createTeam(req, user);
       newTeam.save(function(err, team) {
@@ -21,9 +21,5 @@ module.exports = function(app) {
         });
       });
     });
-  });
-
-  app.get('/teams/new', function(req, res) {
-    res.render('teamnew');
   });
 };

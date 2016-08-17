@@ -3,11 +3,11 @@ var users = require('../users/controller');
 
 module.exports = function(app) {
   app.post('/players', function(req, res) {
-    var promise = users.getUserByUsername(req.user.username);
+    var promise = users.findByUsername(req.user.username);
     promise.then(function(user) {
-      var name = req.body.firstname + ' ' + req.body.surname;
-      var xi = req.body.xi;
-      var position = req.body.position;
+      var name = req.body.player.firstname + ' ' + req.body.player.surname;
+      var xi = req.body.player.xi;
+      var position = req.body.player.position;
       var newPlayer = players.createPlayer(name, position, xi, user);
 
       newPlayer.save(function(err, player) {
@@ -33,10 +33,6 @@ module.exports = function(app) {
         players: players
       });
     });
-  });
-
-  app.get('/players/new', function(req, res) {
-    res.render('playernew');
   });
 
   app.get('/players/me', function(req, res) {
