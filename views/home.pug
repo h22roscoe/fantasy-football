@@ -14,21 +14,21 @@ body(style={'padding-top': '80px'})
       a.btn.btn-default.btn-sm(href="/logout") Logout
 
     div.row-fluid.text-center
+      // TODO: Should be an if here for when they already have player/team
       div.col-sm-6
-        button.btn.btn-primary.btn-lg(
+        button.btn.btn-primary(
           type="button",
           data-toggle="modal",
-          data-target="#teamModal") Create your team here
-      include ./mixins/teamModal
-      +teamModal(teamMethod)
+          data-target="#teamModal") Create your team
+      include ./include/teamModal
 
+      // TODO: Should be an if here for when they already have player/team
       div.col-sm-6
-        button.btn.btn-primary.btn-lg(
+        button.btn.btn-primary(
           type="button",
           data-toggle="modal",
-          data-target="#playerModal") Create your player here
-      include ./mixins/playerModal
-      +playerModal(playerMethod)
+          data-target="#playerModal") Create your player
+      include ./include/playerModal
 
       // Display the table here.
   include ./include/footer

@@ -74,10 +74,14 @@ function limitSelection(defenders, midfielders, attackers) {
 // a given xth one and then disables the rest from one after x to the max.
 function enableUpToXThenDisable(max, x, id) {
   for (var i = 1; i <= x; i++) {
-    $('#' + id + i).show().prop('disabled', false);
+    var select = '#' + id + i;
+    $(select).show();
+    $(select + ' .form-control').prop('disabled', false);
   }
   while (x < max) {
     x++;
-    $('#' + id + x).hide().prop('disabled', true);
+    var select = '#' + id + x;
+    $(select).hide();
+    $(select + ' .form-control').prop('disabled', true);
   }
 }
