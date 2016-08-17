@@ -19,14 +19,16 @@ body(style={'padding-top': '80px'})
           type="button",
           data-toggle="modal",
           data-target="#teamModal") Create your team here
-      include ./include/teamModal
+      include ./mixins/teamModal
+      +teamModal(teamMethod)
 
       div.col-sm-6
         button.btn.btn-primary.btn-lg(
           type="button",
           data-toggle="modal",
           data-target="#playerModal") Create your player here
-      include ./include/playerModal
+      include ./mixins/playerModal
+      +playerModal(playerMethod)
 
       // Display the table here.
   include ./include/footer
