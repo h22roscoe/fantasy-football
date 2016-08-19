@@ -1,7 +1,8 @@
-var teams = require('./teams/router');
-var players = require('./players/router');
+var teamsRouter = require('./teams/router');
+var playersRouter = require('./players/router');
 
-var users = require('./users/controller');
+var User = require('./models/user');
+var users = require('./users/controller')(User);
 
 function configure(app, passport) {
   app.get('/', function(req, res) {
@@ -38,9 +39,7 @@ function configure(app, passport) {
     var promise = users.findByUsername(req.user.username);
     promise.then(function(user) {
       res.render('home', {
-        user: user,
-        playerMethod: user.player ? 'put' : 'post',
-        teamMethod: user.team ? 'put' : 'post'
+        user: user
       });
     });
   });
@@ -52,11 +51,11 @@ function configure(app, passport) {
 
   app.all('/teams/*', isLoggedIn);
   app.all('/teams', isLoggedIn);
-  teams(app);
+  teamsRouter(app);
 
   app.all('/players/*', isLoggedIn);
   app.all('/players', isLoggedIn);
-  players(app);
+  playersRouter(app);
 };
 
 function isLoggedIn(req, res, next) {

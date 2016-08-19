@@ -1,5 +1,7 @@
-var teams = require('./controller');
-var users = require('../users/controller');
+var Team = require('../models/team');
+var teams = require('./controller')(Team);
+var User = require('../models/user');
+var users = require('../users/controller')(User);
 
 module.exports = function(app) {
   app.post('/teams', function(req, res) {
@@ -23,5 +25,9 @@ module.exports = function(app) {
         });
       });
     });
+  });
+
+  app.get('/teams/new', function(req, res) {
+    res.render('teams/new');
   });
 };

@@ -9,26 +9,35 @@ body(style={'padding-top': '80px'})
         | &#32;
         = user.username
 
-      br
+      div.row-fluid
+        a(href="/logout") Logout
 
-      a.btn.btn-default.btn-sm(href="/logout") Logout
+    div.row-fluid
+      div.col-sm-3.col-sm-offset-3.text-center
+        if user.player
+          a.btn.btn-primary(
+            href="players/" + user.player + "/edit") Edit your player
+        else
+          a.btn.btn-primary(href="players/new") Create your player
 
-    div.row-fluid.text-center
-      // TODO: Should be an if here for when they already have player/team
-      div.col-sm-6
-        button.btn.btn-primary(
-          type="button",
-          data-toggle="modal",
-          data-target="#teamModal") Create your team
-      include ./include/teamModal
+      div.col-sm-3.text-center
+        if user.team
+          a.btn.btn-primary(
+            href="teams/" + user.team + "/edit") Edit your team
+        else
+          a.btn.btn-primary(href="teams/new") Create your team
 
-      // TODO: Should be an if here for when they already have player/team
-      div.col-sm-6
-        button.btn.btn-primary(
-          type="button",
-          data-toggle="modal",
-          data-target="#playerModal") Create your player
-      include ./include/playerModal
+    div.row-fluid(style={'padding-top': '60px'})
+      div.col-sm-10.col-sm-offset-1
+        table.table.table-responsive.table-striped
+          thead
+            th Team name
+            th Owner
+            th Points
+          tbody
+            tr
+              td Fake team name data
+              td Me
+              td 101
 
-      // Display the table here.
   include ./include/footer

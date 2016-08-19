@@ -1,5 +1,7 @@
-var players = require('./controller');
-var users = require('../users/controller');
+var Player = require('../models/player');
+var players = require('./controller')(Player);
+var User = require('../models/user');
+var users = require('../users/controller')(User);
 
 module.exports = function(app) {
   app.post('/players', function(req, res) {
@@ -33,6 +35,10 @@ module.exports = function(app) {
         players: players
       });
     });
+  });
+
+  app.get('/players/new', function(req, res) {
+    res.render('players/new');
   });
 
   app.get('/players/me', function(req, res) {
@@ -80,6 +86,14 @@ module.exports = function(app) {
   app.get('/players/:id', function(req, res) {
     players.findById(req.params.id).then(function(player) {
       res.json(player);
+    });
+  });
+
+  app.get('/players/:id/edit', function(req, res) {
+    players.findById(req.params.id).then(function(player) {
+      res.render('players/edit', {
+        player: player
+      });
     });
   });
 };

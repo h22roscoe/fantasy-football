@@ -1,0 +1,107 @@
+doctype htnl
+html(lang="en")
+  include ../include/head
+
+  body(style={'padding-top': '80px'})
+    div.container-fluid
+      div.page-header.text-center
+        h1 Create your own team
+      div.row-fluid
+        div.col-sm-6.col-sm-offset-3
+          - var maxdefs = [1, 2, 3, 4]; // Represents 4 defenders at most in a team
+          - var maxmids = [1, 2, 3, 4, 5];
+          - var maxatts = [1, 2, 3];
+          - var subs = [1, 2, 3, 4];
+          form(action="/teams", method="post")
+            div.form-group.row
+              label.col-sm-2.control-label(for="name")
+                | Team name
+              div.col-sm-10
+                input#name.form-control(
+                  type="text",
+                  name="team[name]",
+                  placeholder="In it for the Mane"
+                )
+
+            div.form-group.row
+              label.col-sm-2.control-label(for="formation")
+                | Formation
+              div.col-sm-10
+                select#formation.form-control(
+                  type="text",
+                  onchange="formationChosen(this.value)",
+                  name="team[formation]"
+                )
+                  option Choose your formation
+                  option 4-4-2
+                  option 4-5-1
+                  option 4-3-3
+                  option 3-4-3
+                  option 3-5-2
+
+            div.form-group.row#goalkeeper
+              label.col-sm-2.control-label(for="goalkeeper")
+                | Goalkeeper
+              div.col-sm-10
+                select.gkSelect.form-control(
+                  type="text",
+                  id="goalkeeper",
+                  name="team[goalkeeper]"
+                )
+                  option Select a goalkeeper
+
+            each def in maxdefs
+              div.form-group.row(id="defender" + def)
+                label.col-sm-2.control-label(for="defender" + def)
+                  | Defender&#32;
+                  = def
+                div.col-sm-10
+                  select.defSelect.form-control(
+                    type="text",
+                    name="team[defender" + def + "]"
+                  )
+                    option Select a defender
+
+            each mid in maxmids
+              div.form-group.row(id="midfielder" + mid)
+                label.col-sm-2.control-label(for="midfielder" + mid)
+                  | Midfielder&#32;
+                  = mid
+                div.col-sm-10
+                  select.midSelect.form-control(
+                    type="text",
+                    name="team[midfielder" + mid + "]"
+                  )
+                    option Select a midfielder
+
+            each att in maxatts
+              div.form-group.row(id="attacker" + att)
+                label.col-sm-2.control-label(for="attacker" + att)
+                  | Attacker&#32;
+                  = att
+                div.col-sm-10
+                  select.attSelect.form-control(
+                    type="text",
+                    name="team[attacker" + att + "]"
+                  )
+                    option Select an attacker
+
+            // TODO: Convert this repetion of these inputs into another mixin.
+            each sub in subs
+              div.form-group.row(id="sub" + sub)
+                label.col-sm-2.control-label(for="sub" + sub)
+                  | Substitute&#32;
+                  = sub
+                div.col-sm-10
+                  select.subSelect.form-control(
+                    type="text",
+                    name="team[sub" + sub + "]"
+                  )
+                    option Select a player from any position to be a substitute
+
+            div.form-group.row.text-center
+              button.btn.btn-warning.btn-lg(type="submit")  Submit
+
+    script(type="text/javascript", src="/javascripts/teams/new.js")
+
+    include ../include/footer

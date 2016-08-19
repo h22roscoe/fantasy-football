@@ -1,0 +1,21 @@
+doctype html
+html(lang="en")
+  include ../include/head
+
+  body(style={'padding-top': '80px'})
+    div.container-fluid
+      div.page-header.text-center
+        h1= team.name
+      div.row-fluid
+        div.col-sm-6.col-sm-offset-3
+          div.well
+            p
+              strong Points
+              |:&#32;
+              = team.points
+            p
+              strong Formation
+              |:&#32;
+              = team.formation
+
+    include ../include/footer
