@@ -15,8 +15,18 @@ module.exports = function(Team) {
     }).exec();
   }
 
+  function findAll() {
+    return Team.find({}).exec();
+  }
+
+  function findById(id) {
+    return Team.findById(id).exec();
+  }
+
   return {
     createTeam: createTeam,
-    findByUserId: findByUserId
+    findByUserId: findByUserId,
+    findAll: findAll,
+    findById: findById
   };
 };

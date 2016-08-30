@@ -27,7 +27,15 @@ module.exports = function(app) {
     });
   });
 
-  app.get('/teams/new', function(req, res) {
-    res.render('teams/new');
+  app.get('/teams/all', function(req, res) {
+    teams.findAll().then(function(teams) {
+      res.json(teams);
+    });
+  });
+
+  app.get('/teams/:id', function(req, res) {
+    teams.findById(req.params.id).then(function(team) {
+      res.json(team);
+    });
   });
 };
