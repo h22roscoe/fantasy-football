@@ -1,8 +1,8 @@
 'use strict';
 
 angular
-  .module('meanApp')
-  .component('registerForm', {
+  .module('loginForm')
+  .component('loginForm', {
     templateUrl: 'user-form/login-form/login-form.template.html',
     controller: ['$location', '$log', 'AuthService', LoginCtrl]
   });
@@ -17,11 +17,11 @@ function LoginCtrl($location, $log, AuthService) {
     $log.info('Submitting log in form');
     AuthService
       .login(this.credentials)
-      .error(function(err) {
-        alert(err);
-      })
-      .then(function() {
+      .then(function(data) {
+        $log.info(data);
         $location.path('/teams');
+      }, function(err) {
+        alert(err);
       });
   };
 }

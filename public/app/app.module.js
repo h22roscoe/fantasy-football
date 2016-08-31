@@ -6,6 +6,7 @@ angular.module('fantasyFootball', [
   'core',
   // 'playerDetail',
   // 'playerTable',
-  // 'teamDetail',
+  'userForm',
+  'teamDetail',
   'teamTable'
 ]);

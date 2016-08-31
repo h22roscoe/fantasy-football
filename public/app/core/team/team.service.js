@@ -5,13 +5,7 @@ angular
   .factory('Team', ['$resource',
     function($resource) {
       return $resource('teams/:teamId', {}, {
-        query: {
-          method: 'GET',
-          params: {
-            teamId: 'all'
-          },
-          isArray: true
-        }
+        // Stick to default options
       });
     }
   ]);

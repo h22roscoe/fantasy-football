@@ -27,7 +27,7 @@ module.exports = function(app) {
     });
   });
 
-  app.get('/teams/all', function(req, res) {
+  app.get('/teams', function(req, res) {
     teams.findAll().then(function(teams) {
       res.json(teams);
     });

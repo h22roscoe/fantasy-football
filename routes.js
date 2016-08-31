@@ -2,59 +2,39 @@ var teamsRouter = require('./teams/router');
 var playersRouter = require('./players/router');
 
 var User = require('./models/user');
-var users = require('./users/controller')(User);
 
 function configure(app, passport) {
-  app.get('/', function(req, res) {
-    res.render('index');
-  });
-
-  app.get('/login', function(req, res) {
-    res.render('login', {
-      message: req.flash('loginMessage')
+  app.post('/register', function(req, res) {
+    User.register(new User({
+      username: req.body.username
+    }), req.body.password, function(err, user) {
+      if (err) {
+        return res.status(500).json({
+          err: err
+        });
+      } else {
+        return res.status(200).json({
+          user: user
+        });
+      }
     });
   });
 
-  // Process the login form
-  app.post('/login', passport.authenticate('local-login', {
-    successRedirect: '/home',
-    failureRedirect: '/login',
-    failureFlash: true
-  }));
-
-  app.get('/signup', function(req, res) {
-    res.render('signup', {
-      message: req.flash('signupMessage')
-    });
-  });
-
-  // Process the signup form
-  app.post('/signup', passport.authenticate('local-signup', {
-    successRedirect: '/home',
-    failureRedirect: '/signup',
-    failureFlash: true
-  }));
-
-  app.get('/home', isLoggedIn, function(req, res) {
-    var promise = users.findByUsername(req.user.username);
-    promise.then(function(user) {
-      res.render('home', {
-        user: user
-      });
+  app.post('/login', passport.authenticate('local'), function(req, res) {
+    return res.status(200).json({
+      status: 'Login successful!'
     });
   });
 
   app.get('/logout', isLoggedIn, function(req, res) {
     req.logout();
-    res.redirect('/');
+    res.status(200).json({
+      status: 'Logged out'
+    });
   });
 
-  app.all('/teams/*', isLoggedIn);
-  app.all('/teams', isLoggedIn);
   teamsRouter(app);
 
-  app.all('/players/*', isLoggedIn);
-  app.all('/players', isLoggedIn);
   playersRouter(app);
 };
 
@@ -63,7 +43,9 @@ function isLoggedIn(req, res, next) {
     return next();
   }
 
-  res.redirect('/');
+  res.status(401).json({
+    message: 'UnauthorizedError'
+  });
 }
 
 module.exports = {

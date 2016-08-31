@@ -1,9 +1,10 @@
 var express = require('express');
+var path = require('path');
+var favicon = require('serve-favicon');
 var app = express();
 
 var mongoose = require('mongoose');
 var passport = require('passport');
-var flash = require('connect-flash');
 
 var PORT = process.env.PORT || 8080;
 
@@ -11,8 +12,6 @@ var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
-
-var route = require('./routes');
 
 var configDB = require('./config/database');
 
@@ -29,11 +28,7 @@ if (ENV === 'production') {
   });
 }
 
-var passConfigure = require('./config/passport');
-
-passConfigure(passport);
-
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, 'public', 'app')));
 
 // Logger
 app.use(morgan('dev'));
@@ -42,26 +37,69 @@ app.use(morgan('dev'));
 app.use(cookieParser());
 
 // Used to get info from HTML forms
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-app.use(bodyParser.json());
 
 app.set('view engine', 'pug');
 
 // Required for passport
 app.use(session({
-  secret: 'iaMmAKINGuPmYoWNsECREThERE',
+  secret: process.env.SECRET,
   resave: false,
   saveUninitialized: false
 }));
 app.use(passport.initialize());
 // Persistent login sessions
 app.use(passport.session());
-// Use connect-flash for flash messages stored in session
-app.use(flash());
 
-route.configure(app, passport);
+require('./config/passport')(passport);
+require('./routes').configure(app, passport);
+
+app.use(function(req, res) {
+  res.sendFile(path.join(__dirname, 'public', 'app', 'index.html'));
+});
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+// error handlers
+
+// [SH] Catch unauthorised errors
+app.use(function(err, req, res, next) {
+  if (err.name === 'UnauthorizedError') {
+    res.status(401).json({
+      message: err.name + ': ' + err.message
+    });
+  }
+});
+
+// production error handler
+// no stacktraces leaked to user
+if (ENV === 'production') {
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: {}
+    });
+  });
+}
+
+// development error handler
+// will print stacktrace
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: err
+  });
+});
 
 app.listen(PORT, function() {
   console.log('Express app started on port: ' + PORT);

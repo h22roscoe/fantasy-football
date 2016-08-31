@@ -2,68 +2,78 @@
 
 angular
   .module('core.auth')
-  .service('AuthService', ['$http', '$window', AuthService]);
+  .factory('AuthService', ['$http', '$q', AuthService]);
 
-function AuthService($http, $window) {
-  return {
-    currentUser: currentUser,
-    saveToken: saveToken,
-    getToken: getToken,
+function AuthService($http, $q) {
+  // Create user variable
+  var user = null;
+
+  // Return available functions for use in the controllers
+  return ({
     isLoggedIn: isLoggedIn,
-    register: register,
+    getUserStatus: getUserStatus,
     login: login,
-    logout: logout
-  };
-
-  function saveToken(token) {
-    $window.localStorage.token = token;
-  };
-
-  function getToken() {
-    return $window.localStorage.token;
-  };
+    logout: logout,
+    register: register
+  });
 
   function isLoggedIn() {
-    var token = getToken();
-    var payload;
+    return user;
+  }
 
-    if (token) {
-      payload = token.split('.')[1];
-
-      // atob works on modern browsers to parse a base64 encoding.
-      payload = $window.atob(payload);
-      payload = JSON.parse(payload);
-
-      return payload.exp > Date.now() / 1000;
-    } else {
-      return false;
-    }
-  };
-
-  function currentUser() {
-    if (isLoggedIn()) {
-      return $http.get('/users/me', {
-        headers: {
-          Authorization: 'Bearer ' + getToken()
-        }
-      });
-    }
-  };
-
-  function register(user) {
-    return $http.post('/register', user)
+  function getUserStatus() {
+    return $http.get('/users/me')
       .success(function(data) {
-        saveToken(data.token);
+        user = data.user;
+      }, function(err) {
+        user = false;
       });
-  };
+  }
 
   function login(user) {
-    return $http.post('/login', user).success(function(data) {
-      saveToken(data.token);
-    });
-  };
+    var deferred = $q.defer();
+
+    // send a post request to the server
+    $http.post('/login', user)
+      .then(function(data) {
+        user = data.user;
+        deferred.resolve();
+      }, function(err) {
+        user = false;
+        deferred.reject();
+      });
+
+    return deferred.promise;
+  }
 
   function logout() {
-    $window.localStorage.removeItem('token');
-  };
+    var deferred = $q.defer();
+
+    // Send a get request to the server
+    $http.get('/logout')
+      .then(function(data) {
+        user = false;
+        deferred.resolve();
+      }, function(err) {
+        user = false;
+        deferred.reject();
+      });
+
+    return deferred.promise;
+  }
+
+  function register(username, password) {
+    var deferred = $q.defer();
+
+    // send a post request to the server
+    $http.post('/register', user)
+      .then(function(data) {
+        deferred.resolve();
+      }, function(err) {
+        deferred.reject();
+      });
+
+    // return promise object
+    return deferred.promise;
+  }
 }
