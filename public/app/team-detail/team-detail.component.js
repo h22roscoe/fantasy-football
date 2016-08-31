@@ -4,7 +4,7 @@
 angular
   .module('teamDetail')
   .component('teamDetail', {
-    templateUrl: '/app/team-detail/team-detail.template.html',
+    templateUrl: 'team-detail/team-detail.template.html',
     controller: ['$routeParams', 'Team',
       function TeamDetailController($routeParams, Team) {
         var self = this;

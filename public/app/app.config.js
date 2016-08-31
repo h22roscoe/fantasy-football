@@ -19,6 +19,21 @@ angular
         .when('/players/:playerId', {
           template: '<player-detail></player-detail>'
         })
-        .otherwise('/teams');
+        .when('/', {
+          template: '<user-form></user-form>'
+        })
+        .otherwise('/');
     }
   ]);
+
+function run($rootScope, $location, AuthService) {
+  $rootScope.$on('$routeChangeStart', function(event, nextRoute, currentRoute) {
+    if (notLoggedInView() && !AuthService.isLoggedIn()) {
+      $location.path('/login');
+    }
+  });
+}
+
+function notLoggedInView() {
+  return !($location.path() === '/login' || $location.path() === '/signup');
+}

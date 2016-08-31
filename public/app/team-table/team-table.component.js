@@ -4,7 +4,7 @@
 angular
   .module('teamTable')
   .component('teamTable', {
-    templateUrl: '/app/team-table/team-table.template.html',
+    templateUrl: 'team-table/team-table.template.html',
     controller: ['Team',
       function TeamListController(Team) {
         this.teams = Team.query();
