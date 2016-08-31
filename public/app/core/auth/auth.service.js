@@ -23,57 +23,38 @@ function AuthService($http, $q) {
 
   function getUserStatus() {
     return $http.get('/users/me')
-      .success(function(data) {
-        user = data.user;
-      }, function(err) {
+      .success(function success(res) {
+        user = res.data.user;
+      }, function error(res) {
         user = false;
       });
   }
 
-  function login(user) {
-    var deferred = $q.defer();
-
+  function login(credentials) {
     // send a post request to the server
-    $http.post('/login', user)
-      .then(function(data) {
-        user = data.user;
-        deferred.resolve();
-      }, function(err) {
+    return $http.post('/login', credentials)
+      .then(function success(res) {
+        user = res.data.user;
+      }, function error(res) {
         user = false;
-        deferred.reject();
       });
-
-    return deferred.promise;
   }
 
   function logout() {
-    var deferred = $q.defer();
-
     // Send a get request to the server
-    $http.get('/logout')
-      .then(function(data) {
+    return $http.get('/logout')
+      .then(function success(res) {
         user = false;
-        deferred.resolve();
-      }, function(err) {
-        user = false;
-        deferred.reject();
       });
-
-    return deferred.promise;
   }
 
-  function register(username, password) {
-    var deferred = $q.defer();
-
+  function register(credentials) {
     // send a post request to the server
-    $http.post('/register', user)
-      .then(function(data) {
+    return $http.post('/register', credentials)
+      .then(function success(res) {
         deferred.resolve();
-      }, function(err) {
+      }, function error(res) {
         deferred.reject();
       });
-
-    // return promise object
-    return deferred.promise;
   }
 }

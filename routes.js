@@ -1,9 +1,6 @@
-var teamsRouter = require('./teams/router');
-var playersRouter = require('./players/router');
-
 var User = require('./models/user');
 
-function configure(app, passport) {
+module.exports = function(app, passport) {
   app.post('/register', function(req, res) {
     User.register(new User({
       username: req.body.username
@@ -33,9 +30,9 @@ function configure(app, passport) {
     });
   });
 
-  teamsRouter(app);
+  require('./teams/router')(app);
 
-  playersRouter(app);
+  require('./players/router')(app);
 };
 
 function isLoggedIn(req, res, next) {
@@ -47,7 +44,3 @@ function isLoggedIn(req, res, next) {
     message: 'UnauthorizedError'
   });
 }
-
-module.exports = {
-  configure: configure
-};

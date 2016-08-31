@@ -8,5 +8,5 @@ angular
   });
 
 function UserCtrl($location, $log) {
-
+  this.loginOrRegister = 'login';
 }
