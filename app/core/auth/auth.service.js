@@ -2,20 +2,20 @@
 
 angular
   .module('core.auth')
-  .factory('AuthService', ['$http', '$q', AuthService]);
+  .factory('AuthService', ['$http', '$log', AuthService]);
 
-function AuthService($http, $q) {
+function AuthService($http, $log) {
   // Create user variable
   var user = null;
 
   // Return available functions for use in the controllers
-  return ({
+  return {
     isLoggedIn: isLoggedIn,
     getUserStatus: getUserStatus,
     login: login,
     logout: logout,
     register: register
-  });
+  };
 
   function isLoggedIn() {
     return user;
@@ -23,10 +23,12 @@ function AuthService($http, $q) {
 
   function getUserStatus() {
     return $http.get('/users/me')
-      .success(function success(res) {
+      .then(function success(res) {
         user = res.data.user;
+        return user;
       }, function error(res) {
         user = false;
+        return user;
       });
   }
 
@@ -35,8 +37,10 @@ function AuthService($http, $q) {
     return $http.post('/login', credentials)
       .then(function success(res) {
         user = res.data.user;
+        return user;
       }, function error(res) {
         user = false;
+        return user;
       });
   }
 
@@ -45,6 +49,7 @@ function AuthService($http, $q) {
     return $http.get('/logout')
       .then(function success(res) {
         user = false;
+        return user;
       });
   }
 
@@ -52,9 +57,11 @@ function AuthService($http, $q) {
     // send a post request to the server
     return $http.post('/register', credentials)
       .then(function success(res) {
-        deferred.resolve();
+        user = res.data.user;
+        return user;
       }, function error(res) {
-        deferred.reject();
+        user = false;
+        return user;
       });
   }
 }

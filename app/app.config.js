@@ -19,21 +19,12 @@ angular
         .when('/players/:playerId', {
           template: '<player-detail></player-detail>'
         })
-        .when('/', {
-          template: '<user-form></user-form>'
+        .when('/login', {
+          template: '<login-form></login-form>'
         })
-        .otherwise('/');
+        .when('/register', {
+          template: '<register-form></register-form>'
+        })
+        .otherwise('/login');
     }
   ]);
-
-function run($rootScope, $location, AuthService) {
-  $rootScope.$on('$routeChangeStart', function(event, nextRoute, currentRoute) {
-    if (notLoggedInView() && !AuthService.isLoggedIn()) {
-      $location.path('/login');
-    }
-  });
-}
-
-function notLoggedInView() {
-  return !($location.path() === '/login' || $location.path() === '/signup');
-}

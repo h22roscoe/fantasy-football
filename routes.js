@@ -1,20 +1,13 @@
 var User = require('./models/user');
+var usersCtrl = require('./users/controller')(User);
+var Team = require('./models/team');
+var teamsCtrl = require('./teams/controller');
 
 module.exports = function(app, passport) {
   app.post('/register', function(req, res) {
-    User.register(new User({
-      username: req.body.username
-    }), req.body.password, function(err, user) {
-      if (err) {
-        return res.status(500).json({
-          err: err
-        });
-      } else {
-        return res.status(200).json({
-          user: user
-        });
-      }
-    });
+    var username = req.body.username;
+    var passwd = req.body.password;
+    usersCtrl.registerUser(username, passwd, userRegisteredCb);
   });
 
   app.post('/login', passport.authenticate('local'), function(req, res) {
@@ -30,10 +23,22 @@ module.exports = function(app, passport) {
     });
   });
 
-  require('./teams/router')(app);
+  require('./teams/router')(app, teamsCtrl, usersCtrl);
 
-  require('./players/router')(app);
+  require('./users/router')(app, usersCtrl);
 };
+
+function userRegisteredCb(err, user) {
+  if (err) {
+    return res.status(500).json({
+      err: err
+    });
+  } else {
+    return res.status(200).json({
+      user: user
+    });
+  }
+}
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {

@@ -1,6 +1,9 @@
 <div class="row-fluid">
-  <div class="col-md-6">
+  <div class="col-sm-6 col-sm-offset-3">
     <h1>Log in</h1>
+    <p>
+      Or <a ng-href="#!/register">register</a> if you need to
+    </p>
     <form ng-submit="$ctrl.onSubmit()">
       <div class="form-group">
         <label for="username">Username</label>
@@ -20,7 +23,9 @@
           placeholder="Password"
           ng-model="$ctrl.credentials.password">
       </div>
-      <button type="submit" class="btn btn-default">Log in!</button>
+      <button
+        type="submit"
+        class="btn btn-default">Log in!</button>
     </form>
   </div>
 </div>

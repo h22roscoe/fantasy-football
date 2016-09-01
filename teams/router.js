@@ -1,12 +1,6 @@
-var Team = require('../models/team');
-var teams = require('./controller')(Team);
-var User = require('../models/user');
-var users = require('../users/controller')(User);
-
-module.exports = function(app) {
+module.exports = function(app, teams, users) {
   app.post('/teams', function(req, res) {
-    var promise = users.findByUsername(req.user.username);
-    promise.then(function(user) {
+    users.findByUsername(req.user.username).then(function(user) {
       var name = req.body.team.name;
       var formation = req.body.team.formation;
       var newTeam = teams.createTeam(name. formation, user);
@@ -21,7 +15,10 @@ module.exports = function(app) {
             throw err;
           }
 
-          res.redirect('/home');
+          res.status(200).json({
+            team: team,
+            message: 'Team successfully created!'
+          });
         });
       });
     });

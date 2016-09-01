@@ -6,29 +6,27 @@ var app = express();
 var mongoose = require('mongoose');
 var passport = require('passport');
 
-var PORT = process.env.PORT || 8080;
-
 var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 
-var configDB = require('./config/database');
+var dbconf = require('./config/database');
 
-var ENV = process.env.NODE_ENV;
+const ENV = process.env.NODE_ENV;
 if (ENV === 'production') {
-  mongoose.connect(configDB.production.uri, {
-    user: configDB.user,
-    pass: configDB.pass
+  mongoose.connect(dbconf.production.uri, {
+    user: dbconf.user,
+    pass: dbconf.pass
   });
 } else {
-  mongoose.connect(configDB.development.uri, {
-    user: configDB.user,
-    pass: configDB.pass
+  mongoose.connect(dbconf.development.uri, {
+    user: dbconf.user,
+    pass: dbconf.pass
   });
 }
 
-app.use(express.static(path.join(__dirname, 'public', 'app')));
+app.use(express.static(path.join(__dirname, 'app')));
 
 // Logger
 app.use(morgan('dev'));
@@ -45,14 +43,18 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }));
+
 app.use(passport.initialize());
 // Persistent login sessions
 app.use(passport.session());
 
 require('./config/passport')(passport);
 require('./routes')(app, passport);
-require('./errors')(app);
 
+// To handle any errors that occur in the routes
+require('./errors')(app, ENV);
+
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, function() {
   console.log('Express app started on port: ' + PORT);
 });
