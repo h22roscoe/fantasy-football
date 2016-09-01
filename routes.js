@@ -7,12 +7,22 @@ module.exports = function(app, passport) {
   app.post('/register', function(req, res) {
     var username = req.body.username;
     var passwd = req.body.password;
-    usersCtrl.registerUser(username, passwd, userRegisteredCb);
+    usersCtrl.registerUser(username, passwd, function(err, user) {
+      if (err) {
+        return res.status(500).json({
+          err: err
+        });
+      } else {
+        return res.status(200).json({
+          user: user
+        });
+      }
+    });
   });
 
   app.post('/login', passport.authenticate('local'), function(req, res) {
     return res.status(200).json({
-      status: 'Login successful!'
+      user: req.user
     });
   });
 
@@ -27,18 +37,6 @@ module.exports = function(app, passport) {
 
   require('./users/router')(app, usersCtrl);
 };
-
-function userRegisteredCb(err, user) {
-  if (err) {
-    return res.status(500).json({
-      err: err
-    });
-  } else {
-    return res.status(200).json({
-      user: user
-    });
-  }
-}
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {

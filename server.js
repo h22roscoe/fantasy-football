@@ -49,10 +49,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require('./config/passport')(passport);
-require('./routes')(app, passport);
+
+var router = express.Router();
+require('./routes')(router, passport);
 
 // To handle any errors that occur in the routes
-require('./errors')(app, ENV);
+require('./errors')(router, ENV);
+
+app.use(router);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, function() {

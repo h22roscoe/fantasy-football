@@ -11,7 +11,7 @@ function RegisterCtrl($location, $log, AuthService) {
   var self = this;
 
   self.credentials = {
-    name: '',
+    username: '',
     password: ''
   };
 
@@ -19,10 +19,11 @@ function RegisterCtrl($location, $log, AuthService) {
     $log.info('Submitting registration');
     AuthService
       .register(self.credentials)
-      .then(function(user) {
-        $log.info(user);
-        if (user) {
+      .then(function(data) {
+        if (data.user) {
           $location.path('/teams');
+        } else {
+          $log.debug(data.err);
         }
       });
   };

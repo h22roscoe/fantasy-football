@@ -11,7 +11,6 @@ function AuthService($http, $log) {
   // Return available functions for use in the controllers
   return {
     isLoggedIn: isLoggedIn,
-    getUserStatus: getUserStatus,
     login: login,
     logout: logout,
     register: register
@@ -21,35 +20,15 @@ function AuthService($http, $log) {
     return user;
   }
 
-  function getUserStatus() {
-    return $http.get('/users/me')
-      .then(function success(res) {
-        user = res.data.user;
-        return user;
-      }, function error(res) {
-        user = false;
-        return user;
-      });
-  }
-
   function login(credentials) {
     // send a post request to the server
     return $http.post('/login', credentials)
       .then(function success(res) {
         user = res.data.user;
-        return user;
+        return res.data;
       }, function error(res) {
         user = false;
-        return user;
-      });
-  }
-
-  function logout() {
-    // Send a get request to the server
-    return $http.get('/logout')
-      .then(function success(res) {
-        user = false;
-        return user;
+        return res.data;
       });
   }
 
@@ -58,8 +37,17 @@ function AuthService($http, $log) {
     return $http.post('/register', credentials)
       .then(function success(res) {
         user = res.data.user;
-        return user;
+        return res.data;
       }, function error(res) {
+        user = false;
+        return res.data;
+      });
+  }
+
+  function logout() {
+    // Send a get request to the server
+    return $http.get('/logout')
+      .then(function success(res) {
         user = false;
         return user;
       });

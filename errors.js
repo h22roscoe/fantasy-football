@@ -12,7 +12,7 @@ module.exports = function(app, ENV) {
   app.use(function(err, req, res, next) {
     if (err.name === 'UnauthorizedError') {
       res.status(401).json({
-        message: err.name + ': ' + err.message
+        err: err.message
       });
     }
   });
