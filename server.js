@@ -27,6 +27,7 @@ if (ENV === 'production') {
 }
 
 app.use(express.static(path.join(__dirname, 'app')));
+app.use(favicon(path.join(__dirname, 'app', 'favicon.ico')));
 
 // Logger
 app.use(morgan('dev'));

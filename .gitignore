@@ -1,5 +1,9 @@
-# compiled output
-/dist
+# database stuff
+mongod
+/data
 
 # dependencies
 /node_modules
+
+# editor stuff
+/.c9
