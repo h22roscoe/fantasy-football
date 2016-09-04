@@ -4,16 +4,32 @@ angular
   .module('forms')
   .component('registerForm', {
     templateUrl: 'forms/register/register.template.html',
-    controller: ['$location', '$log', 'AuthService', RegisterCtrl]
+    controller: ['$location', '$log', 'AuthService', 'Player', RegisterCtrl]
   });
 
-function RegisterCtrl($location, $log, AuthService) {
+function RegisterCtrl($location, $log, AuthService, Player) {
   var self = this;
+  
+  self.isPlayer = false;
+  
+  self.positions = [
+    'Goalkeeper',
+    'Defender',
+    'Midfielder',
+    'Attacker'
+  ];
+  
+  self.xis = [1, 2, 3, 4, 5, 6, 7];
 
   self.credentials = {
     username: '',
     password: ''
   };
+  
+  self.player = new Player();
+  self.player.name = '';
+  self.player.position = 'Goalkeeper';
+  self.player.xi = 1;
 
   self.onSubmit = function() {
     $log.info('Submitting registration');
@@ -26,5 +42,9 @@ function RegisterCtrl($location, $log, AuthService) {
           $log.debug(data.err);
         }
       });
+      
+      if (self.isPlayer) {
+        self.player.$save();
+      }
   };
 }

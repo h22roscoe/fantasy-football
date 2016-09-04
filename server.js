@@ -1,3 +1,6 @@
+var https = require('https');
+var http = require('http');
+var fs = require('fs');
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -52,6 +55,8 @@ app.use(passport.session());
 require('./config/passport')(passport);
 
 var router = express.Router();
+
+// Set up the new router with the routes
 require('./routes')(router, passport);
 
 // To handle any errors that occur in the routes
@@ -60,6 +65,18 @@ require('./errors')(router, ENV);
 app.use(router);
 
 const PORT = process.env.PORT || 8080;
-app.listen(PORT, function() {
-  console.log('Express app started on port: ' + PORT);
-});
+const options = {
+  key: fs.readFileSync('key.pem', 'utf-8'),
+  cert: fs.readFileSync('cert.pem', 'utf-8'),
+  rejectUnauthorized: false
+};
+
+if (ENV === 'production') {
+  https.createServer(options, app).listen(PORT, function() {
+    console.log('Express app started on port: ' + PORT);
+  });
+} else {
+  app.listen(PORT, function() {
+    console.log('Express app started on port: ' + PORT);
+  });
+}

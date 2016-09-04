@@ -5,12 +5,13 @@ angular
   .module('teamDetail')
   .component('teamDetail', {
     templateUrl: 'team-detail/team-detail.template.html',
-    controller: ['$routeParams', 'Team',
-      function TeamDetailController($routeParams, Team) {
-        var self = this;
-        self.team = Team.get({
-          teamId: $routeParams.teamId
-        });
-      }
-    ]
+    controller: ['$routeParams', 'Team', TeamDetailController]
   });
+
+function TeamDetailController($routeParams, Team) {
+  var self = this;
+
+  self.team = Team.get({
+    teamId: $routeParams.teamId
+  });
+}

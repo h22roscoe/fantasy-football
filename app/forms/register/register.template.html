@@ -12,7 +12,7 @@
           class="form-control"
           id="username"
           placeholder="Enter your username"
-          ng-model="$ctrl.credentials.username">
+          ng-model="$ctrl.credentials.username" />
       </div>
       <div class="form-group">
         <label for="password">Password</label>
@@ -21,7 +21,41 @@
           class="form-control"
           id="password"
           placeholder="Password"
-          ng-model="$ctrl.credentials.password">
+          ng-model="$ctrl.credentials.password" />
+      </div>
+      <div class="form-group">
+        <label>
+          <input type="checkbox" ng-model="$ctrl.isPlayer" />
+          IC player
+        </label>
+      </div>
+      <div class="form-group" ng-if="$ctrl.isPlayer">
+        <div class="form-group">
+          <label for="name">Your name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            placeholder="Your name"
+            ng-model="$ctrl.player.name" />
+        </div>
+        <div class="form-group">
+          <label for="position">Position</label>
+          <select
+            class="form-control"
+            id="position"
+            ng-model="$ctrl.player.position"
+            ng-options="position for position in $ctrl.positions">
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="xi">XI</label>
+          <select
+            class="form-control"
+            id="xi"
+            ng-model="$ctrl.player.xi"
+            ng-options="xi for xi in $ctrl.xis" />
+        </div>
       </div>
       <button
         type="submit"
