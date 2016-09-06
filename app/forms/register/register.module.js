@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('forms.register', []);
+angular.module('forms.register', ['core']);

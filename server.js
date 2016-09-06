@@ -1,6 +1,3 @@
-var https = require('https');
-var http = require('http');
-var fs = require('fs');
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -14,18 +11,17 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 
-var dbconf = require('./config/database');
-
 const ENV = process.env.NODE_ENV;
+const DB_CONF = require('./config/database');
 if (ENV === 'production') {
-  mongoose.connect(dbconf.production.uri, {
-    user: dbconf.user,
-    pass: dbconf.pass
+  mongoose.connect(DB_CONF.production.uri, {
+    user: DB_CONF.user,
+    pass: DB_CONF.pass
   });
 } else {
-  mongoose.connect(dbconf.development.uri, {
-    user: dbconf.user,
-    pass: dbconf.pass
+  mongoose.connect(DB_CONF.development.uri, {
+    user: DB_CONF.user,
+    pass: DB_CONF.pass
   });
 }
 
@@ -41,12 +37,22 @@ app.use(cookieParser());
 // Used to get info from HTML forms
 app.use(bodyParser.json());
 
-// Required for passport
-app.use(session({
+var sess = {
   secret: process.env.SECRET,
   resave: false,
+  cookie: {
+    httpOnly: false
+  },
   saveUninitialized: false
-}));
+};
+
+if (ENV === 'production') {
+  app.set('trust proxy', 1); // Trust first proxy
+  sess.cookie.secure = true; // Serve secure cookies
+}
+
+// Required for passport
+app.use(session(sess));
 
 app.use(passport.initialize());
 // Persistent login sessions
@@ -54,29 +60,10 @@ app.use(passport.session());
 
 require('./config/passport')(passport);
 
-var router = express.Router();
-
-// Set up the new router with the routes
-require('./routes')(router, passport);
-
-// To handle any errors that occur in the routes
-require('./errors')(router, ENV);
-
-app.use(router);
+// Set up the routes
+app.use(require('./router')(passport));
 
 const PORT = process.env.PORT || 8080;
-const options = {
-  key: fs.readFileSync('key.pem', 'utf-8'),
-  cert: fs.readFileSync('cert.pem', 'utf-8'),
-  rejectUnauthorized: false
-};
-
-if (ENV === 'production') {
-  https.createServer(options, app).listen(PORT, function() {
-    console.log('Express app started on port: ' + PORT);
-  });
-} else {
-  app.listen(PORT, function() {
-    console.log('Express app started on port: ' + PORT);
-  });
-}
+app.listen(PORT, function() {
+  console.log('Express app started on port: ' + PORT);
+});

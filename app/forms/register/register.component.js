@@ -9,42 +9,37 @@ angular
 
 function RegisterCtrl($location, $log, AuthService, Player) {
   var self = this;
-  
+
   self.isPlayer = false;
-  
+
   self.positions = [
     'Goalkeeper',
     'Defender',
     'Midfielder',
     'Attacker'
   ];
-  
+
   self.xis = [1, 2, 3, 4, 5, 6, 7];
 
   self.credentials = {
     username: '',
     password: ''
   };
-  
+
   self.player = new Player();
   self.player.name = '';
   self.player.position = 'Goalkeeper';
   self.player.xi = 1;
 
   self.onSubmit = function() {
-    $log.info('Submitting registration');
     AuthService
       .register(self.credentials)
       .then(function(data) {
-        if (data.user) {
-          $location.path('/teams');
-        } else {
-          $log.debug(data.err);
+        if (self.isPlayer) {
+          self.player.$save(function() {
+            $location.path('/teams');
+          });
         }
       });
-      
-      if (self.isPlayer) {
-        self.player.$save();
-      }
   };
 }
