@@ -8,16 +8,36 @@ angular
 
       $routeProvider
         .when('/teams', {
-          template: '<team-table></team-table>'
+          template: '<team-table></team-table>',
+          resolve: {
+            access: ['AuthService', function(AuthService) {
+              return AuthService.isLoggedIn();
+            }],
+          }
         })
         .when('/teams/:teamId', {
-          template: '<team-detail></team-detail>'
+          template: '<team-detail></team-detail>',
+          resolve: {
+            access: ['AuthService', function(AuthService) {
+              return AuthService.isLoggedIn();
+            }],
+          }
         })
         .when('/players', {
-          template: '<player-table></player-table>'
+          template: '<player-table></player-table>',
+          resolve: {
+            access: ['AuthService', function(AuthService) {
+              return AuthService.isLoggedIn();
+            }],
+          }
         })
         .when('/players/:playerId', {
-          template: '<player-detail></player-detail>'
+          template: '<player-detail></player-detail>',
+          resolve: {
+            access: ['AuthService', function(AuthService) {
+              return AuthService.isLoggedIn();
+            }],
+          }
         })
         .when('/login', {
           template: '<login-form></login-form>'
@@ -27,4 +47,13 @@ angular
         })
         .otherwise('/login');
     }
-  ]);
+  ])
+  .run(['$rootScope', 'AuthService', '$location',
+    function($rootScope, AuthService, $location) {
+      $rootScope.$on('$routeChangeError',
+        function(event, current, previous, rejection) {
+          if (rejection == AuthService.UNAUTHORIZED) {
+            $location.path('/login');
+          }
+        });
+    }]);;

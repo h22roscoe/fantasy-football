@@ -39,6 +39,8 @@ function RegisterCtrl($location, $log, AuthService, Player) {
           self.player.$save(function() {
             $location.path('/teams');
           });
+        } else {
+          $location.path('/teams');
         }
       });
   };

@@ -2,22 +2,30 @@
 
 angular
   .module('core.auth')
-  .factory('AuthService', ['$http', '$log', AuthService]);
+  .factory('AuthService', ['$q', '$http', '$log', AuthService]);
 
-function AuthService($http, $log) {
+function AuthService($q, $http, $log) {
   // Create user variable
   var user = null;
 
   // Return available functions for use in the controllers
-  return {
+  var Access = {
+    OK: 200,
+    UNAUTHORIZED: 401,
     isLoggedIn: isLoggedIn,
     login: login,
     logout: logout,
     register: register
   };
 
+  return Access;
+
   function isLoggedIn() {
-    return user;
+    if (user) {
+      return Access.OK;
+    } else {
+      return $q.reject(Access.UNAUTHORIZED);
+    }
   }
 
   function login(credentials) {

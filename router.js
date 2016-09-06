@@ -20,7 +20,7 @@ module.exports = function(passport) {
         session: true
       })(req, res, function() {
         return res.status(200).json({
-          status: 'Registration successful!'
+          user: user
         });
       });
     });
