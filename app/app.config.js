@@ -12,7 +12,7 @@ angular
           resolve: {
             access: ['AuthService', function(AuthService) {
               return AuthService.isLoggedIn();
-            }],
+            }]
           }
         })
         .when('/teams/:teamId', {
@@ -20,7 +20,15 @@ angular
           resolve: {
             access: ['AuthService', function(AuthService) {
               return AuthService.isLoggedIn();
-            }],
+            }]
+          }
+        })
+        .when('/create', {
+          template: '<team-create></team-create>',
+          resolve: {
+            access: ['AuthService', function(AuthService) {
+              return AuthService.isLoggedIn();
+            }]
           }
         })
         .when('/players', {
@@ -36,7 +44,7 @@ angular
           resolve: {
             access: ['AuthService', function(AuthService) {
               return AuthService.isLoggedIn();
-            }],
+            }]
           }
         })
         .when('/login', {

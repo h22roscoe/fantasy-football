@@ -8,5 +8,6 @@ angular.module('fantasyFootball', [
   // 'playerTable',
   'forms',
   'teamDetail',
-  'teamTable'
+  'teamTable',
+  'teamCreate'
 ]);

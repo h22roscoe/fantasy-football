@@ -28,53 +28,43 @@ router.post('/', function(req, res) {
 
 router.get('/', function(req, res) {
   users.findAll().then(function(players) {
-    res.status(200).json({
-      players: players
-    });
+    res.status(200).json(players);
   });
 });
 
 router.get('/me', function(req, res) {
   users.findByUsername(req.user.username).then(function(user) {
-    res.json(user);
+    res.status(200).json(user);
   });
 });
 
 router.get('/goalkeepers', function(req, res) {
   users.findAllByPosition('Goalkeeper').then(function(goalkeepers) {
-    res.json({
-      players: goalkeepers
-    });
+    res.status(200).json(goalkeepers);
   });
 });
 
 router.get('/defenders', function(req, res) {
   users.findAllByPosition('Defender').then(function(defenders) {
-    res.json({
-      players: defenders
-    });
+    res.status(200).json(defenders);
   });
 });
 
 router.get('/midfielders', function(req, res) {
   users.findAllByPosition('Midfielder').then(function(midfielders) {
-    res.json({
-      players: midfielders
-    });
+    res.status(200).json(midfielders);
   });
 });
 
 router.get('/attackers', function(req, res) {
   users.findAllByPosition('Attacker').then(function(attackers) {
-    res.json({
-      players: attackers
-    });
+    res.status(200).json(attackers);
   });
 });
 
 router.get('/:id', function(req, res) {
   users.findById(req.params.id).then(function(player) {
-    res.json(player);
+    res.status(200).json(player);
   });
 });
 

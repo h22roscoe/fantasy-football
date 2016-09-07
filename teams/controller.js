@@ -6,6 +6,8 @@ module.exports = function(Team) {
     newTeam.user = user;
     newTeam.points = 0;
 
+    console.log(newTeam);
+
     return newTeam;
   }
 
@@ -16,7 +18,7 @@ module.exports = function(Team) {
   }
 
   function findAll() {
-    return Team.find({}).exec();
+    return Team.find({}).populate('user').exec();
   }
 
   function findById(id) {

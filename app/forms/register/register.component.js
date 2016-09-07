@@ -4,10 +4,10 @@ angular
   .module('forms')
   .component('registerForm', {
     templateUrl: 'forms/register/register.template.html',
-    controller: ['$location', '$log', 'AuthService', 'Player', RegisterCtrl]
+    controller: ['$location', 'AuthService', 'Player', RegisterCtrl]
   });
 
-function RegisterCtrl($location, $log, AuthService, Player) {
+function RegisterCtrl($location, AuthService, Player) {
   var self = this;
 
   self.isPlayer = false;

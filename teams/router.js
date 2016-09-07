@@ -9,12 +9,14 @@ var router = express.Router();
 
 router.post('/', function(req, res) {
   users.findByUsername(req.user.username).then(function(user) {
-    var name = req.body.team.name;
-    var formation = req.body.team.formation;
-    var newTeam = teams.createTeam(name. formation, user);
+    var name = req.body.name;
+    var formation = req.body.formation;
+    var newTeam = teams.createTeam(name, formation, user);
     newTeam.save(function(err, team) {
       if (err) {
-        throw err;
+        res.status(500).json({
+          err: 'Server error when saving the new team'
+        });
       }
 
       user.team = team;
@@ -26,8 +28,7 @@ router.post('/', function(req, res) {
         }
 
         res.status(200).json({
-          team: team,
-          message: 'Team successfully created!'
+          team: team
         });
       });
     });

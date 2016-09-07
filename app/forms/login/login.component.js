@@ -4,10 +4,10 @@ angular
   .module('forms')
   .component('loginForm', {
     templateUrl: 'forms/login/login.template.html',
-    controller: ['$location', '$log', 'AuthService', LoginCtrl]
+    controller: ['$location', 'AuthService', LoginCtrl]
   });
 
-function LoginCtrl($location, $log, AuthService) {
+function LoginCtrl($location, AuthService) {
   var self = this;
 
   self.credentials = {
@@ -16,7 +16,6 @@ function LoginCtrl($location, $log, AuthService) {
   };
 
   self.onSubmit = function() {
-    $log.info('Submitting log in form');
     AuthService
       .login(self.credentials)
       .then(function(data) {

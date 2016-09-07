@@ -1,0 +1,174 @@
+<div class="row-fluid">
+  <div class="col-sm-6 col-sm-offset-3">
+    <h1>Create your team</h1>
+    <form ng-submit="$ctrl.onSubmit()" novalidate>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          placeholder="Enter the team's name"
+          ng-model="$ctrl.team.name" />
+      </div>
+      <div class="form-group">
+        <label for="formation">Formation</label>
+        <select
+          class="form-control"
+          id="formation"
+          ng-model="$ctrl.team.formation"
+          ng-change="$ctrl.formationChange()"
+          ng-options="formation for formation in $ctrl.formations">
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="goalkeeper">Goalkeeper</label>
+        <select
+          class="form-control"
+          id="goalkeeper"
+          ng-model="$ctrl.gk"
+          ng-options="gk.name for gk in $ctrl.goalkeepers">
+        </select>
+      </div>
+      <div class="form-group" ng-if="$ctrl.defs > 0">
+        <label for="defender1">Defender 1</label>
+        <select
+          class="form-control"
+          id="defender1"
+          ng-model="$ctrl.def1"
+          ng-options="def.name for def in $ctrl.defenders">
+        </select>
+      </div>
+      <div class="form-group" ng-if="$ctrl.defs > 1">
+        <label for="defender2">Defender 2</label>
+        <select
+          class="form-control"
+          id="defender2"
+          ng-model="$ctrl.def2"
+          ng-options="def.name for def in $ctrl.defenders">
+        </select>
+      </div>
+      <div class="form-group" ng-if="$ctrl.defs > 2">
+        <label for="defender3">Defender 3</label>
+        <select
+          class="form-control"
+          id="defender3"
+          ng-model="$ctrl.def3"
+          ng-options="def.name for def in $ctrl.defenders">
+        </select>
+      </div>
+      <div class="form-group" ng-if="$ctrl.defs > 3">
+        <label for="defender4">Defender 4</label>
+        <select
+          class="form-control"
+          id="defender4"
+          ng-model="$ctrl.def4"
+          ng-options="def.name for def in $ctrl.defenders">
+        </select>
+      </div>
+      <div class="form-group" ng-if="$ctrl.mids > 0">
+        <label for="midfielder1">Midfielder 1</label>
+        <select
+          class="form-control"
+          id="midfielder1"
+          ng-model="$ctrl.mid1"
+          ng-options="mid.name for mid in $ctrl.midfielders">
+        </select>
+      </div>
+      <div class="form-group" ng-if="$ctrl.mids > 1">
+        <label for="midfielder2">Midfielder 2</label>
+        <select
+          class="form-control"
+          id="midfielder2"
+          ng-model="$ctrl.mid2"
+          ng-options="mid.name for mid in $ctrl.midfielders">
+        </select>
+      </div>
+      <div class="form-group" ng-if="$ctrl.mids > 2">
+        <label for="midfielder3">Midfielder 3</label>
+        <select
+          class="form-control"
+          id="midfielder3"
+          ng-model="$ctrl.mid3"
+          ng-options="mid.name for mid in $ctrl.midfielders">
+        </select>
+      </div>
+      <div class="form-group" ng-if="$ctrl.mids > 3">
+        <label for="midfielder4">Midfielder 4</label>
+        <select
+          class="form-control"
+          id="midfielder4"
+          ng-model="$ctrl.mid4"
+          ng-options="mid.name for mid in $ctrl.midfielders">
+        </select>
+      </div>
+      <div class="form-group" ng-if="$ctrl.mids > 4">
+        <label for="midfielder5">Midfielder 5</label>
+        <select
+          class="form-control"
+          id="midfielder5"
+          ng-model="$ctrl.mid5"
+          ng-options="mid.name for mid in $ctrl.midfielders">
+        </select>
+      </div>
+      <div class="form-group" ng-if="$ctrl.atts > 0">
+        <label for="attacker1">Attacker 1</label>
+        <select
+          class="form-control"
+          id="attacker1"
+          ng-model="$ctrl.att1"
+          ng-options="att.name for att in $ctrl.attackers">
+        </select>
+      </div>
+      <div class="form-group" ng-if="$ctrl.atts > 1">
+        <label for="attacker2">Attacker 2</label>
+        <select
+          class="form-control"
+          id="attacker2"
+          ng-model="$ctrl.att2"
+          ng-options="att.name for att in $ctrl.attackers">
+        </select>
+      </div>
+      <div class="form-group" ng-if="$ctrl.atts > 2">
+        <label for="attacker3">Attacker 3</label>
+        <select
+          class="form-control"
+          id="attacker3"
+          ng-model="$ctrl.att3"
+          ng-options="att.name for att in $ctrl.attackers">
+        </select>
+      </div>
+      <div class="form-group" ng-if="$ctrl.subs > 0">
+        <label for="substitute1">Substitute 1</label>
+        <select
+          class="form-control"
+          id="substitute1"
+          ng-model="$ctrl.sub1"
+          ng-options="sub.name for sub in $ctrl.allPlayers">
+        </select>
+      </div>
+      <div class="form-group" ng-if="$ctrl.subs > 1">
+        <label for="substitute2">Substitute 2</label>
+        <select
+          class="form-control"
+          id="substitute2"
+          ng-model="$ctrl.sub2"
+          ng-options="sub.name for sub in $ctrl.allPlayers">
+        </select>
+      </div>
+      <div class="form-group" ng-if="$ctrl.subs > 2">
+        <label for="substitute3">Substitute 3</label>
+        <select
+          class="form-control"
+          id="substitute3"
+          ng-model="$ctrl.sub3"
+          ng-options="sub.name for sub in $ctrl.allPlayers">
+        </select>
+      </div>
+      <button
+        type="submit"
+        class="btn btn-default">Create the team!
+      </button>
+    </form>
+  </div>
+</div>
