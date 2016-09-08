@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('playerDetail', ['core']);
+angular.module('playerDetail', ['ngRoute', 'core']);

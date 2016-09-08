@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('playerEdit', ['core']);
+angular.module('playerEdit', ['ngRoute', 'core']);
