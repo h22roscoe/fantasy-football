@@ -12,16 +12,15 @@ over the season and create teams of other IC players to rank them.
 
 ### TODO
 
-* I don't have tests properly set up yet but I think I will try to use
-  Jasmine and Karma. Selenium + Protractor for e2etests.
-* The forms for creating a team and editing a team.
-* The form for creating a player goes on to the register form.
-* The form to edit your player.
-* The admin forms to update players points, goals etc.
+* The forms for ~~creating a team~~ and editing a team.
+* ~~The form for creating a player goes on to the register form.~~
+* The admin forms to ~~update players points, goals etc.~~
 * Make a teams points update automatically based on the players it has.
   (Could be quite difficult)
 * Add some actual UI to this. And some client side validation for the forms.
 * Add the components to view player details and the players points table.
+* I don't have tests properly set up yet but I think I will try to use
+  Jasmine and Karma. Selenium + Protractor for e2etests.
 
 ### How to setup if you want to help
 
