@@ -6,7 +6,7 @@ angular
   .component('teamTable', {
     templateUrl: 'team-table/team-table.template.html',
     controller: ['Team',
-      function TeamListController(Team) {
+      function TeamTableController(Team) {
         this.teams = Team.query();
         this.orderProp = 'points';
       }

@@ -4,8 +4,8 @@
 angular.module('fantasyFootball', [
   'ngRoute',
   'core',
-  // 'playerDetail',
-  // 'playerTable',
+  'playerDetail',
+  'playerTable',
   'forms',
   'teamDetail',
   'teamTable',

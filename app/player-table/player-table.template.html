@@ -1,0 +1,42 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="col-sm-2">
+      <!--Sidebar content-->
+      <p>
+        Search:
+        <input ng-model="$ctrl.query" />
+      </p>
+      <p>
+        Sort by:
+        <select ng-model="$ctrl.orderProp">
+          <option value="name">Alphabetical</option>
+          <option value="points">Most points</option>
+        </select>
+      </p>
+    </div>
+    <div class="col-sm-10">
+      <!--Body content-->
+      <h1 class="text-center">Players table</h1>
+      <table class="table table-striped table-responsive">
+        <thead class="teams">
+          <th>Player name</th>
+          <th>Username</th>
+          <th>Points</th>
+          <th>Goals</th>
+          <th>Assists</th>
+        </thead>
+        <tbody>
+          <tr ng-repeat="player in $ctrl.players | filter: $ctrl.query | orderBy: $ctrl.orderProp : $ctrl.orderProp === 'points'">
+            <td>
+              <a href="#!/players/{{ player._id }}">{{ player.name }}</a>
+            </td>
+            <td>{{ player.username }}</td>
+            <td>{{ player.points }}</td>
+            <td>{{ player.goals }}</td>
+            <td>{{ player.assists }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
