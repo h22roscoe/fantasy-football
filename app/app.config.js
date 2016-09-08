@@ -39,6 +39,14 @@ angular
             }],
           }
         })
+        .when('/players/edit/:playerId', {
+          template: '<player-edit></player-edit>',
+          resolve: {
+            access: ['AuthService', function(AuthService) {
+              return AuthService.isAdmin();
+            }]
+          }
+        })
         .when('/players/:playerId', {
           template: '<player-detail></player-detail>',
           resolve: {

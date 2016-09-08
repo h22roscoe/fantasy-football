@@ -13,6 +13,7 @@ function AuthService($q, $http, $log) {
     OK: 200,
     UNAUTHORIZED: 401,
     isLoggedIn: isLoggedIn,
+    isAdmin: isAdmin,
     login: login,
     logout: logout,
     register: register
@@ -22,6 +23,14 @@ function AuthService($q, $http, $log) {
 
   function isLoggedIn() {
     if (user) {
+      return Access.OK;
+    } else {
+      return $q.reject(Access.UNAUTHORIZED);
+    }
+  }
+
+  function isAdmin() {
+    if (user && user.admin) {
       return Access.OK;
     } else {
       return $q.reject(Access.UNAUTHORIZED);

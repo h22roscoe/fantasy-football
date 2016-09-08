@@ -4,7 +4,7 @@ angular
   .module('playerDetail')
   .component('playerDetail', {
     templateUrl: 'player-detail/player-detail.template.html',
-    controller: PlayerDetailController
+    controller: ['$routeParams', 'Player', PlayerDetailController]
   });
 
 function PlayerDetailController($routeParams, Player) {
