@@ -13,6 +13,7 @@ module.exports = function(User) {
 
   function addPlayer(user, name, position, xi) {
     user.name = name;
+    user.admin = false;
     user.position = position;
     user.xi = parseInt(xi);
     user.appearances = 0;
