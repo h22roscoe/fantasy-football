@@ -21,8 +21,6 @@ function LoginCtrl($location, AuthService) {
       .then(function(data) {
         if (data.user) {
           $location.path('/teams');
-        } else {
-          $log.debug(data);
         }
       });
   };
