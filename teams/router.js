@@ -9,9 +9,7 @@ var router = express.Router();
 
 router.post('/', function(req, res) {
   users.findByUsername(req.user.username).then(function(user) {
-    var name = req.body.name;
-    var formation = req.body.formation;
-    var newTeam = teams.createTeam(name, formation, user);
+    var newTeam = teams.createTeam(req.body, user);
     newTeam.save(function(err, team) {
       if (err) {
         res.status(500).json({

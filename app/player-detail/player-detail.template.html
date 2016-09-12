@@ -1,9 +1,33 @@
 <div class="well">
-  <h1>
-    <strong>Name</strong>: {{ $ctrl.player.name }}
-  </h1>
+  <h1>{{ $ctrl.player.name }}</h1>
+  <h4>{{ $ctrl.player.position }} in the
+    <ng-pluralize
+      count="$ctrl.player.xi"
+      when="{
+        '1': '1st',
+        '2': '2nd',
+        '3': '3rd',
+        'other': '{}th'
+      }">
+    </ng-pluralize> team</h4>
 
   <p>
     <strong>Points</strong>: {{ $ctrl.player.points }}
+  </p>
+
+  <p>
+    <strong>Appearances</strong>: {{ $ctrl.player.appearances }}
+  </p>
+
+  <p>
+    <strong>Goals</strong>: {{ $ctrl.player.goals }}
+  </p>
+
+  <p>
+    <strong>Assists</strong>: {{ $ctrl.player.assists }}
+  </p>
+
+  <p>
+    <strong>Own goals</strong>: {{ $ctrl.player.owngoals }}
   </p>
 </div>

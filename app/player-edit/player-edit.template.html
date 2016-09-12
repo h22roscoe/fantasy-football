@@ -1,5 +1,8 @@
 <div class="row-fluid">
-  <div class="col-sm-6 col-sm-offset-3">
+  <div class="col-sm-6">
+    <player-detail player="$ctrl.player"></player-detail>
+  </div>
+  <div class="col-sm-6">
     <h1>Edit player</h1>
     <form ng-submit="$ctrl.onSubmit()" novalidate>
       <div class="form-group">
@@ -28,6 +31,15 @@
           ng-options="xi for xi in $ctrl.xis" />
       </div>
       <div class="form-group">
+        <label for="apps">Appearances</label>
+        <input
+          class="form-control"
+          type="number"
+          min="0"
+          id="apps"
+          ng-model="$ctrl.player.appearances" />
+      </div>
+      <div class="form-group">
         <label for="goals">Goals</label>
         <input
           class="form-control"
@@ -35,6 +47,60 @@
           min="0"
           id="goals"
           ng-model="$ctrl.player.goals" />
+      </div>
+      <div class="form-group">
+        <label for="assists">Assists</label>
+        <input
+          class="form-control"
+          type="number"
+          min="0"
+          id="assists"
+          ng-model="$ctrl.player.assists" />
+      </div>
+      <div class="form-group">
+        <label for="owngoals">Own goals</label>
+        <input
+          class="form-control"
+          type="number"
+          min="0"
+          id="owngoals"
+          ng-model="$ctrl.player.owngoals" />
+      </div>
+      <div class="form-group">
+        <label for="cleansheets">Clean sheets</label>
+        <input
+          class="form-control"
+          type="number"
+          min="0"
+          id="cleansheets"
+          ng-model="$ctrl.player.cleansheets" />
+      </div>
+      <div class="form-group">
+        <label for="yellowcards">Yellows</label>
+        <input
+          class="form-control"
+          type="number"
+          min="0"
+          id="yellowcards"
+          ng-model="$ctrl.player.yellowcards" />
+      </div>
+      <div class="form-group">
+        <label for="redcards">Reds</label>
+        <input
+          class="form-control"
+          type="number"
+          min="0"
+          id="redcards"
+          ng-model="$ctrl.player.redcards" />
+      </div>
+      <div class="form-group">
+        <label for="motms">Man of the matches</label>
+        <input
+          class="form-control"
+          type="number"
+          min="0"
+          id="motms"
+          ng-model="$ctrl.player.motms" />
       </div>
       <button
         type="submit"

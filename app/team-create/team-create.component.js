@@ -62,34 +62,35 @@ function TeamCreateCtrl(Team, Player, $location, $log) {
 
   self.onSubmit = function() {
     gatherPlayersIntoTeam();
-    $log.info(self.team);
 
-    //self.team.$save(function success(data) {
-    //  $location.path('/teams');
-    //});
+    $log.info(self.team);
+    self.team.$save(function success(data) {
+      $location.path('/teams');
+    });
   };
 
+  // Gathers the chosen players from their ng-model parts into the team model
   function gatherPlayersIntoTeam() {
     self.team.goalkeepers.push(self.gk);
 
     for (var d = 1; d <= self.defs; d++) {
       var defKey = 'def' + d;
-      self.team.defenders.push(self[defKey]);
+      self.team.defenders.push(self[defKey]._id);
     }
 
     for (var m = 1; m <= self.mids; m++) {
       var midKey = 'mid' + m;
-      self.team.midfielders.push(self[midKey]);
+      self.team.midfielders.push(self[midKey]._id);
     }
 
     for (var a = 1; a <= self.atts; a++) {
       var attKey = 'att' + a;
-      self.team.attackers.push(self[attKey]);
+      self.team.attackers.push(self[attKey]._id);
     }
 
     for (var s = 1; s <= self.subs; s++) {
       var subKey = 'sub' + s;
-      self.team.substitutes.push(self[subKey]);
+      self.team.substitutes.push(self[subKey]._id);
     }
   };
 }

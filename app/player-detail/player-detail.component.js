@@ -4,13 +4,14 @@ angular
   .module('playerDetail')
   .component('playerDetail', {
     templateUrl: 'player-detail/player-detail.template.html',
-    controller: ['$routeParams', 'Player', PlayerDetailController]
+    bindings: {
+      player: '='
+    },
+    controller: [
+      PlayerDetailController
+    ]
   });
 
-function PlayerDetailController($routeParams, Player) {
+function PlayerDetailController() {
   var self = this;
-
-  self.player = Player.get({
-    playerId: $routeParams.playerId
-  });
 }

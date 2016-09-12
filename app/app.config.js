@@ -48,8 +48,13 @@ angular
           }
         })
         .when('/players/:playerId', {
-          template: '<player-detail></player-detail>',
+          template: '<player-detail player=$resolve.player></player-detail>',
           resolve: {
+            player: ['Player', '$route', function(Player, $route) {
+              return Player.get({
+                playerId: $route.current.params.playerId
+              });
+            }],
             access: ['AuthService', function(AuthService) {
               return AuthService.isLoggedIn();
             }]

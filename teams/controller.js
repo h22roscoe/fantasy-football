@@ -1,8 +1,13 @@
 module.exports = function(Team) {
-  function createTeam(name, formation, user) {
+  function createTeam(body, user) {
     var newTeam = new Team();
-    newTeam.name = name;
-    newTeam.formation = formation;
+    newTeam.name = body.name;
+    newTeam.formation = body.formation;
+    newTeam.goalkeepers = body.goalkeepers;
+    newTeam.defenders = body.defenders;
+    newTeam.midfielders = body.midfielders;
+    newTeam.attackers = body.attackers;
+    newTeam.subs = body.substitutes;
     newTeam.user = user;
     newTeam.points = 0;
 

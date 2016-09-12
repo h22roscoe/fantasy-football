@@ -4,10 +4,10 @@ angular
   .module('playerEdit')
   .component('playerEdit', {
     templateUrl: 'player-edit/player-edit.template.html',
-    controller: ['$routeParams', 'Player', PlayerEditController]
+    controller: ['$routeParams', '$location', 'Player', PlayerEditController]
   });
 
-function PlayerEditController($routeParams, Player) {
+function PlayerEditController($routeParams, $location, Player) {
   var self = this;
 
   self.positions = [
@@ -24,6 +24,10 @@ function PlayerEditController($routeParams, Player) {
   });
 
   self.onSubmit = function() {
-    console.log(self.player);
+    self.player.$update({
+      playerId: $routeParams.playerId
+    }, function(data) {
+      $location.path('/teams');
+    });
   };
 }
