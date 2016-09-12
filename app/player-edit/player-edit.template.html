@@ -18,6 +18,7 @@
         <select
           class="form-control"
           id="position"
+          ng-change="$ctrl.onChange()"
           ng-model="$ctrl.player.position"
           ng-options="position for position in $ctrl.positions">
         </select>
@@ -37,6 +38,7 @@
           type="number"
           min="0"
           id="apps"
+          ng-change="$ctrl.onChange()"
           ng-model="$ctrl.player.appearances" />
       </div>
       <div class="form-group">
@@ -46,6 +48,7 @@
           type="number"
           min="0"
           id="goals"
+          ng-change="$ctrl.onChange()"
           ng-model="$ctrl.player.goals" />
       </div>
       <div class="form-group">
@@ -55,16 +58,8 @@
           type="number"
           min="0"
           id="assists"
+          ng-change="$ctrl.onChange()"
           ng-model="$ctrl.player.assists" />
-      </div>
-      <div class="form-group">
-        <label for="owngoals">Own goals</label>
-        <input
-          class="form-control"
-          type="number"
-          min="0"
-          id="owngoals"
-          ng-model="$ctrl.player.owngoals" />
       </div>
       <div class="form-group">
         <label for="cleansheets">Clean sheets</label>
@@ -73,7 +68,28 @@
           type="number"
           min="0"
           id="cleansheets"
+          ng-change="$ctrl.onChange()"
           ng-model="$ctrl.player.cleansheets" />
+      </div>
+      <div class="form-group">
+        <label for="motms">Man of the matches</label>
+        <input
+          class="form-control"
+          type="number"
+          min="0"
+          id="motms"
+          ng-change="$ctrl.onChange()"
+          ng-model="$ctrl.player.motms" />
+      </div>
+      <div class="form-group">
+        <label for="owngoals">Own goals</label>
+        <input
+          class="form-control"
+          type="number"
+          min="0"
+          id="owngoals"
+          ng-change="$ctrl.onChange()"
+          ng-model="$ctrl.player.owngoals" />
       </div>
       <div class="form-group">
         <label for="yellowcards">Yellows</label>
@@ -82,6 +98,7 @@
           type="number"
           min="0"
           id="yellowcards"
+          ng-change="$ctrl.onChange()"
           ng-model="$ctrl.player.yellowcards" />
       </div>
       <div class="form-group">
@@ -91,16 +108,8 @@
           type="number"
           min="0"
           id="redcards"
+          ng-change="$ctrl.onChange()"
           ng-model="$ctrl.player.redcards" />
-      </div>
-      <div class="form-group">
-        <label for="motms">Man of the matches</label>
-        <input
-          class="form-control"
-          type="number"
-          min="0"
-          id="motms"
-          ng-model="$ctrl.player.motms" />
       </div>
       <button
         type="submit"
