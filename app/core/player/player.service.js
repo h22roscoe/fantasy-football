@@ -5,11 +5,11 @@ angular
   .factory('Player', ['$resource',
     function($resource) {
       return $resource('players/:playerId', {
+        // Stick to default options
+      }, {
         update: {
           method: 'PUT'
         }
-      }, {
-        // Stick to default options
       });
     }
   ]);

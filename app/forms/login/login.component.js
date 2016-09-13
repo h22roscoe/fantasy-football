@@ -20,7 +20,7 @@ function LoginCtrl($location, AuthService) {
       .login(self.credentials)
       .then(function(data) {
         if (data.user) {
-          $location.path('/teams');
+          $location.path('/players');
         }
       });
   };

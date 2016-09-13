@@ -4,26 +4,17 @@ angular
   .module('playerEdit')
   .component('playerEdit', {
     templateUrl: 'player-edit/player-edit.template.html',
-    controller: ['$routeParams', '$location', 'Player', PlayerEditController]
+    controller: [
+      '$routeParams',
+      '$location',
+      'Player',
+      'POINTS',
+      PlayerEditController
+    ]
   });
 
-function PlayerEditController($routeParams, $location, Player) {
+function PlayerEditController($routeParams, $location, Player, POINTS) {
   var self = this;
-
-  var APP_POINTS = 3;
-  var GK_GOAL_POINTS = 10;
-  var DEF_GOAL_POINTS = 8;
-  var MID_GOAL_POINTS = 5;
-  var ATT_GOAL_POINTS = 4;
-  var GK_ASSIST_POINTS = 8;
-  var DEF_ASSIST_POINTS = 6;
-  var MID_ASSIST_POINTS = 5;
-  var ATT_ASSIST_POINTS = MID_ASSIST_POINTS;
-  var CS_POINTS = 8;
-  var OG_POINTS = -5;
-  var YELLOW_POINTS = -5;
-  var RED_POINTS = -10;
-  var MOTM_POINTS = 8;
 
   self.positions = [
     'Goalkeeper',
@@ -44,40 +35,41 @@ function PlayerEditController($routeParams, $location, Player) {
     self.player.$update({
       playerId: $routeParams.playerId
     }, function(data) {
-      $location.path('/teams');
+      $location.path('/players');
     });
   };
 
   function updatePoints() {
-    var newPoints = 0;
-
-    newPoints += APP_POINTS * self.player.appearances;
-    newPoints += MOTM_POINTS * self.player.motms;
-    newPoints += YELLOW_POINTS * self.player.yellowcards;
-    newPoints += RED_POINTS * self.player.redcards;
-    newPoints += OG_POINTS * self.player.owngoals;
-
     switch (self.player.position) {
       case 'Goalkeeper':
-        newPoints += GK_GOAL_POINTS * self.player.goals;
-        newPoints += GK_ASSIST_POINTS * self.player.assists;
-        newPoints += CS_POINTS * self.player.cleansheets;
+        updatePointsWith(POINTS.GK);
         break;
       case 'Defender':
-        newPoints += DEF_GOAL_POINTS * self.player.goals;
-        newPoints += DEF_ASSIST_POINTS * self.player.assists;
-        newPoints += CS_POINTS * self.player.cleansheets;
+        updatePointsWith(POINTS.DEF);
         break;
       case 'Midfielder':
-        newPoints += MID_GOAL_POINTS * self.player.goals;
-        newPoints += MID_ASSIST_POINTS * self.player.assists;
+        updatePointsWith(POINTS.MID);
         break;
       case 'Attacker':
-        newPoints += ATT_GOAL_POINTS * self.player.goals;
-        newPoints += ATT_ASSIST_POINTS * self.player.assists;
+        updatePointsWith(POINTS.ATT);
+        break;
+      default:
         break;
     }
+  };
+
+  function updatePointsWith(points) {
+    var newPoints = 0;
+
+    newPoints += points.APPEARANCE * self.player.appearances;
+    newPoints += points.GOAL * self.player.goals;
+    newPoints += points.ASSIST * self.player.assists;
+    newPoints += points.CLEANSHEET * self.player.cleansheets;
+    newPoints += points.MOTM * self.player.motms;
+    newPoints += points.YELLOW * self.player.yellowcards;
+    newPoints += points.RED * self.player.redcards;
+    newPoints += points.OWNGOAL * self.player.owngoals;
 
     self.player.points = newPoints;
-  };
+  }
 }

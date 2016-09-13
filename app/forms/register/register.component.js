@@ -37,10 +37,10 @@ function RegisterCtrl($location, AuthService, Player) {
       .then(function(data) {
         if (self.isPlayer) {
           self.player.$save(function() {
-            $location.path('/teams');
+            $location.path('/players');
           });
         } else {
-          $location.path('/teams');
+          $location.path('/players');
         }
       });
   };

@@ -26,6 +26,26 @@ router.post('/', function(req, res) {
   });
 });
 
+router.put('/:id', function(req, res) {
+  users.findById(req.params.id).then(function(user) {
+    Object.keys(req.body).forEach(function(key) {
+      user[key] = req.body[key];
+    });
+
+    user.save(function(err, user) {
+      if (err) {
+        res.status(500).json({
+          err: 'Some kind of error when updating user'
+        });
+      }
+
+      res.status(200).json({
+        user: user
+      });
+    });
+  });
+});
+
 router.get('/', function(req, res) {
   users.findAll().then(function(players) {
     res.status(200).json(players);
