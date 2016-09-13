@@ -20,10 +20,16 @@
       <table class="table table-striped table-responsive">
         <thead class="teams">
           <th>Player name</th>
-          <th>Username</th>
           <th>Points</th>
+          <th>User</th>
+          <th>Apps</th>
           <th>Goals</th>
           <th>Assists</th>
+          <th>Clean sheets</th>
+          <th>MOTMs</th>
+          <th>Yellows</th>
+          <th>Reds</th>
+          <th>Own goals</th>
         </thead>
         <tbody>
           <tr ng-repeat="player in $ctrl.players | filter: $ctrl.query | orderBy: $ctrl.orderProp : $ctrl.orderProp === 'points'">
@@ -33,10 +39,16 @@
                 <i class="fa fa-edit" aria-hidden="true"></i>
               </a>
             </td>
-            <td>{{ player.username }}</td>
             <td>{{ player.points }}</td>
+            <td>{{ player.username }}</td>
+            <td>{{ player.appearances }}</td>
             <td>{{ player.goals }}</td>
             <td>{{ player.assists }}</td>
+            <td>{{ player.cleansheets }}</td>
+            <td>{{ player.motms }}</td>
+            <td>{{ player.yellowcards }}</td>
+            <td>{{ player.redcards }}</td>
+            <td>{{ player.owngoals }}</td>
           </tr>
         </tbody>
       </table>
