@@ -27,7 +27,7 @@ var teamSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Player'
   }],
-  subs: [{
+  substitutes: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Player'
   }],

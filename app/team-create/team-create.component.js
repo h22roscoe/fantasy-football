@@ -63,7 +63,6 @@ function TeamCreateCtrl(Team, Player, $location, $log) {
   self.onSubmit = function() {
     gatherPlayersIntoTeam();
 
-    $log.info(self.team);
     self.team.$save(function success(data) {
       $location.path('/teams');
     });
@@ -75,22 +74,22 @@ function TeamCreateCtrl(Team, Player, $location, $log) {
 
     for (var d = 1; d <= self.defs; d++) {
       var defKey = 'def' + d;
-      self.team.defenders.push(self[defKey]._id);
+      self.team.defenders.push(self[defKey]);
     }
 
     for (var m = 1; m <= self.mids; m++) {
       var midKey = 'mid' + m;
-      self.team.midfielders.push(self[midKey]._id);
+      self.team.midfielders.push(self[midKey]);
     }
 
     for (var a = 1; a <= self.atts; a++) {
       var attKey = 'att' + a;
-      self.team.attackers.push(self[attKey]._id);
+      self.team.attackers.push(self[attKey]);
     }
 
     for (var s = 1; s <= self.subs; s++) {
       var subKey = 'sub' + s;
-      self.team.substitutes.push(self[subKey]._id);
+      self.team.substitutes.push(self[subKey]);
     }
   };
 }

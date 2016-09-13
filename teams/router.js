@@ -21,7 +21,7 @@ router.post('/', function(req, res) {
       user.save(function(err) {
         if (err) {
           res.status(500).json({
-            err: 'Server error'
+            err: 'Server error when saving team to player'
           });
         }
 

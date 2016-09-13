@@ -3,15 +3,13 @@ module.exports = function(Team) {
     var newTeam = new Team();
     newTeam.name = body.name;
     newTeam.formation = body.formation;
-    newTeam.goalkeepers = body.goalkeepers;
-    newTeam.defenders = body.defenders;
-    newTeam.midfielders = body.midfielders;
-    newTeam.attackers = body.attackers;
-    newTeam.subs = body.substitutes;
+    // newTeam.goalkeepers = body.goalkeepers;
+    // newTeam.defenders = body.defenders;
+    // newTeam.midfielders = body.midfielders;
+    // newTeam.attackers = body.attackers;
+    // newTeam.substitutes = body.substitutes;
     newTeam.user = user;
     newTeam.points = 0;
-
-    console.log(newTeam);
 
     return newTeam;
   }
