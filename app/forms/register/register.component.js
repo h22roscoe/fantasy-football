@@ -10,8 +10,6 @@ angular
 function RegisterCtrl($location, AuthService, Player) {
   var self = this;
 
-  self.isPlayer = false;
-
   self.positions = [
     'Goalkeeper',
     'Defender',
@@ -35,13 +33,9 @@ function RegisterCtrl($location, AuthService, Player) {
     AuthService
       .register(self.credentials)
       .then(function(data) {
-        if (self.isPlayer) {
-          self.player.$save(function() {
-            $location.path('/players');
-          });
-        } else {
+        self.player.$save(function() {
           $location.path('/players');
-        }
+        });
       });
   };
 }
