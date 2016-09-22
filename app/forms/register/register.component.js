@@ -30,12 +30,14 @@ function RegisterCtrl($location, AuthService, Player) {
   self.player.xi = 1;
 
   self.onSubmit = function() {
-    AuthService
-      .register(self.credentials)
-      .then(function(data) {
-        self.player.$save(function() {
-          $location.path('/players');
+    if (self.registerForm.$valid) {
+      AuthService
+        .register(self.credentials)
+        .then(function(data) {
+          self.player.$save(function() {
+            $location.path('/players');
+          });
         });
-      });
+    }
   };
 }

@@ -4,39 +4,69 @@
     <p>
       Or <a ng-href="#!/login">log in</a> if you already have an account
     </p>
-    <form ng-submit="$ctrl.onSubmit()" name="registerForm" novalidate>
-      <div class="form-group">
-        <label for="username">Username</label>
+    <form ng-submit="$ctrl.onSubmit()" name="$ctrl.registerForm" novalidate>
+      <div
+        class="form-group"
+        ng-class="{
+          'has-error': $ctrl.registerForm.username.$invalid && $ctrl.registerForm.username.$dirty
+        }">
+        <label class="control-label" for="username">Username</label>
         <input
           type="text"
           class="form-control"
           id="username"
+          name="username"
           placeholder="Enter your username"
           ng-model="$ctrl.credentials.username"
+          ng-pattern="'\\w+'"
           required />
+        <span class="help-block"
+          ng-show="$ctrl.registerForm.username.$invalid && $ctrl.registerForm.username.$dirty">
+          Username should only include letters, numbers and/or underscores.
+        </span>
       </div>
-      <div class="form-group">
-        <label for="password">Password</label>
+      <div
+        class="form-group"
+        ng-class="{
+          'has-error': $ctrl.registerForm.password.$invalid && $ctrl.registerForm.password.$dirty
+        }">
+        <label class="control-label" for="password">Password</label>
         <input
           type="password"
           class="form-control"
           id="password"
+          name="password"
           placeholder="Password"
           ng-model="$ctrl.credentials.password"
+          ng-pattern="'\\w+'"
           required />
+        <span class="help-block"
+          ng-show="$ctrl.registerForm.password.$invalid && $ctrl.registerForm.password.$dirty">
+          Password should only include letters, numbers and/or underscores.
+        </span>
       </div>
-      <div class="form-group">
-        <label for="name">Your name</label>
+      <div
+        class="form-group"
+        ng-class="{
+          'has-error': $ctrl.registerForm.name.$invalid && $ctrl.registerForm.name.$dirty
+        }">
+        <label class="control-label" for="name">Your name</label>
         <input
           type="text"
           class="form-control"
           id="name"
+          name="name"
           placeholder="Your name"
           ng-model="$ctrl.player.name"
+          ng-pattern="'\\w+ \\w+'"
           required />
+        <span class="help-block"
+          ng-show="$ctrl.registerForm.name.$invalid && $ctrl.registerForm.name.$dirty">
+          Name must be your first and second name seperated by a space
+        </span>
       </div>
       <div class="form-group">
-        <label for="position">Position</label>
+        <label class="control-label" for="position">Position</label>
         <select
           class="form-control"
           id="position"
@@ -46,7 +76,7 @@
         </select>
       </div>
       <div class="form-group">
-        <label for="xi">XI</label>
+        <label class="control-label" for="xi">XI</label>
         <select
           class="form-control"
           id="xi"
