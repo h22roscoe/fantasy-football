@@ -18,14 +18,14 @@
         Click <a href="#!/teams">here</a> for the teams table
       </p>
 
-      <p>
-        Click <button class="btn btn-primary"
+      <div>
+        <button class="btn btn-primary"
                       ng-csv="$ctrl.players"
                       filename="players_table.csv"
                       csv-header="$ctrl.getHeaders();">
-        here
-      </button> to export to a CSV file for use as a spreadsheet
-      </p>
+        Export to CSV
+      </button>
+      </div>
     </div>
     <div class="col-sm-10">
       <!--Body content-->
@@ -37,11 +37,11 @@
           <th>Apps</th>
           <th>Goals</th>
           <th>Assists</th>
-          <th>Clean sheets</th>
+          <th>CSs</th>
           <th>MOTMs</th>
           <th>Yellows</th>
           <th>Reds</th>
-          <th>Own goals</th>
+          <th>OGs</th>
         </thead>
         <tbody>
           <tr ng-repeat="player in $ctrl.players | filter: $ctrl.query | orderBy: $ctrl.orderProp : $ctrl.orderProp === 'points'">
