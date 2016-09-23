@@ -1,13 +1,13 @@
 module.exports = function(Team) {
-  function create(name, formation) {
+  function create(name, formation, gks, defs, mids, atts, subs) {
     var newTeam = new Team();
     newTeam.name = name;
     newTeam.formation = formation;
-    // newTeam.goalkeepers = goalkeepers;
-    // newTeam.defenders = defenders;
-    // newTeam.midfielders = midfielders;
-    // newTeam.attackers = attackers;
-    // newTeam.substitutes = substitutes;
+    newTeam.goalkeepers = gks;
+    newTeam.defenders = defs;
+    newTeam.midfielders = mids;
+    newTeam.attackers = atts;
+    newTeam.substitutes = subs;
     newTeam.points = 0;
 
     return newTeam;
@@ -16,7 +16,12 @@ module.exports = function(Team) {
   function findByOwnerId(id) {
     return Team.findOne({
       owner: id
-    }).exec();
+    })
+      .populate('goalkeepers')
+      .populate('defenders')
+      .populate('midfielders')
+      .populate('attackers')
+      .populate('substitutes').exec();
   }
 
   function findAll() {
@@ -24,7 +29,12 @@ module.exports = function(Team) {
   }
 
   function findById(id) {
-    return Team.findById(id).exec();
+    return Team.findById(id)
+      .populate('goalkeepers')
+      .populate('defenders')
+      .populate('midfielders')
+      .populate('attackers')
+      .populate('substitutes').exec();
   }
 
   return {

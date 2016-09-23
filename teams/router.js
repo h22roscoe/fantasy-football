@@ -10,7 +10,13 @@ var router = express.Router();
 router.post('/', function(req, res) {
   var name = req.body.name;
   var formation = req.body.formation;
-  var newTeam = teams.create(name, formation);
+  var gks = req.body.goalkeepers;
+  var defs = req.body.defenders;
+  var mids = req.body.midfielders;
+  var atts = req.body.attackers;
+  var subs = req.body.substitutes;
+
+  var newTeam = teams.create(name, formation, gks, defs, mids, atts, subs);
   newTeam.save(function(err) {
     if (err) {
       res.status(500).json({

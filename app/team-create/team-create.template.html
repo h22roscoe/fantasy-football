@@ -9,7 +9,8 @@
           class="form-control"
           id="name"
           placeholder="Enter the team's name"
-          ng-model="$ctrl.team.name" />
+          ng-model="$ctrl.team.name"
+          required />
       </div>
       <div class="form-group">
         <label for="formation">Formation</label>
@@ -18,7 +19,8 @@
           id="formation"
           ng-model="$ctrl.team.formation"
           ng-change="$ctrl.formationChange()"
-          ng-options="formation for formation in $ctrl.formations">
+          ng-options="formation for formation in $ctrl.formations"
+          required>
         </select>
       </div>
       <div class="form-group">
@@ -27,7 +29,8 @@
           class="form-control"
           id="goalkeeper"
           ng-model="$ctrl.gk"
-          ng-options="gk.name for gk in $ctrl.goalkeepers">
+          ng-options="gk.name for gk in $ctrl.goalkeepers"
+          required>
         </select>
       </div>
       <div class="form-group" ng-if="$ctrl.defs > 0">
@@ -36,7 +39,8 @@
           class="form-control"
           id="defender1"
           ng-model="$ctrl.def1"
-          ng-options="def.name for def in $ctrl.defenders">
+          ng-options="def.name for def in $ctrl.defenders"
+          required>
         </select>
       </div>
       <div class="form-group" ng-if="$ctrl.defs > 1">
@@ -45,7 +49,8 @@
           class="form-control"
           id="defender2"
           ng-model="$ctrl.def2"
-          ng-options="def.name for def in $ctrl.defenders">
+          ng-options="def.name for def in $ctrl.defenders"
+          required>
         </select>
       </div>
       <div class="form-group" ng-if="$ctrl.defs > 2">
@@ -63,7 +68,8 @@
           class="form-control"
           id="defender4"
           ng-model="$ctrl.def4"
-          ng-options="def.name for def in $ctrl.defenders">
+          ng-options="def.name for def in $ctrl.defenders"
+          required>
         </select>
       </div>
       <div class="form-group" ng-if="$ctrl.mids > 0">
@@ -72,7 +78,8 @@
           class="form-control"
           id="midfielder1"
           ng-model="$ctrl.mid1"
-          ng-options="mid.name for mid in $ctrl.midfielders">
+          ng-options="mid.name for mid in $ctrl.midfielders"
+          required>
         </select>
       </div>
       <div class="form-group" ng-if="$ctrl.mids > 1">
@@ -81,7 +88,8 @@
           class="form-control"
           id="midfielder2"
           ng-model="$ctrl.mid2"
-          ng-options="mid.name for mid in $ctrl.midfielders">
+          ng-options="mid.name for mid in $ctrl.midfielders"
+          required>
         </select>
       </div>
       <div class="form-group" ng-if="$ctrl.mids > 2">
@@ -90,7 +98,8 @@
           class="form-control"
           id="midfielder3"
           ng-model="$ctrl.mid3"
-          ng-options="mid.name for mid in $ctrl.midfielders">
+          ng-options="mid.name for mid in $ctrl.midfielders"
+          required>
         </select>
       </div>
       <div class="form-group" ng-if="$ctrl.mids > 3">
@@ -99,7 +108,8 @@
           class="form-control"
           id="midfielder4"
           ng-model="$ctrl.mid4"
-          ng-options="mid.name for mid in $ctrl.midfielders">
+          ng-options="mid.name for mid in $ctrl.midfielders"
+          required>
         </select>
       </div>
       <div class="form-group" ng-if="$ctrl.mids > 4">
@@ -108,7 +118,8 @@
           class="form-control"
           id="midfielder5"
           ng-model="$ctrl.mid5"
-          ng-options="mid.name for mid in $ctrl.midfielders">
+          ng-options="mid.name for mid in $ctrl.midfielders"
+          required>
         </select>
       </div>
       <div class="form-group" ng-if="$ctrl.atts > 0">
@@ -117,7 +128,8 @@
           class="form-control"
           id="attacker1"
           ng-model="$ctrl.att1"
-          ng-options="att.name for att in $ctrl.attackers">
+          ng-options="att.name for att in $ctrl.attackers"
+          required>
         </select>
       </div>
       <div class="form-group" ng-if="$ctrl.atts > 1">
@@ -126,7 +138,8 @@
           class="form-control"
           id="attacker2"
           ng-model="$ctrl.att2"
-          ng-options="att.name for att in $ctrl.attackers">
+          ng-options="att.name for att in $ctrl.attackers"
+          required>
         </select>
       </div>
       <div class="form-group" ng-if="$ctrl.atts > 2">
@@ -135,7 +148,8 @@
           class="form-control"
           id="attacker3"
           ng-model="$ctrl.att3"
-          ng-options="att.name for att in $ctrl.attackers">
+          ng-options="att.name for att in $ctrl.attackers"
+          required>
         </select>
       </div>
       <div class="form-group" ng-if="$ctrl.subs > 0">
@@ -144,7 +158,8 @@
           class="form-control"
           id="substitute1"
           ng-model="$ctrl.sub1"
-          ng-options="sub.name for sub in $ctrl.allPlayers">
+          ng-options="sub.name for sub in $ctrl.allPlayers"
+          required>
         </select>
       </div>
       <div class="form-group" ng-if="$ctrl.subs > 1">
@@ -153,7 +168,8 @@
           class="form-control"
           id="substitute2"
           ng-model="$ctrl.sub2"
-          ng-options="sub.name for sub in $ctrl.allPlayers">
+          ng-options="sub.name for sub in $ctrl.allPlayers"
+          required>
         </select>
       </div>
       <div class="form-group" ng-if="$ctrl.subs > 2">
@@ -162,7 +178,8 @@
           class="form-control"
           id="substitute3"
           ng-model="$ctrl.sub3"
-          ng-options="sub.name for sub in $ctrl.allPlayers">
+          ng-options="sub.name for sub in $ctrl.allPlayers"
+          required>
         </select>
       </div>
       <button

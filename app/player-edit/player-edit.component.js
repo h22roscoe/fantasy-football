@@ -32,11 +32,13 @@ function PlayerEditController($routeParams, $location, Player, POINTS) {
   self.onChange = updatePoints;
 
   self.onSubmit = function() {
-    self.player.$update({
-      playerId: $routeParams.playerId
-    }, function(data) {
-      $location.path('/players');
-    });
+    if (self.playerForm.$valid) {
+      self.player.$update({
+        playerId: $routeParams.playerId
+      }, function() {
+        $location.path('/players');
+      });
+    }
   };
 
   function updatePoints() {
@@ -56,7 +58,7 @@ function PlayerEditController($routeParams, $location, Player, POINTS) {
       default:
         break;
     }
-  };
+  }
 
   function updatePointsWith(points) {
     var newPoints = 0;

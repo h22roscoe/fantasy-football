@@ -1,120 +1,142 @@
 <div class="row-fluid">
-  <div class="col-sm-6">
-    <player-detail player="$ctrl.player"></player-detail>
-  </div>
-  <div class="col-sm-6">
+  <div class="col-xs-6 col-xs-offset-1">
     <h1>Edit player</h1>
-    <form ng-submit="$ctrl.onSubmit()" novalidate>
-      <div class="form-group">
-        <label for="name">Player Name</label>
+    <form ng-submit="$ctrl.onSubmit()" name="$ctrl.playerForm" novalidate>
+      <div
+        class="form-group"
+        ng-class="{
+          'has-error': $ctrl.playerForm.name.$invalid && $ctrl.playerForm.name.$dirty
+        }">
+        <label class="control-label" for="name">Name</label>
         <input
           type="text"
           class="form-control"
           id="name"
-          ng-model="$ctrl.player.name" />
+          name="name"
+          placeholder="Player name"
+          ng-model="$ctrl.player.name"
+          ng-pattern="'\\w+ \\w+'"
+          required />
+        <span class="help-block"
+              ng-show="$ctrl.playerForm.name.$invalid && $ctrl.playerForm.name.$dirty">
+          Name must be the first and second name separated by a space
+        </span>
       </div>
       <div class="form-group">
-        <label for="position">Position</label>
+        <label class="control-label" for="position">Position</label>
         <select
           class="form-control"
           id="position"
-          ng-change="$ctrl.onChange()"
           ng-model="$ctrl.player.position"
-          ng-options="position for position in $ctrl.positions">
+          ng-options="position for position in $ctrl.positions"
+          required>
         </select>
       </div>
       <div class="form-group">
-        <label for="xi">XI</label>
+        <label class="control-label" for="xi">XI</label>
         <select
           class="form-control"
           id="xi"
           ng-model="$ctrl.player.xi"
-          ng-options="xi for xi in $ctrl.xis" />
+          ng-options="xi for xi in $ctrl.xis"
+          required>
+        </select>
       </div>
       <div class="form-group">
-        <label for="apps">Appearances</label>
+        <label class="control-label" for="apps">Appearances</label>
         <input
           class="form-control"
           type="number"
           min="0"
           id="apps"
           ng-change="$ctrl.onChange()"
-          ng-model="$ctrl.player.appearances" />
+          ng-model="$ctrl.player.appearances"
+          required />
       </div>
       <div class="form-group">
-        <label for="goals">Goals</label>
+        <label class="control-label" for="goals">Goals</label>
         <input
           class="form-control"
           type="number"
           min="0"
           id="goals"
           ng-change="$ctrl.onChange()"
-          ng-model="$ctrl.player.goals" />
+          ng-model="$ctrl.player.goals"
+          required />
       </div>
       <div class="form-group">
-        <label for="assists">Assists</label>
+        <label class="control-label" for="assists">Assists</label>
         <input
           class="form-control"
           type="number"
           min="0"
           id="assists"
           ng-change="$ctrl.onChange()"
-          ng-model="$ctrl.player.assists" />
+          ng-model="$ctrl.player.assists"
+          required />
       </div>
       <div class="form-group">
-        <label for="cleansheets">Clean sheets</label>
+        <label class="control-label" for="cleansheets">Clean sheets</label>
         <input
           class="form-control"
           type="number"
           min="0"
           id="cleansheets"
           ng-change="$ctrl.onChange()"
-          ng-model="$ctrl.player.cleansheets" />
+          ng-model="$ctrl.player.cleansheets"
+          required />
       </div>
       <div class="form-group">
-        <label for="motms">Man of the matches</label>
+        <label class="control-label" for="motms">Man of the matches</label>
         <input
           class="form-control"
           type="number"
           min="0"
           id="motms"
           ng-change="$ctrl.onChange()"
-          ng-model="$ctrl.player.motms" />
+          ng-model="$ctrl.player.motms"
+          required />
       </div>
       <div class="form-group">
-        <label for="owngoals">Own goals</label>
+        <label class="control-label" for="owngoals">Own goals</label>
         <input
           class="form-control"
           type="number"
           min="0"
           id="owngoals"
           ng-change="$ctrl.onChange()"
-          ng-model="$ctrl.player.owngoals" />
+          ng-model="$ctrl.player.owngoals"
+          required />
       </div>
       <div class="form-group">
-        <label for="yellowcards">Yellows</label>
+        <label class="control-label" for="yellowcards">Yellows</label>
         <input
           class="form-control"
           type="number"
           min="0"
           id="yellowcards"
           ng-change="$ctrl.onChange()"
-          ng-model="$ctrl.player.yellowcards" />
+          ng-model="$ctrl.player.yellowcards"
+          required />
       </div>
       <div class="form-group">
-        <label for="redcards">Reds</label>
+        <label class="control-label" for="redcards">Reds</label>
         <input
           class="form-control"
           type="number"
           min="0"
           id="redcards"
           ng-change="$ctrl.onChange()"
-          ng-model="$ctrl.player.redcards" />
+          ng-model="$ctrl.player.redcards"
+          required />
       </div>
       <button
         type="submit"
-        class="btn btn-default">Update this player!
+        class="btn btn-primary">Update this player!
       </button>
     </form>
+  </div>
+  <div class="col-sm-4">
+    <player-detail player="$ctrl.player"></player-detail>
   </div>
 </div>

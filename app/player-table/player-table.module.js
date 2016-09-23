@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('playerTable', ['core']);
+angular.module('playerTable', ['core', 'ngCsv']);
