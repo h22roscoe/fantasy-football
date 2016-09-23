@@ -1,34 +1,25 @@
 var express = require('express');
 
-var User = require('../models/user');
-var users = require('../users/controller')(User);
+var User = require('../models/player');
+var users = require('./controller')(User);
 var Team = require('../models/team');
 var teams = require('./controller')(Team);
 
 var router = express.Router();
 
 router.post('/', function(req, res) {
-  users.findByUsername(req.user.username).then(function(user) {
-    var newTeam = teams.createTeam(req.body, user);
-    newTeam.save(function(err, team) {
-      if (err) {
-        res.status(500).json({
-          err: 'Server error when saving the new team'
-        });
-      }
-
-      user.team = team;
-      user.save(function(err) {
-        if (err) {
-          res.status(500).json({
-            err: 'Server error when saving team to player'
-          });
-        }
-
-        res.status(200).json({
-          team: team
-        });
+  var name = req.body.name;
+  var formation = req.body.formation;
+  var newTeam = teams.create(name, formation);
+  newTeam.save(function(err) {
+    if (err) {
+      res.status(500).json({
+        err: 'Server error when saving the new team'
       });
+    }
+
+    res.status(200).json({
+      team: newTeam
     });
   });
 });

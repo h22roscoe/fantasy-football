@@ -4,14 +4,12 @@ angular
   .module('playerTable')
   .component('playerTable', {
     templateUrl: 'player-table/player-table.template.html',
-    controller: ['Player', 'AuthService', PlayerTableController]
+    controller: ['Player', PlayerTableController]
   });
 
-function PlayerTableController(Player, AuthService) {
+function PlayerTableController(Player) {
   var self = this;
 
   this.players = Player.query();
   this.orderProp = 'points';
-
-  this.admin = AuthService.isAdmin() === AuthService.OK;
 }

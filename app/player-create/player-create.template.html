@@ -1,0 +1,50 @@
+<div class="row-fluid">
+  <div class="col-sm-6 col-sm-offset-3">
+    <h1>Create new player</h1>
+    <form ng-submit="$ctrl.onSubmit()" name="$ctrl.playerForm" novalidate>
+      <div
+        class="form-group"
+        ng-class="{
+          'has-error': $ctrl.playerForm.name.$invalid && $ctrl.playerForm.name.$dirty
+        }">
+        <label class="control-label" for="name">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          name="name"
+          placeholder="Player name"
+          ng-model="$ctrl.player.name"
+          ng-pattern="'\\w+ \\w+'"
+          required />
+        <span class="help-block"
+              ng-show="$ctrl.playerForm.name.$invalid && $ctrl.playerForm.name.$dirty">
+          Name must be the first and second name separated by a space
+        </span>
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="position">Position</label>
+        <select
+          class="form-control"
+          id="position"
+          ng-model="$ctrl.player.position"
+          ng-options="position for position in $ctrl.positions"
+          required>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="xi">XI</label>
+        <select
+          class="form-control"
+          id="xi"
+          ng-model="$ctrl.player.xi"
+          ng-options="xi for xi in $ctrl.xis"
+          required>
+        </select>
+      </div>
+      <button
+        type="submit"
+        class="btn btn-default">Create new player!</button>
+    </form>
+  </div>
+</div>

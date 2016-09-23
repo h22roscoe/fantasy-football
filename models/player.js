@@ -1,14 +1,8 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var passportLocalMongoose = require('passport-local-mongoose');
 
 // Define the schema for our user model
-var userSchema = new Schema({
-  admin: Boolean,
-  team: {
-    type: Schema.Types.ObjectId,
-    ref: 'Team'
-  },
+var playerSchema = new Schema({
   name: String,
   position: {
     type: String,
@@ -26,6 +20,4 @@ var userSchema = new Schema({
   points: Number
 });
 
-userSchema.plugin(passportLocalMongoose);
-
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Player', playerSchema);

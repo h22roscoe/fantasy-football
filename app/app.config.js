@@ -3,49 +3,27 @@
 angular
   .module('fantasyFootball')
   .config(['$locationProvider' ,'$routeProvider',
-    function config($locationProvider, $routeProvider) {
+    function($locationProvider, $routeProvider) {
       $locationProvider.hashPrefix('!');
 
       $routeProvider
         .when('/teams', {
-          template: '<team-table></team-table>',
-          resolve: {
-            access: ['AuthService', function(AuthService) {
-              return AuthService.isLoggedIn();
-            }]
-          }
+          template: '<team-table></team-table>'
         })
         .when('/teams/:teamId', {
-          template: '<team-detail></team-detail>',
-          resolve: {
-            access: ['AuthService', function(AuthService) {
-              return AuthService.isLoggedIn();
-            }]
-          }
+          template: '<team-detail></team-detail>'
         })
-        .when('/create', {
-          template: '<team-create></team-create>',
-          resolve: {
-            access: ['AuthService', function(AuthService) {
-              return AuthService.isLoggedIn();
-            }]
-          }
+        .when('/create-team', {
+          template: '<team-create></team-create>'
+        })
+        .when('/create-player', {
+          template: '<player-create></player-create>'
         })
         .when('/players', {
-          template: '<player-table></player-table>',
-          resolve: {
-            access: ['AuthService', function(AuthService) {
-              return AuthService.isLoggedIn();
-            }],
-          }
+          template: '<player-table></player-table>'
         })
         .when('/players/edit/:playerId', {
-          template: '<player-edit></player-edit>',
-          resolve: {
-            access: ['AuthService', function(AuthService) {
-              return AuthService.isAdmin();
-            }]
-          }
+          template: '<player-edit></player-edit>'
         })
         .when('/players/:playerId', {
           template: '<player-detail player=$resolve.player></player-detail>',
@@ -54,27 +32,9 @@ angular
               return Player.get({
                 playerId: $route.current.params.playerId
               });
-            }],
-            access: ['AuthService', function(AuthService) {
-              return AuthService.isLoggedIn();
             }]
           }
         })
-        .when('/login', {
-          template: '<login-form></login-form>'
-        })
-        .when('/register', {
-          template: '<register-form></register-form>'
-        })
-        .otherwise('/login');
+        .otherwise('/players');
     }
-  ])
-  .run(['$rootScope', 'AuthService', '$location',
-    function($rootScope, AuthService, $location) {
-      $rootScope.$on('$routeChangeError',
-        function(event, current, previous, rejection) {
-          if (rejection == AuthService.UNAUTHORIZED) {
-            $location.path('/login');
-          }
-        });
-    }]);;
+  ]);

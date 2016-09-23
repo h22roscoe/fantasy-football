@@ -21,7 +21,6 @@
         <thead class="teams">
           <th>Player name</th>
           <th>Points</th>
-          <th>User</th>
           <th>Apps</th>
           <th>Goals</th>
           <th>Assists</th>
@@ -35,12 +34,11 @@
           <tr ng-repeat="player in $ctrl.players | filter: $ctrl.query | orderBy: $ctrl.orderProp : $ctrl.orderProp === 'points'">
             <td>
               <a ng-href="#!/players/{{ player._id }}">{{ player.name }}</a>
-              <a ng-href="#!/players/edit/{{ player._id }}" ng-if="$ctrl.admin" class="btn btn-sm">
+              <a ng-href="#!/players/edit/{{ player._id }}" class="btn btn-sm">
                 <i class="fa fa-edit" aria-hidden="true"></i>
               </a>
             </td>
             <td>{{ player.points }}</td>
-            <td>{{ player.username }}</td>
             <td>{{ player.appearances }}</td>
             <td>{{ player.goals }}</td>
             <td>{{ player.assists }}</td>
@@ -52,6 +50,9 @@
           </tr>
         </tbody>
       </table>
+      <p class="text-center">
+        Add a new player <a href="#!/create-player">here</a>!
+      </p>
     </div>
   </div>
 </div>

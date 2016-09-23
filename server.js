@@ -7,8 +7,6 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 
 var morgan = require('morgan');
-var cookieParser = require('cookie-parser');
-var session = require('express-session');
 var bodyParser = require('body-parser');
 
 const ENV = process.env.NODE_ENV;
@@ -31,37 +29,11 @@ app.use(favicon(path.join(__dirname, 'app', 'favicon', 'favicon.ico')));
 // Logger
 app.use(morgan('dev'));
 
-// Read cookies (needed for auth)
-app.use(cookieParser());
-
 // Used to get info from HTML forms
 app.use(bodyParser.json());
 
-var sess = {
-  secret: process.env.SECRET,
-  resave: false,
-  cookie: {
-    httpOnly: false
-  },
-  saveUninitialized: false
-};
-
-if (ENV === 'production') {
-  app.set('trust proxy', 1); // Trust first proxy
-  sess.cookie.secure = true; // Serve secure cookies
-}
-
-// Required for passport
-app.use(session(sess));
-
-app.use(passport.initialize());
-// Persistent login sessions
-app.use(passport.session());
-
-require('./config/passport')(passport);
-
 // Set up the routes
-app.use(require('./router')(passport));
+app.use(require('./router'));
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, function() {

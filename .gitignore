@@ -7,6 +7,7 @@ mongod
 
 # editor stuff
 /.c9
+/.idea
 
 # ssl stuff
 *.pem

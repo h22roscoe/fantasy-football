@@ -6,8 +6,8 @@ angular.module('fantasyFootball', [
   'core',
   'playerDetail',
   'playerTable',
+  'playerCreate',
   'playerEdit',
-  'forms',
   'teamDetail',
   'teamTable',
   'teamCreate'
