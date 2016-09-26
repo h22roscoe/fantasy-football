@@ -1,0 +1,38 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{ $ctrl.title }}</h3>
+  </div>
+  <div class="panel-body" ng-if="$ctrl.list.max">
+    <ul dnd-list="$ctrl.list.players"
+        dnd-allowed-types="$ctrl.list.allowedTypes"
+        dnd-disable-if="$ctrl.list.players.length >= $ctrl.list.max"
+        class="list-group">
+      <li ng-repeat="player in $ctrl.list.players"
+          dnd-draggable="player"
+          dnd-type="$ctrl.list.allowedTypes[0]"
+          dnd-moved="$ctrl.list.players.splice($index, 1)"
+          dnd-effect-allowed="move">
+        {{ player.name }}
+      </li>
+      <li class="dndPlaceholder">
+        Drop any <strong>{{ $ctrl.position }}</strong> here
+      </li>
+    </ul>
+  </div>
+  <div class="panel-body" ng-if="!$ctrl.list.max">
+    <ul dnd-list="$ctrl.list.players"
+        dnd-allowed-types="$ctrl.list.allowedTypes"
+        class="list-group">
+      <li ng-repeat="player in $ctrl.list.players"
+          dnd-draggable="player"
+          dnd-type="$ctrl.list.allowedTypes[0]"
+          dnd-moved="$ctrl.list.players.splice($index, 1)"
+          dnd-effect-allowed="move">
+        {{ player.name }}
+      </li>
+      <li class="dndPlaceholder">
+        Drop any <strong>{{ $ctrl.position }}</strong> here
+      </li>
+    </ul>
+  </div>
+</div>
