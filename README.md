@@ -12,14 +12,13 @@ over the season and create teams of other IC players to rank them.
 
 ### TODO
 
+* __Higher priority:__ Add some actual UI to this. And some client side validation for the forms.
 * The forms for ~~creating a team~~ and editing a team.
 * ~~The admin forms to update players points, goals etc.~~
 * ~~Add the components to view player details and the players points table.~~
-* __Higher priority:__ Add some actual UI to this. And some client side validation for the forms.
-* Make a teams points update automatically based on the players it has.
-  (Could be quite difficult)
-* __Gave up on this one:__ I don't have tests properly set up yet but I think I will try to use
-  Jasmine and Karma. Selenium + Protractor for e2etests.
+* When a user adds a player it should become his/her player and the same for a team.
+* Add the ability for the admin to edit the team for transfers.
+* Make a teams points update automatically based on the players it has. (Could be quite difficult)
 
 ### How to setup if you want to help
 
@@ -31,6 +30,6 @@ If not, this worked for me:
 
 1. Get [MongoDB](https://community.c9.io/t/setting-up-mongodb/1717) set up
 2. Run it on a terminal instance in cloud 9
-3. Run the server.js file with an environment variable for SECRET set up.
+3. Run the server.js file with an environment variable for SECRET and/or IP set up.
 4. Navigate to [https://fantasy-football-h22roscoe.c9users.io]( https://fantasy-football-h22roscoe.c9users.io)
   (with the equivalent for your account) for the preview
