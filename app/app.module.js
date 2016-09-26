@@ -5,6 +5,7 @@ angular.module('fantasyFootball', [
   'ngRoute',
   'ngSanitize',
   'ngCsv',
+  'dndLists',
   'core',
   'playerDetail',
   'playerTable',

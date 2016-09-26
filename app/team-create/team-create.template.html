@@ -1,9 +1,9 @@
 <div class="row-fluid">
-  <div class="col-sm-6 col-sm-offset-3">
+  <div class="col-sm-4 col-sm-offset-2">
     <h1>Create your team</h1>
     <form ng-submit="$ctrl.onSubmit()" novalidate>
       <div class="form-group">
-        <label for="name">Name</label>
+        <label for="name" class="control-label">Name</label>
         <input
           type="text"
           class="form-control"
@@ -13,7 +13,7 @@
           required />
       </div>
       <div class="form-group">
-        <label for="formation">Formation</label>
+        <label for="formation" class="control-label">Formation</label>
         <select
           class="form-control"
           id="formation"
@@ -23,169 +23,176 @@
           required>
         </select>
       </div>
-      <div class="form-group">
-        <label for="goalkeeper">Goalkeeper</label>
-        <select
-          class="form-control"
-          id="goalkeeper"
-          ng-model="$ctrl.gk"
-          ng-options="gk.name for gk in $ctrl.goalkeepers"
-          required>
-        </select>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Goalkeeper</h3>
+        </div>
+        <div class="panel-body">
+          <ul dnd-list="$ctrl.team.goalkeepers.players"
+              dnd-allowed-types="$ctrl.team.goalkeepers.allowedTypes"
+              dnd-disable-if="$ctrl.team.goalkeepers.players.length >= $ctrl.team.goalkeepers.max"
+              class="list-group">
+            <li ng-repeat="gk in $ctrl.team.goalkeepers.players"
+                dnd-draggable="gk"
+                dnd-type="'GK'"
+                dnd-moved="$ctrl.team.goalkeepers.players.splice($index, 1)"
+                dnd-effect-allowed="move">
+              {{ gk.name }}
+            </li>
+            <li class="dndPlaceholder">
+              Drop any <strong>goalkeeper</strong> here
+            </li>
+          </ul>
+        </div>
       </div>
-      <div class="form-group" ng-if="$ctrl.defs > 0">
-        <label for="defender1">Defender 1</label>
-        <select
-          class="form-control"
-          id="defender1"
-          ng-model="$ctrl.def1"
-          ng-options="def.name for def in $ctrl.defenders"
-          required>
-        </select>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Defenders</h3>
+        </div>
+        <div class="panel-body">
+          <ul dnd-list="$ctrl.team.defenders.players"
+              dnd-allowed-types="$ctrl.team.defenders.allowedTypes"
+              dnd-disable-if="$ctrl.team.defenders.players.length >= $ctrl.team.defenders.max"
+              class="list-group">
+            <li ng-repeat="def in $ctrl.team.defenders.players"
+                dnd-draggable="def"
+                dnd-type="'DEF'"
+                dnd-moved="$ctrl.team.defenders.players.splice($index, 1)"
+                dnd-effect-allowed="move">
+              {{ def.name }}
+            </li>
+            <li class="dndPlaceholder">
+              Drop any <strong>defender</strong> here
+            </li>
+          </ul>
+        </div>
       </div>
-      <div class="form-group" ng-if="$ctrl.defs > 1">
-        <label for="defender2">Defender 2</label>
-        <select
-          class="form-control"
-          id="defender2"
-          ng-model="$ctrl.def2"
-          ng-options="def.name for def in $ctrl.defenders"
-          required>
-        </select>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Midfielders</h3>
+        </div>
+        <div class="panel-body">
+          <ul dnd-list="$ctrl.team.midfielders.players"
+              dnd-allowed-types="$ctrl.team.midfielders.allowedTypes"
+              dnd-disable-if="$ctrl.team.midfielders.players.length >= $ctrl.team.midfielders.max"
+              class="list-group">
+            <li ng-repeat="mid in $ctrl.team.midfielders.players"
+                dnd-draggable="mid"
+                dnd-type="'MID'"
+                dnd-moved="$ctrl.team.midfielders.players.splice($index, 1)"
+                dnd-effect-allowed="move">
+              {{ mid.name }}
+            </li>
+            <li class="dndPlaceholder">
+              Drop any <strong>midfielder</strong> here
+            </li>
+          </ul>
+        </div>
       </div>
-      <div class="form-group" ng-if="$ctrl.defs > 2">
-        <label for="defender3">Defender 3</label>
-        <select
-          class="form-control"
-          id="defender3"
-          ng-model="$ctrl.def3"
-          ng-options="def.name for def in $ctrl.defenders">
-        </select>
-      </div>
-      <div class="form-group" ng-if="$ctrl.defs > 3">
-        <label for="defender4">Defender 4</label>
-        <select
-          class="form-control"
-          id="defender4"
-          ng-model="$ctrl.def4"
-          ng-options="def.name for def in $ctrl.defenders"
-          required>
-        </select>
-      </div>
-      <div class="form-group" ng-if="$ctrl.mids > 0">
-        <label for="midfielder1">Midfielder 1</label>
-        <select
-          class="form-control"
-          id="midfielder1"
-          ng-model="$ctrl.mid1"
-          ng-options="mid.name for mid in $ctrl.midfielders"
-          required>
-        </select>
-      </div>
-      <div class="form-group" ng-if="$ctrl.mids > 1">
-        <label for="midfielder2">Midfielder 2</label>
-        <select
-          class="form-control"
-          id="midfielder2"
-          ng-model="$ctrl.mid2"
-          ng-options="mid.name for mid in $ctrl.midfielders"
-          required>
-        </select>
-      </div>
-      <div class="form-group" ng-if="$ctrl.mids > 2">
-        <label for="midfielder3">Midfielder 3</label>
-        <select
-          class="form-control"
-          id="midfielder3"
-          ng-model="$ctrl.mid3"
-          ng-options="mid.name for mid in $ctrl.midfielders"
-          required>
-        </select>
-      </div>
-      <div class="form-group" ng-if="$ctrl.mids > 3">
-        <label for="midfielder4">Midfielder 4</label>
-        <select
-          class="form-control"
-          id="midfielder4"
-          ng-model="$ctrl.mid4"
-          ng-options="mid.name for mid in $ctrl.midfielders"
-          required>
-        </select>
-      </div>
-      <div class="form-group" ng-if="$ctrl.mids > 4">
-        <label for="midfielder5">Midfielder 5</label>
-        <select
-          class="form-control"
-          id="midfielder5"
-          ng-model="$ctrl.mid5"
-          ng-options="mid.name for mid in $ctrl.midfielders"
-          required>
-        </select>
-      </div>
-      <div class="form-group" ng-if="$ctrl.atts > 0">
-        <label for="attacker1">Attacker 1</label>
-        <select
-          class="form-control"
-          id="attacker1"
-          ng-model="$ctrl.att1"
-          ng-options="att.name for att in $ctrl.attackers"
-          required>
-        </select>
-      </div>
-      <div class="form-group" ng-if="$ctrl.atts > 1">
-        <label for="attacker2">Attacker 2</label>
-        <select
-          class="form-control"
-          id="attacker2"
-          ng-model="$ctrl.att2"
-          ng-options="att.name for att in $ctrl.attackers"
-          required>
-        </select>
-      </div>
-      <div class="form-group" ng-if="$ctrl.atts > 2">
-        <label for="attacker3">Attacker 3</label>
-        <select
-          class="form-control"
-          id="attacker3"
-          ng-model="$ctrl.att3"
-          ng-options="att.name for att in $ctrl.attackers"
-          required>
-        </select>
-      </div>
-      <div class="form-group" ng-if="$ctrl.subs > 0">
-        <label for="substitute1">Substitute 1</label>
-        <select
-          class="form-control"
-          id="substitute1"
-          ng-model="$ctrl.sub1"
-          ng-options="sub.name for sub in $ctrl.allPlayers"
-          required>
-        </select>
-      </div>
-      <div class="form-group" ng-if="$ctrl.subs > 1">
-        <label for="substitute2">Substitute 2</label>
-        <select
-          class="form-control"
-          id="substitute2"
-          ng-model="$ctrl.sub2"
-          ng-options="sub.name for sub in $ctrl.allPlayers"
-          required>
-        </select>
-      </div>
-      <div class="form-group" ng-if="$ctrl.subs > 2">
-        <label for="substitute3">Substitute 3</label>
-        <select
-          class="form-control"
-          id="substitute3"
-          ng-model="$ctrl.sub3"
-          ng-options="sub.name for sub in $ctrl.allPlayers"
-          required>
-        </select>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Attackers</h3>
+        </div>
+        <div class="panel-body">
+          <ul dnd-list="$ctrl.team.attackers.players"
+              dnd-allowed-types="$ctrl.team.attackers.allowedTypes"
+              dnd-disable-if="$ctrl.team.attackers.players.length >= $ctrl.team.attackers.max"
+              class="list-group">
+            <li ng-repeat="att in $ctrl.team.attackers.players"
+                dnd-draggable="att"
+                dnd-type="'ATT'"
+                dnd-moved="$ctrl.team.attackers.players.splice($index, 1)"
+                dnd-effect-allowed="move">
+              {{ att.name }}
+            </li>
+            <li class="dndPlaceholder">
+              Drop any <strong>attacker</strong> here
+            </li>
+          </ul>
+        </div>
       </div>
       <button
         type="submit"
         class="btn btn-default">Create the team!
       </button>
     </form>
+  </div>
+  <div class="col-sm-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1 class="panel-title">Goalkeepers</h1>
+      </div>
+      <div class="panel-body">
+        <ul dnd-list="$ctrl.goalkeepers.players"
+            dnd-allowed-types="$ctrl.goalkeepers.allowedTypes"
+            class="list-group">
+          <li ng-repeat="gk in $ctrl.goalkeepers.players"
+              dnd-draggable="gk"
+              dnd-type="'GK'"
+              dnd-moved="$ctrl.goalkeepers.players.splice($index, 1)"
+              dnd-effect-allowed="move"
+              class="list-group-item">
+            {{ gk.name }}
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1 class="panel-title">Defenders</h1>
+      </div>
+      <div class="panel-body">
+        <ul dnd-list="$ctrl.defenders.players"
+            dnd-allowed-types="$ctrl.defenders.allowedTypes"
+            class="list-group">
+          <li ng-repeat="def in $ctrl.defenders.players"
+              dnd-draggable="def"
+              dnd-type="'DEF'"
+              dnd-moved="$ctrl.defenders.players.splice($index, 1)"
+              dnd-effect-allowed="move"
+              class="list-group-item">
+            {{ def.name }}
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1 class="panel-title">Midfielders</h1>
+      </div>
+      <div class="panel-body">
+        <ul dnd-list="$ctrl.midfielders.players"
+            dnd-allowed-types="$ctrl.midfielders.allowedTypes"
+            class="list-group">
+          <li ng-repeat="mid in $ctrl.midfielders.players"
+              dnd-draggable="mid"
+              dnd-type="'MID'"
+              dnd-moved="$ctrl.midfielders.players.splice($index, 1)"
+              dnd-effect-allowed="move"
+              class="list-group-item">
+            {{ mid.name }}
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1 class="panel-title">Attackers</h1>
+      </div>
+      <div class="panel-body">
+        <ul dnd-list="$ctrl.attackers.players"
+            dnd-allowed-types="$ctrl.attackers.allowedTypes"
+            class="list-group">
+          <li ng-repeat="att in $ctrl.attackers.players"
+              dnd-draggable="att"
+              dnd-type="'ATT'"
+              dnd-moved="$ctrl.attackers.players.splice($index, 1)"
+              dnd-effect-allowed="move"
+              class="list-group-item">
+            {{ att.name }}
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>

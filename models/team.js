@@ -27,10 +27,6 @@ var teamSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Player'
   }],
-  substitutes: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Player'
-  }],
   points: Number
 });
 
