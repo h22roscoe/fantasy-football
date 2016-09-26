@@ -41,13 +41,17 @@ module.exports = function(passport) {
     });
   });
 
-  router.post('/players/*', isLoggedIn);
-  router.put('/players/*', isLoggedIn);
+  router.post('/players/*', isAdmin);
+  router.put('/players/*', isAdmin);
   router.use('/players', require('./players/router'));
 
-  router.post('/teams/*', isLoggedIn);
-  router.put('/teams/*', isLoggedIn);
+  router.post('/teams/*', isAdmin);
+  router.put('/teams/*', isAdmin);
   router.use('/teams', require('./teams/router'));
+
+  router.post('/users/*', isAdmin);
+  router.put('/users/*', isAdmin);
+  router.use('/users', require('./users/router'));
 
   return router;
 };
@@ -55,6 +59,30 @@ module.exports = function(passport) {
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
+  }
+
+  res.status(401).json({
+    err: 'UnauthorizedError'
+  });
+}
+
+function isAdmin(req, res, next) {
+  if (req.isAuthenticated()) {
+    users.findByUsername(req.user.username).then(function(user) {
+      if (!user) {
+        res.status(401).json({
+          err: 'UnauthorizedError'
+        });
+      }
+
+      if (user.admin) {
+        next();
+      } else {
+        res.status(401).json({
+          err: 'UnauthorizedError'
+        });
+      }
+    });
   }
 
   res.status(401).json({
