@@ -2,11 +2,14 @@ module.exports = function(User) {
   function findByUsername(username) {
     return User.findOne({
       username: username
-    }).populate('team').exec();
+    }).populate('team')
+      .populate('player').exec();
   }
 
   function findById(id) {
-    return User.findById(id).populate('team').exec();
+    return User.findById(id)
+      .populate('team')
+      .populate('player').exec();
   }
 
   function register(username, passwd, cb) {

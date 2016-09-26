@@ -2,9 +2,9 @@
 
 angular
   .module('core.auth')
-  .factory('AuthService', ['$q', '$http', AuthService]);
+  .factory('Auth', ['$q', '$http', Auth]);
 
-function AuthService($q, $http) {
+function Auth($q, $http) {
   var user = null;
 
   // Return available functions for use in the controllers

@@ -7,6 +7,7 @@ angular.module('fantasyFootball', [
   'ngCsv',
   'dndLists',
   'core',
+  'forms',
   'playerDetail',
   'playerTable',
   'playerCreate',

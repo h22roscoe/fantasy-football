@@ -31,4 +31,22 @@ router.put('/add-team', function(req, res) {
   });
 });
 
+router.put('/add-player', function(req, res) {
+  users.findByUsername(req.user.username).then(function(user) {
+    user.player = req.body.player;
+
+    user.save(function(err) {
+      if (err) {
+        res.status(500).json({
+          err: 'Something went wrong when assigning the player his/her player'
+        });
+      }
+
+      res.status(200).json({
+        user: user
+      });
+    });
+  });
+});
+
 module.exports = router;

@@ -8,6 +8,10 @@ var userSchema = new Schema({
   team: {
     type: Schema.Types.ObjectId,
     ref: 'Team'
+  },
+  player: {
+    type: Schema.Types.ObjectId,
+    ref: 'Player'
   }
 });
 
