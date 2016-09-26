@@ -9,7 +9,7 @@ var teamSchema = mongoose.Schema({
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Player'
+    ref: 'User'
   },
   goalkeepers: [{
     type: mongoose.Schema.Types.ObjectId,
