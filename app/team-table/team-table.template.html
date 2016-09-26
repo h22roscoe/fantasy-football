@@ -31,7 +31,7 @@
         <tbody>
           <tr ng-repeat="team in $ctrl.teams | filter: $ctrl.query | orderBy: $ctrl.orderProp : $ctrl.orderProp === 'points'">
             <td><a href="#!/teams/{{ team._id }}">{{ team.name }}</a></td>
-            <td>{{ team.owner.name }}</td>
+            <td>{{ team.owner.username }}</td>
             <td>{{ team.points }}</td>
           </tr>
         </tbody>

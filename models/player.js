@@ -4,6 +4,10 @@ var Schema = mongoose.Schema;
 // Define the schema for our user model
 var playerSchema = new Schema({
   name: String,
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
   position: {
     type: String,
     enum: ['Goalkeeper', 'Defender', 'Midfielder', 'Attacker']

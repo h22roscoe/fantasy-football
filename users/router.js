@@ -3,6 +3,12 @@ var express = require('express');
 var User = require('../models/user');
 var users = require('./controller')(User);
 
+var Player = require('../models/player');
+var players = require('../players/controller')(Player);
+
+var Team = require('../models/team');
+var teams = require('../teams/controller')(Team);
+
 var router = express.Router();
 
 router.get('/:id', function(req, res) {
@@ -17,16 +23,27 @@ router.put('/add-team', function(req, res) {
   users.findByUsername(req.user.username).then(function(user) {
     user.team = req.body.team;
 
-    user.save(function(err) {
+    user.save(function(err, userWithTeam) {
       if (err) {
         res.status(500).json({
           err: 'Something went wrong when assigning the player his/her team'
         });
+      } else {
+        teams.findById(userWithTeam.team).then(function(team) {
+          team.owner = userWithTeam;
+          team.save(function(err) {
+            if (err) {
+              res.status(500).json({
+                err: 'Something went wrong with team-owner relationship'
+              });
+            } else {
+              res.status(200).json({
+                user: userWithTeam
+              });
+            }
+          });
+        });
       }
-
-      res.status(200).json({
-        user: user
-      });
     });
   });
 });
@@ -35,16 +52,27 @@ router.put('/add-player', function(req, res) {
   users.findByUsername(req.user.username).then(function(user) {
     user.player = req.body.player;
 
-    user.save(function(err) {
+    user.save(function(err, userWithPlayer) {
       if (err) {
         res.status(500).json({
-          err: 'Something went wrong when assigning the player his/her player'
+          err: 'Something went wrong when assigning the user his/her player'
+        });
+      } else {
+        players.findById(userWithPlayer.player).then(function(player) {
+          player.owner = userWithPlayer;
+          player.save(function(err) {
+            if (err) {
+              res.status(500).json({
+                err: 'Something went wrong with player-owner relationship'
+              });
+            } else {
+              res.status(200).json({
+                user: userWithPlayer
+              });
+            }
+          });
         });
       }
-
-      res.status(200).json({
-        user: user
-      });
     });
   });
 });
