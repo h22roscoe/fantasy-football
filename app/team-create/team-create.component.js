@@ -4,10 +4,10 @@ angular
   .module('teamCreate')
   .component('teamCreate', {
     templateUrl: 'team-create/team-create.template.html',
-    controller: ['Team', 'Player', '$location', TeamCreateCtrl]
+    controller: ['Team', 'Player', 'User', '$location', TeamCreateCtrl]
   });
 
-function TeamCreateCtrl(Team, Player, $location) {
+function TeamCreateCtrl(Team, Player, User, $location) {
   var self = this;
 
   self.formations = [
@@ -81,8 +81,12 @@ function TeamCreateCtrl(Team, Player, $location) {
   };
 
   self.onSubmit = function() {
-    self.team.$save(function success() {
-      $location.path('/teams');
-    });
+    if (self.teamForm.$valid) {
+      self.team.$save(function (response) {
+        User.addTeam(response.team).then(function () {
+          $location.path('/players');
+        })
+      });
+    }
   };
 }

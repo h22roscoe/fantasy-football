@@ -16,7 +16,7 @@ over the season and create teams of other IC players to rank them.
 * The forms for ~~creating a team~~ and editing a team.
 * ~~The admin forms to update players points, goals etc.~~
 * ~~Add the components to view player details and the players points table.~~
-* When a user adds a player it should become his/her player and the same for a team.
+* ~~When a user adds a player it should become his/her player and the same for a team.~~
 * Add the ability for the admin to edit the team for transfers.
 * Make a teams points update automatically based on the players it has. (Could be quite difficult)
 

@@ -49,8 +49,8 @@ module.exports = function(passport) {
   router.put('/teams/*', isAdmin);
   router.use('/teams', require('./teams/router'));
 
-  router.post('/users/*', isAdmin);
-  router.put('/users/*', isAdmin);
+  router.post('/users/*', isLoggedIn);
+  router.put('/users/*', isLoggedIn);
   router.use('/users', require('./users/router'));
 
   return router;
@@ -59,11 +59,11 @@ module.exports = function(passport) {
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
+  } else {
+    res.status(401).json({
+      err: 'UnauthorizedError'
+    });
   }
-
-  res.status(401).json({
-    err: 'UnauthorizedError'
-  });
 }
 
 function isAdmin(req, res, next) {
@@ -83,9 +83,9 @@ function isAdmin(req, res, next) {
         });
       }
     });
+  } else {
+    res.status(401).json({
+      err: 'UnauthorizedError'
+    });
   }
-
-  res.status(401).json({
-    err: 'UnauthorizedError'
-  });
 }

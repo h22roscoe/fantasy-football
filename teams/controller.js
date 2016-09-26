@@ -1,5 +1,5 @@
 module.exports = function(Team) {
-  function create(name, formation, gks, defs, mids, atts, subs) {
+  function create(name, formation, gks, defs, mids, atts) {
     var newTeam = new Team();
     newTeam.name = name;
     newTeam.formation = formation;
@@ -7,7 +7,6 @@ module.exports = function(Team) {
     newTeam.defenders = defs;
     newTeam.midfielders = mids;
     newTeam.attackers = atts;
-    newTeam.substitutes = subs;
     newTeam.points = 0;
 
     return newTeam;
@@ -20,8 +19,7 @@ module.exports = function(Team) {
       .populate('goalkeepers')
       .populate('defenders')
       .populate('midfielders')
-      .populate('attackers')
-      .populate('substitutes').exec();
+      .populate('attackers').exec();
   }
 
   function findAll() {
@@ -33,8 +31,7 @@ module.exports = function(Team) {
       .populate('goalkeepers')
       .populate('defenders')
       .populate('midfielders')
-      .populate('attackers')
-      .populate('substitutes').exec();
+      .populate('attackers').exec();
   }
 
   return {

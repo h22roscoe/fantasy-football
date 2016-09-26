@@ -4,10 +4,10 @@ angular
   .module('playerCreate')
   .component('playerCreate', {
     templateUrl: 'player-create/player-create.template.html',
-    controller: ['$location', 'Player', PlayerCreateCtrl]
+    controller: ['$location', 'Player', 'User', PlayerCreateCtrl]
   });
 
-function PlayerCreateCtrl($location, Player) {
+function PlayerCreateCtrl($location, Player, User) {
   var self = this;
 
   self.positions = [
@@ -19,11 +19,6 @@ function PlayerCreateCtrl($location, Player) {
 
   self.xis = [1, 2, 3, 4, 5, 6, 7];
 
-  self.credentials = {
-    username: '',
-    password: ''
-  };
-
   self.player = new Player();
   self.player.name = '';
   self.player.position = 'Goalkeeper';
@@ -31,8 +26,10 @@ function PlayerCreateCtrl($location, Player) {
 
   self.onSubmit = function() {
     if (self.playerForm.$valid) {
-      self.player.$save(function() {
-        $location.path('/players');
+      self.player.$save(function(response) {
+        User.addPlayer(response.player).then(function() {
+          $location.path('/players');
+        });
       });
     }
   }
