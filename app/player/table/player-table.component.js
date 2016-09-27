@@ -1,9 +1,9 @@
 'use strict';
 
 angular
-  .module('playerTable')
+  .module('player.table')
   .component('playerTable', {
-    templateUrl: 'player-table/player-table.template.html',
+    templateUrl: 'player/table/player-table.template.html',
     controller: ['Player', 'Auth', PlayerTableController]
   });
 

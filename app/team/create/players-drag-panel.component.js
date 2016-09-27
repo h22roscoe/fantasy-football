@@ -1,9 +1,9 @@
 'use strict';
 
 angular
-  .module('teamCreate')
+  .module('team.create')
   .component('playersDragPanel', {
-    templateUrl: 'team-create/players-drag-panel.template.html',
+    templateUrl: 'team/create/players-drag-panel.template.html',
     controller: [PlayersDragPanelController],
     bindings: {
       list: '=',

@@ -2,9 +2,9 @@
 
 // Register `teamDetail` component, along with its associated controller and template
 angular
-  .module('teamDetail')
+  .module('team.detail')
   .component('teamDetail', {
-    templateUrl: 'team-detail/team-detail.template.html',
+    templateUrl: 'team/detail/team-detail.template.html',
     controller: ['$routeParams', 'Team', TeamDetailController]
   });
 

@@ -2,9 +2,9 @@
 
 // Register `teamTable` component, along with its associated controller and template
 angular
-  .module('teamTable')
+  .module('team.table')
   .component('teamTable', {
-    templateUrl: 'team-table/team-table.template.html',
+    templateUrl: 'team/table/team-table.template.html',
     controller: ['Team', TeamTableController]
   });
 

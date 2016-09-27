@@ -1,4 +1,4 @@
 'use strict';
 
 // Define the `teamTable` module
-angular.module('teamTable', ['core.team']);
+angular.module('team.table', ['core.team']);

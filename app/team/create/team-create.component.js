@@ -1,9 +1,9 @@
 'use strict';
 
 angular
-  .module('teamCreate')
+  .module('team.create')
   .component('teamCreate', {
-    templateUrl: 'team-create/team-create.template.html',
+    templateUrl: 'team/create/team-create.template.html',
     controller: ['Team', 'Player', 'User', '$location', TeamCreateCtrl]
   });
 

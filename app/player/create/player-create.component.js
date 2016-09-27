@@ -1,9 +1,9 @@
 'use strict';
 
 angular
-  .module('playerCreate')
+  .module('player.create')
   .component('playerCreate', {
-    templateUrl: 'player-create/player-create.template.html',
+    templateUrl: 'player/create/player-create.template.html',
     controller: ['$location', 'Player', 'User', PlayerCreateCtrl]
   });
 

@@ -8,11 +8,6 @@ angular.module('fantasyFootball', [
   'dndLists',
   'core',
   'forms',
-  'playerDetail',
-  'playerTable',
-  'playerCreate',
-  'playerEdit',
-  'teamDetail',
-  'teamTable',
-  'teamCreate'
+  'player',
+  'team'
 ]);

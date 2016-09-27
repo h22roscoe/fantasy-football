@@ -1,9 +1,9 @@
 'use strict';
 
 angular
-  .module('playerDetail')
+  .module('player.detail')
   .component('playerDetail', {
-    templateUrl: 'player-detail/player-detail.template.html',
+    templateUrl: 'player/detail/player-detail.template.html',
     bindings: {
       player: '='
     },

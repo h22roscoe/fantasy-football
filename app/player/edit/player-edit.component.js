@@ -1,9 +1,9 @@
 'use strict';
 
 angular
-  .module('playerEdit')
+  .module('player.edit')
   .component('playerEdit', {
-    templateUrl: 'player-edit/player-edit.template.html',
+    templateUrl: 'player/edit/player-edit.template.html',
     controller: [
       '$routeParams',
       '$location',

@@ -1,7 +1,7 @@
 'use strict';
 
 // Define the `teamDetail` module
-angular.module('teamDetail', [
+angular.module('team.detail', [
   'ngRoute',
   'core.team'
 ]);
