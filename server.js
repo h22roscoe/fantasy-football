@@ -46,11 +46,6 @@ var sess = {
   saveUninitialized: false
 };
 
-if (ENV === 'production') {
-  app.set('trust proxy', 1); // Trust first proxy
-  sess.cookie.secure = true; // Serve secure cookies
-}
-
 // Required for passport
 app.use(session(sess));
 
