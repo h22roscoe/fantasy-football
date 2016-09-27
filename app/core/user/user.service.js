@@ -14,7 +14,7 @@ function User($http, Me) {
     return $http.put('/users/add-player', {
       player: player
     }).then(function success(res) {
-      Me.player = res.user.player;
+      Me.player = res.data.user.player;
       return res;
     });
   }
@@ -22,7 +22,7 @@ function User($http, Me) {
     return $http.put('/users/add-team', {
       team: team
     }).then(function success(res) {
-      Me.team = res.user.team;
+      Me.team = res.data.user.team;
       return res;
     });
   }
