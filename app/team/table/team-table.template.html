@@ -2,8 +2,8 @@
   <div class="row-fluid">
     <div class="col-sm-2 col-sm-offset-2">
       <!--Sidebar content-->
-      <search query="$ctrl.query" orderProp="$ctrl.orderProp"></search>
-      <p class="text-center" ng-hide="$ctrl.team()">
+      <search query="$ctrl.query" order="$ctrl.orderProp"></search>
+      <p class="text-center" ng-show="$ctrl.isLoggedIn && !$ctrl.team()">
         Add your team <a href="#!/create-team">here</a>!
       </p>
     </div>

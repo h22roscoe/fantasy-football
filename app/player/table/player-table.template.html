@@ -2,9 +2,9 @@
   <div class="row-fluid">
     <div class="col-sm-2 col-sm-offset-2">
       <!--Sidebar content-->
-      <search query="$ctrl.query" orderProp="$ctrl.orderProp"></search>
+      <search query="$ctrl.query" order="$ctrl.orderProp"></search>
 
-      <p class="text-center" ng-hide="$ctrl.player()">
+      <p class="text-center" ng-show="$ctrl.isLoggedIn && !$ctrl.player()">
         Add your player <a href="#!/create-player">here</a>!
       </p>
 

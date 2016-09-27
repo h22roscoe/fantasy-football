@@ -11,6 +11,7 @@ function PlayerTableController(Player, Auth) {
   var self = this;
 
   self.isAdmin = Auth.isAdmin() === Auth.OK;
+  self.isLoggedIn = Auth.isLoggedIn() === Auth.OK;
   self.player = Auth.player;
   self.players = Player.query();
   self.orderProp = 'points';

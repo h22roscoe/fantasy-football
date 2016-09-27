@@ -11,8 +11,9 @@ angular
 function TeamTableController(Team, Auth) {
   var self = this;
 
+  self.isLoggedIn = Auth.isLoggedIn() === Auth.OK;
   self.team = Auth.team;
-  
+
   self.teams = Team.query();
   self.orderProp = 'points';
 }

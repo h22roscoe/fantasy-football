@@ -6,11 +6,9 @@ angular
     templateUrl: 'forms/search.template.html',
     bindings: {
       query: '=',
-      orderProp: '='
+      order: '='
     },
     controller: [SearchController]
   });
 
-function SearchController() {
-
-}
+function SearchController() {}
