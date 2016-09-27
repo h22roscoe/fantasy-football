@@ -1,4 +1,4 @@
 'use strict';
 
 // Define the `core.auth` module
-angular.module('core.auth', []);
+angular.module('core.auth', ['core.user']);

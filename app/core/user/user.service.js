@@ -2,9 +2,9 @@
 
 angular
   .module('core.user')
-  .factory('User', ['$http', User]);
+  .factory('User', ['$http', 'Me', User]);
 
-function User($http) {
+function User($http, Me) {
   return {
     addPlayer: addPlayer,
     addTeam: addTeam
@@ -13,11 +13,17 @@ function User($http) {
   function addPlayer(player) {
     return $http.put('/users/add-player', {
       player: player
+    }).then(function success(res) {
+      Me.player = res.user.player;
+      return res;
     });
   }
   function addTeam(team) {
     return $http.put('/users/add-team', {
       team: team
+    }).then(function success(res) {
+      Me.team = res.user.team;
+      return res;
     });
   }
 }

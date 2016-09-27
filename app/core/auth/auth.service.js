@@ -2,11 +2,9 @@
 
 angular
   .module('core.auth')
-  .factory('Auth', ['$q', '$http', Auth]);
+  .factory('Auth', ['$q', '$http', 'Me', Auth]);
 
-function Auth($q, $http) {
-  var user = null;
-
+function Auth($q, $http, Me) {
   // Return available functions for use in the controllers
   var Access = {
     OK: 200,
@@ -21,7 +19,7 @@ function Auth($q, $http) {
   return Access;
 
   function isLoggedIn() {
-    if (user) {
+    if (Me.loggedIn) {
       return Access.OK;
     } else {
       return $q.reject(Access.UNAUTHORIZED);
@@ -29,7 +27,7 @@ function Auth($q, $http) {
   }
 
   function isAdmin() {
-    if (user && user.admin) {
+    if (Me.loggedIn && Me.admin) {
       return Access.OK;
     } else {
       return $q.reject(Access.UNAUTHORIZED);
@@ -40,11 +38,17 @@ function Auth($q, $http) {
     // Send a post request to the server
     return $http.post('/login', credentials)
       .then(function success(res) {
-        user = res.data.user;
-        return res.data;
+        Me.loggedIn = true;
+        Me.admin = res.user.admin;
+        Me.team = res.user.team;
+        Me.player = res.user.player;
+        Me.username = res.user.username;
+        return res;
       }, function error(res) {
-        user = false;
-        return res.data;
+        Me.loggedIn = false;
+        Me.admin = false;
+        Me.username = null;
+        return res;
       });
   }
 
@@ -52,11 +56,15 @@ function Auth($q, $http) {
     // Send a post request to the server
     return $http.post('/register', credentials)
       .then(function success(res) {
-        user = res.data.user;
-        return res.data;
+        Me.loggedIn = true;
+        Me.admin = res.user.admin;
+        Me.username = res.user.username;
+        return res;
       }, function error(res) {
-        user = false;
-        return res.data;
+        Me.loggedIn = false;
+        Me.admin = false;
+        Me.username = null;
+        return res;
       });
   }
 
@@ -64,8 +72,9 @@ function Auth($q, $http) {
     // Send a get request to the server
     return $http.get('/logout')
       .then(function success() {
-        user = false;
-        return user;
+        Me.loggedIn = false;
+        Me.admin = false;
+        Me.username = null;
       });
   }
 }
