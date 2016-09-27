@@ -5,5 +5,6 @@ angular.module('core', [
   'core.player',
   'core.team',
   'core.auth',
-  'core.user'
+  'core.user',
+  'core.nav'
 ]);

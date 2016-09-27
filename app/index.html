@@ -42,10 +42,13 @@
   <script src="core/player/player.service.js"></script>
   <script src="core/auth/auth.module.js"></script>
   <script src="core/auth/auth.service.js"></script>
+  <script src="core/nav/nav.module.js"></script>
+  <script src="core/nav/nav.component.js"></script>
   <script src="core/user/user.module.js"></script>
   <script src="core/user/user.value.js"></script>
   <script src="core/user/user.service.js"></script>
   <script src="forms/forms.module.js"></script>
+  <script src="forms/search.component.js"></script>
   <script src="forms/register/register.module.js"></script>
   <script src="forms/register/register.component.js"></script>
   <script src="forms/login/login.module.js"></script>
@@ -58,31 +61,7 @@
 
 <body style="padding-top: 80px">
   <div class="container-fluid">
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#ic-main-nav">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#!/">
-            <img class="img-responsive" style="max-height: 2rem; max-width: 2rem;" src="images/ICL_Crest.png"/>
-          </a>
-        </div>
-        <div class="collapse navbar-collapse" id="ic-main-nav">
-          <ul class="nav navbar-nav">
-            <li><a href="#!/players">Players</a></li>
-            <li><a href="#!/teams">Teams</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#!/login">Login</a></li>
-            <li><a href="#!/register">Register</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <top-nav></top-nav>
     <div class="view-container">
       <div class="view-frame" ng-view>
       </div>
