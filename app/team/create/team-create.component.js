@@ -81,7 +81,7 @@ function TeamCreateCtrl(Team, Player, User, $location) {
   };
 
   self.onSubmit = function() {
-    if (self.teamForm.$valid) {
+    if (self.teamForm.$valid && lengthsMatch()) {
       self.team.$save(function (response) {
         User.addTeam(response.team).then(function () {
           $location.path('/players');
@@ -89,4 +89,11 @@ function TeamCreateCtrl(Team, Player, User, $location) {
       });
     }
   };
+
+  function lengthsMatch() {
+    return self.team.attackers.players.length === self.team.attackers.max
+      && self.team.midfielders.players.length === self.team.midfielders.max
+      && self.team.goalkeepers.players.length === self.team.goalkeepers.max
+      && self.team.defenders.players.length === self.team.defenders.max;
+  }
 }
