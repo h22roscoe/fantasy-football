@@ -16,16 +16,16 @@ angular
         .when('/create-team', {
           template: '<team-create></team-create>',
           resolve: {
-            access: ['Auth', function(Auth) {
-              return Auth.isLoggedIn();
+            access: ['Auth', '$q', function(Auth, $q) {
+              return Auth.team() ? $q.reject(Auth.UNAUTHORIZED) : Auth.OK;
             }]
           }
         })
         .when('/create-player', {
           template: '<player-create></player-create>',
           resolve: {
-            access: ['Auth', function(Auth) {
-              return Auth.isLoggedIn();
+            access: ['Auth', '$q', function(Auth, $q) {
+              return Auth.player() ? $q.reject(Auth.UNAUTHORIZED) : Auth.OK;
             }]
           }
         })
@@ -59,10 +59,10 @@ angular
         .otherwise('/players');
     }
   ]).run(['$rootScope', 'Auth', '$location',
-  function($rootScope, AuthService, $location) {
+  function($rootScope, Auth, $location) {
     $rootScope.$on('$routeChangeError',
       function(event, current, previous, rejection) {
-        if (rejection == AuthService.UNAUTHORIZED) {
+        if (rejection == Auth.UNAUTHORIZED) {
           $location.path('/login');
         }
       });

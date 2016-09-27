@@ -5,10 +5,14 @@ angular
   .module('team.table')
   .component('teamTable', {
     templateUrl: 'team/table/team-table.template.html',
-    controller: ['Team', TeamTableController]
+    controller: ['Team', 'Auth', TeamTableController]
   });
 
-function TeamTableController(Team) {
-  this.teams = Team.query();
-  this.orderProp = 'points';
+function TeamTableController(Team, Auth) {
+  var self = this;
+
+  self.team = Auth.team;
+  
+  self.teams = Team.query();
+  self.orderProp = 'points';
 }

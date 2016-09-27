@@ -4,6 +4,10 @@
       <!--Sidebar content-->
       <search query="$ctrl.query" orderProp="$ctrl.orderProp"></search>
 
+      <p class="text-center" ng-hide="$ctrl.player()">
+        Add your player <a href="#!/create-player">here</a>!
+      </p>
+
       <div>
         <button class="btn btn-primary"
                       ng-csv="$ctrl.players"
@@ -49,9 +53,6 @@
           </tr>
         </tbody>
       </table>
-      <p class="text-center">
-        Add your player <a href="#!/create-player">here</a>!
-      </p>
     </div>
   </div>
 </div>
