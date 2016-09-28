@@ -5,7 +5,7 @@
       <div
         class="form-group"
         ng-class="{
-          'has-error': $ctrl.playerForm.name.$invalid && $ctrl.playerForm.name.$dirty
+          'has-error': $ctrl.playerForm.name.$invalid && $ctrl.playerForm.name.$touched
         }">
         <label class="control-label" for="name">Name</label>
         <input
@@ -18,7 +18,7 @@
           ng-pattern="'\\w+ \\w+'"
           required />
         <span class="help-block"
-              ng-show="$ctrl.playerForm.name.$invalid && $ctrl.playerForm.name.$dirty">
+              ng-show="$ctrl.playerForm.name.$invalid && $ctrl.playerForm.name.$touched">
           Name must be the first and second name separated by a space
         </span>
       </div>

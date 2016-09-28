@@ -1,6 +1,10 @@
 <div class="row-fluid">
   <div class="col-sm-4 col-sm-offset-2">
     <h1>Create your team</h1>
+    <div uib-alert
+         ng-repeat="alert in $ctrl.alerts"
+         ng-class="'alert-' + (alert.type || 'danger')"
+         close="$ctrl.closeAlert($index)">{{ alert.msg }}</div>
     <form ng-submit="$ctrl.onSubmit()" name="$ctrl.teamForm" novalidate>
       <div class="form-group">
         <label for="name" class="control-label">Name</label>

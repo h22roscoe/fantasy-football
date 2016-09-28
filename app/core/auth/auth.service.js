@@ -70,12 +70,12 @@ function Auth($q, $http, Me) {
         Me.team = res.data.user.team;
         Me.player = res.data.user.player;
         Me.username = res.data.user.username;
-        return res.data;
+        return res;
       }, function error(res) {
         Me.loggedIn = false;
         Me.admin = false;
         Me.username = null;
-        return res.data;
+        return res;
       });
   }
 
@@ -86,12 +86,12 @@ function Auth($q, $http, Me) {
         Me.loggedIn = true;
         Me.admin = res.data.user.admin;
         Me.username = res.data.user.username;
-        return res.data;
+        return res;
       }, function error(res) {
         Me.loggedIn = false;
         Me.admin = false;
         Me.username = null;
-        return res.data;
+        return res;
       });
   }
 

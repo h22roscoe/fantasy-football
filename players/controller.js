@@ -18,17 +18,17 @@ module.exports = function(Player) {
   }
 
   function findById(id) {
-    return Player.findById(id).exec();
+    return Player.findById(id).populate('owner').exec();
   }
 
   function findAllByPosition(position) {
     return Player.find({
       position: position
-    }).exec();
+    }).populate('owner').exec();
   }
 
   function findAll() {
-    return Player.find({}).exec();
+    return Player.find({}).populate('owner').exec();
   }
 
   return {

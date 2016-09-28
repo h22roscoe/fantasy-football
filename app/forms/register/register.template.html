@@ -4,6 +4,10 @@
     <p>
       Or <a ng-href="#!/login">log in</a> if you already have an account
     </p>
+    <div uib-alert
+         ng-repeat="alert in $ctrl.alerts"
+         ng-class="'alert-' + (alert.type || 'danger')"
+         close="$ctrl.closeAlert($index)">{{ alert.msg }}</div>
     <form ng-submit="$ctrl.onSubmit()" name="$ctrl.registerForm" novalidate>
       <div
         class="form-group"

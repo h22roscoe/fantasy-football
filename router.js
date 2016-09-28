@@ -11,7 +11,7 @@ module.exports = function(passport) {
     var passwd = req.body.password;
     users.register(username, passwd, function (err, user) {
       if (err) {
-        return res.status(500).json({
+        return res.status(401).json({
           err: err
         });
       }

@@ -9,6 +9,19 @@ angular
 
 function TeamCreateCtrl(Team, Player, User, $location) {
   var self = this;
+  
+  self.alerts = [];
+
+   self.addAlert = function(msg, type) {
+    self.alerts.push({
+      msg: msg,
+      type: type
+    });
+  };
+
+  self.closeAlert = function(index) {
+    self.alerts.splice(index, 1);
+  };
 
   self.formations = [
     '4-4-2',
@@ -81,13 +94,26 @@ function TeamCreateCtrl(Team, Player, User, $location) {
   };
 
   self.onSubmit = function() {
-    if (self.teamForm.$valid && lengthsMatch()) {
-      self.team.$save(function (response) {
-        User.addTeam(response.team).then(function () {
-          $location.path('/players');
-        })
-      });
+    if (!lengthsMatch()) {
+      self.addAlert('The number of players must match the chosen formation');
+    
+      if (self.teamForm.$invalid) {
+        self.addAlert('You must fill in the team name.');
+      }
+      
+      return;
     }
+    
+    if (self.teamForm.$invalid) {
+      self.addAlert('You must fill in the team name.');
+      return;
+    }
+    
+    self.team.$save(function(response) {
+      User.addTeam(response.team).then(function() {
+        $location.path('/players');
+      });
+    });
   };
 
   function lengthsMatch() {

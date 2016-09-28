@@ -22,7 +22,7 @@ router.get('/:id', function(req, res) {
 router.put('/add-team', function(req, res) {
   users.findByUsername(req.user.username).then(function(user) {
     if (!user.team) {
-      user.team = req.body.team;
+      user.team = req.body.team._id;
     }
 
     user.save(function(err, userWithTeam) {
@@ -53,7 +53,7 @@ router.put('/add-team', function(req, res) {
 router.put('/add-player', function(req, res) {
   users.findByUsername(req.user.username).then(function(user) {
     if (!user.player) {
-      user.player = req.body.player;
+      user.player = req.body.player._id;
     }
 
     user.save(function(err, userWithPlayer) {

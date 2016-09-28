@@ -4,6 +4,10 @@
     <p>
       Or <a ng-href="#!/register">register</a> if you need to
     </p>
+    <div uib-alert
+         ng-repeat="alert in $ctrl.alerts"
+         ng-class="'alert-' + (alert.type || 'danger')"
+         close="$ctrl.closeAlert($index)">{{ alert.msg }}</div>
     <form ng-submit="$ctrl.onSubmit()">
       <div class="form-group">
         <label for="username">Username</label>

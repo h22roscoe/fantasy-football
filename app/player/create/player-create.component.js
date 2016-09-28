@@ -32,5 +32,5 @@ function PlayerCreateCtrl($location, Player, User) {
         });
       });
     }
-  }
+  };
 }

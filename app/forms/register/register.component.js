@@ -9,13 +9,30 @@ angular
 
 function RegisterCtrl($location, Auth) {
   var self = this;
+  
+  self.alerts = [];
+
+  self.addAlert = function(msg, type) {
+    self.alerts.push({
+      msg: msg,
+      type: type
+    });
+  };
+
+  self.closeAlert = function(index) {
+    self.alerts.splice(index, 1);
+  };
 
   self.onSubmit = function() {
     if (self.registerForm.$valid) {
       Auth
         .register(self.credentials)
-        .then(function() {
-          $location.path('/players');
+        .then(function success(res) {
+          if (res.status === 200) {
+            $location.path('/players');
+          } else {
+            self.addAlert(res.data.err.message);
+          } 
         });
     }
   };
