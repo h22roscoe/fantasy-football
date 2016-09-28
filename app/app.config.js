@@ -58,12 +58,20 @@ angular
         })
         .otherwise('/players');
     }
-  ]).run(['$rootScope', 'Auth', '$location',
-  function($rootScope, Auth, $location) {
+  ]).run(['$rootScope', 'Auth', '$location', '$window',
+  function($rootScope, Auth, $location, $window) {
     $rootScope.$on('$routeChangeError',
       function(event, current, previous, rejection) {
-        if (rejection == Auth.UNAUTHORIZED) {
+        if (rejection === Auth.UNAUTHORIZED) {
           $location.path('/login');
         }
       });
+    
+    $rootScope.$on('$routeChangeStart', function() {
+        $rootScope.$broadcast('pageLoaded');
+    });
+      
+    $window.onbeforeunload = function() {
+      $rootScope.$broadcast('pageRefresh');
+    };
   }]);
