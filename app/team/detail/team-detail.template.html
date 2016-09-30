@@ -20,7 +20,7 @@
     <div class="panel-body">
       <ul class="list-group">
         <li class="list-group-item" ng-repeat="gk in $ctrl.team.goalkeepers">
-          <a ng-href="#!/players/{{ gk._id }}">
+          <a style="display: block;" ng-href="#!/players/{{ gk._id }}">
             <img class="img-thumbnail img-responsive" style="height: auto; width: auto; max-height: 30px; max-width: 30px; border: none;" src="../images/Shirt.png">
             {{ gk.name }}
           </a>
@@ -38,7 +38,7 @@
     <div class="panel-body">
       <ul class="list-group">
         <li class="list-group-item" ng-repeat="def in $ctrl.team.defenders">
-          <a ng-href="#!/players/{{ def._id }}">
+          <a style="display: block;" ng-href="#!/players/{{ def._id }}">
             <img class="img-thumbnail img-responsive" style="height: auto; width: auto; max-height: 30px; max-width: 30px; border: none;" src="../images/Shirt.png">
             {{ def.name }}
           </a>
@@ -56,7 +56,7 @@
     <div class="panel-body">
       <ul class="list-group">
         <li class="list-group-item" ng-repeat="mid in $ctrl.team.midfielders">
-          <a ng-href="#!/players/{{ mid._id }}">
+          <a style="display: block;" ng-href="#!/players/{{ mid._id }}">
             <img class="img-thumbnail img-responsive" style="height: auto; width: auto; max-height: 30px; max-width: 30px; border: none;" src="../images/Shirt.png">
             {{ mid.name }}
           </a>
@@ -74,7 +74,7 @@
     <div class="panel-body">
       <ul class="list-group">
         <li class="list-group-item" ng-repeat="att in $ctrl.team.attackers">
-          <a ng-href="#!/players/{{ att._id }}">
+          <a style="display: block;" ng-href="#!/players/{{ att._id }}">
             <img class="img-thumbnail img-responsive" style="height: auto; width: auto; max-height: 30px; max-width: 30px; border: none;" src="../images/Shirt.png">
             {{ att.name }}
           </a>

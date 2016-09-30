@@ -13,21 +13,33 @@
     </div>
     <div class="collapse navbar-collapse" id="ic-main-nav">
       <ul class="nav navbar-nav">
-        <li><a href="#!/players">Players</a></li>
-        <li><a href="#!/teams">Teams</a></li>
+        <li>
+          <a href="#!/players">Players</a>
+        </li>
+        <li>
+          <a href="#!/teams">Teams</a>
+        </li>
       </ul>
       <ul ng-if="!$ctrl.isLoggedIn()" class="nav navbar-nav navbar-right">
-        <li><a href="#!/login">Login</a></li>
-        <li><a href="#!/register">Register</a></li>
+        <li>
+          <a href="#!/login">Login</a>
+        </li>
+        <li>
+          <a href="#!/register">Register</a>
+        </li>
       </ul>
       <ul ng-if="$ctrl.isLoggedIn()" class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" role="button">
-            {{ $ctrl.username() }}<span class="caret"></span>
+            <i class="fa fa-user" aria-hidden="true"></i> {{ $ctrl.username() }} <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li><a ng-href="#!/players/{{ $ctrl.player() }}">Your player</a></li>
-            <li><a ng-href="#!/teams/{{ $ctrl.team() }}">Your team</a></li>
+            <li>
+              <a ng-href="#!/players/{{ $ctrl.player() }}">Your player</a>
+            </li>
+            <li>
+              <a ng-href="#!/teams/{{ $ctrl.team() }}">Your team</a>
+            </li>
           </ul>
         </li>
       </ul>

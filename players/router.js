@@ -14,7 +14,7 @@ router.post('/', function(req, res) {
   player.save(function(err) {
     if (err) {
       res.status(500).json({
-        err: 'Some kind of error when saving user with player'
+        err: err
       });
     }
 
@@ -33,13 +33,21 @@ router.put('/:id', function(req, res) {
     player.save(function(err) {
       if (err) {
         res.status(500).json({
-          err: 'Some kind of error when updating player'
+          err: err
         });
       }
 
       res.status(200).json({
         player: player
       });
+    });
+  });
+});
+
+router.delete('/:id', function (req, res) {
+  players.removeById(req.params.id).then(function() {
+    res.status(200).json({
+      status: 'Player with id ' + req.params.id + ' removed'
     });
   });
 });

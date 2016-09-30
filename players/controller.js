@@ -21,6 +21,10 @@ module.exports = function(Player) {
     return Player.findById(id).populate('owner').exec();
   }
 
+  function removeById(id) {
+    return Player.findByIdAndRemove(id).exec();
+  }
+
   function findAllByPosition(position) {
     return Player.find({
       position: position
@@ -34,6 +38,7 @@ module.exports = function(Player) {
   return {
     create: create,
     findById: findById,
+    removeById: removeById,
     findAllByPosition: findAllByPosition,
     findAll: findAll
   };

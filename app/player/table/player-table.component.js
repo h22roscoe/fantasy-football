@@ -16,6 +16,19 @@ function PlayerTableController(Player, Auth) {
   self.players = Player.query();
   self.orderProp = 'points';
 
+  self.delete = function(player) {
+    var sure = confirm('Are you sure you want to delete this player?');
+    if (sure) {
+      var idx = self.players.indexOf(player);
+
+      Player.delete({
+        playerId: player._id
+      });
+
+      self.players.splice(idx, 1);
+    }
+  };
+
   self.getHeaders = function() {
     if (self.players && self.players.length > 0) {
       var aPlayer = self.players[0];
