@@ -14,16 +14,18 @@ function Auth($q, $http, Me, $rootScope) {
   $rootScope.$on('pageRefresh', function saveState(e) {
     sessionStorage.setItem('Me', JSON.stringify(Me));
   });
-  
+
   $rootScope.$on('pageLoaded', function() {
     var tempMe = JSON.parse(sessionStorage.getItem('Me'));
-    Me.loggedIn = tempMe.loggedIn;
-    Me.admin = tempMe.admin;
-    Me.username = tempMe.username;
-    Me.player = tempMe.player;
-    Me.team = tempMe.team;
+    if (tempMe) {
+      Me.loggedIn = tempMe.loggedIn;
+      Me.admin = tempMe.admin;
+      Me.username = tempMe.username;
+      Me.player = tempMe.player;
+      Me.team = tempMe.team;
+    }
   });
-  
+
   // Return available functions for use in the controllers
   var Access = {
     OK: 200,

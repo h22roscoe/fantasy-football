@@ -9,7 +9,7 @@ angular
 
 function TeamCreateCtrl(Team, Player, User, $location) {
   var self = this;
-  
+
   self.alerts = [];
 
    self.addAlert = function(msg, type) {
@@ -87,28 +87,28 @@ function TeamCreateCtrl(Team, Player, User, $location) {
     var regex = /^(\d)-(\d)-(\d)$/;
     var match = self.team.formation.match(regex);
     if (match) {
-      self.team.defenders.max = match[1]; // The 0th index would be the whole string
-      self.team.midfielders.max = match[2];
-      self.team.attackers.max = match[3];
+      self.team.defenders.max = parseInt(match[1]); // The 0th index would be the whole string
+      self.team.midfielders.max = parseInt(match[2]);
+      self.team.attackers.max = parseInt(match[3]);
     }
   };
 
   self.onSubmit = function() {
     if (!lengthsMatch()) {
       self.addAlert('The number of players must match the chosen formation');
-    
+
       if (self.teamForm.$invalid) {
         self.addAlert('You must fill in the team name.');
       }
-      
+
       return;
     }
-    
+
     if (self.teamForm.$invalid) {
       self.addAlert('You must fill in the team name.');
       return;
     }
-    
+
     self.team.$save(function(response) {
       User.addTeam(response.team).then(function() {
         $location.path('/players');
@@ -117,9 +117,15 @@ function TeamCreateCtrl(Team, Player, User, $location) {
   };
 
   function lengthsMatch() {
-    return self.team.attackers.players.length === self.team.attackers.max
-      && self.team.midfielders.players.length === self.team.midfielders.max
-      && self.team.goalkeepers.players.length === self.team.goalkeepers.max
-      && self.team.defenders.players.length === self.team.defenders.max;
+    var atts =
+      self.team.attackers.players.length === self.team.attackers.max;
+    var mids =
+      self.team.midfielders.players.length === self.team.midfielders.max;
+    var defs =
+      self.team.defenders.players.length === self.team.defenders.max;
+    var gks =
+      self.team.goalkeepers.players.length === self.team.goalkeepers.max;
+
+    return atts && mids && defs && gks;
   }
 }

@@ -1,6 +1,6 @@
-<div class="col-sm-2">
+<div class="well col-sm-2 col-sm-offset-1">
   <h1>
-    <strong>Name</strong>: {{ $ctrl.team.name }}
+    <strong>{{ $ctrl.team.name }}</strong>
   </h1>
 
   <p>
@@ -13,36 +13,73 @@
 </div>
 
 <div class="col-sm-2">
-  <h3>Goalkeeper</h3>
-  <p ng-repeat="gk in $ctrl.team.goalkeepers">
-    <a ng-href="#!/players/{{ gk._id }}">{{ gk.name }}</a>
-  </p>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Goalkeeper</h3>
+    </div>
+    <div class="panel-body">
+      <ul class="list-group">
+        <li class="list-group-item" ng-repeat="gk in $ctrl.team.goalkeepers">
+          <a ng-href="#!/players/{{ gk._id }}">
+            <img class="img-thumbnail img-responsive" style="height: auto; width: auto; max-height: 30px; max-width: 30px; border: none;" src="../images/Shirt.png">
+            {{ gk.name }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
 
 <div class="col-sm-2">
-  <h3>Defenders</h3>
-  <p ng-repeat="def in $ctrl.team.defenders">
-    <a ng-href="#!/players/{{ def._id }}">{{ def.name }}</a>
-  </p>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Defenders</h3>
+    </div>
+    <div class="panel-body">
+      <ul class="list-group">
+        <li class="list-group-item" ng-repeat="def in $ctrl.team.defenders">
+          <a ng-href="#!/players/{{ def._id }}">
+            <img class="img-thumbnail img-responsive" style="height: auto; width: auto; max-height: 30px; max-width: 30px; border: none;" src="../images/Shirt.png">
+            {{ def.name }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
 
 <div class="col-sm-2">
-  <h3>Midfielders</h3>
-  <p ng-repeat="mid in $ctrl.team.midfielders">
-    <a ng-href="#!/players/{{ mid._id }}">{{ mid.name }}</a>
-  </p>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Midfielders</h3>
+    </div>
+    <div class="panel-body">
+      <ul class="list-group">
+        <li class="list-group-item" ng-repeat="mid in $ctrl.team.midfielders">
+          <a ng-href="#!/players/{{ mid._id }}">
+            <img class="img-thumbnail img-responsive" style="height: auto; width: auto; max-height: 30px; max-width: 30px; border: none;" src="../images/Shirt.png">
+            {{ mid.name }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
 
 <div class="col-sm-2">
-  <h3>Attackers</h3>
-  <p ng-repeat="att in $ctrl.team.attackers">
-    <a ng-href="#!/players/{{ att._id }}">{{ att.name }}</a>
-  </p>
-</div>
-
-<div class="col-sm-2">
-  <h3>Substitutes</h3>
-  <p ng-repeat="sub in $ctrl.team.substitutes">
-    <a ng-href="#!/players/{{ sub._id }}">{{ sub.name }}</a>
-  </p>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Attackers</h3>
+    </div>
+    <div class="panel-body">
+      <ul class="list-group">
+        <li class="list-group-item" ng-repeat="att in $ctrl.team.attackers">
+          <a ng-href="#!/players/{{ att._id }}">
+            <img class="img-thumbnail img-responsive" style="height: auto; width: auto; max-height: 30px; max-width: 30px; border: none;" src="../images/Shirt.png">
+            {{ att.name }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>

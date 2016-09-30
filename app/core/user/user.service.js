@@ -12,17 +12,17 @@ function User($http, Me) {
 
   function addPlayer(player) {
     return $http.put('/users/add-player', {
-      player: player
+      id: player._id
     }).then(function success(res) {
-      Me.player = res.data.user.player;
+      Me.player = player._id;
       return res;
     });
   }
   function addTeam(team) {
     return $http.put('/users/add-team', {
-      team: team
+      id: team._id
     }).then(function success(res) {
-      Me.team = res.data.user.team;
+      Me.team = team._id;
       return res;
     });
   }

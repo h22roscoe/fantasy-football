@@ -4,8 +4,12 @@ angular
   .module('core.team')
   .factory('Team', ['$resource',
     function($resource) {
-      return $resource('teams/:teamId', {}, {
+      return $resource('teams/:teamId', {
         // Stick to default options
+      }, {
+        update: {
+          method: 'PUT'
+        }
       });
     }
   ]);
