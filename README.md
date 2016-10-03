@@ -13,12 +13,16 @@ over the season and create teams of other IC players to rank them.
 ### TODO
 
 * __Higher priority:__ Add some actual UI to this. And some client side validation for the forms.
+* Change user password.
+* Search for certain xi.
+* Sub appearances.
 * The forms for ~~creating a team~~ and editing a team.
 * ~~The admin forms to update players points, goals etc.~~
 * ~~Add the components to view player details and the players points table.~~
 * ~~When a user adds a player it should become his/her player and the same for a team.~~
 * Add the ability for the admin to edit the team for transfers.
 * Make a teams points update automatically based on the players it has. (Could be quite difficult)
+* Add the BUCS stuff.
 
 ### How to setup if you want to help
 
