@@ -16,6 +16,7 @@ over the season and create teams of other IC players to rank them.
 * Change user password.
 * Search for certain xi.
 * Sub appearances.
+* Add players without user let them associate with user.
 * The forms for ~~creating a team~~ and editing a team.
 * ~~The admin forms to update players points, goals etc.~~
 * ~~Add the components to view player details and the players points table.~~
