@@ -19,4 +19,6 @@ function TopNavController(Auth) {
   self.team = Auth.team;
 
   self.username = Auth.username;
+  
+  self.logout = Auth.logout;
 }

@@ -123,6 +123,8 @@ function Auth($q, $http, Me, $rootScope) {
         Me.loggedIn = false;
         Me.admin = false;
         Me.username = null;
+        Me.player = null;
+        Me.team = null;
       });
   }
 }
