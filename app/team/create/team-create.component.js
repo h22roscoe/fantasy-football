@@ -109,12 +109,27 @@ function TeamCreateCtrl(Team, Player, User, $location) {
       return;
     }
 
-    self.team.$save(function(response) {
-      User.addTeam(response.team).then(function() {
-        $location.path('/players');
+    self.team.goalkeepers = extractListOfIds(self.team.goalkeepers.players);
+    self.team.defenders = extractListOfIds(self.team.defenders.players);
+    self.team.midfielders = extractListOfIds(self.team.midfielders.players);
+    self.team.attackers = extractListOfIds(self.team.attackers.players);
+
+    self.team.$save(function(res) {
+      User.addTeam(res.team).then(function() {
+        $location.path('/teams');
       });
     });
   };
+
+  function extractListOfIds(arr) {
+    var idArr = [];
+
+    for (var i = 0; i < arr.length; i++) {
+      idArr.push(arr[i]._id);
+    }
+
+    return idArr;
+  }
 
   function lengthsMatch() {
     var atts =

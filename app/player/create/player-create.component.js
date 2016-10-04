@@ -4,10 +4,10 @@ angular
   .module('player.create')
   .component('playerCreate', {
     templateUrl: 'player/create/player-create.template.html',
-    controller: ['$location', 'Player', 'User', PlayerCreateCtrl]
+    controller: ['$location', 'Player', PlayerCreateCtrl]
   });
 
-function PlayerCreateCtrl($location, Player, User) {
+function PlayerCreateCtrl($location, Player) {
   var self = this;
 
   self.positions = [
@@ -27,9 +27,7 @@ function PlayerCreateCtrl($location, Player, User) {
   self.onSubmit = function() {
     if (self.playerForm.$valid) {
       self.player.$save(function(response) {
-        User.addPlayer(response.player).then(function() {
-          $location.path('/players');
-        });
+        $location.path('/players');
       });
     }
   };

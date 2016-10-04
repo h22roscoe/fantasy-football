@@ -4,5 +4,6 @@ angular.module('player', [
   'player.create',
   'player.table',
   'player.detail',
-  'player.edit'
+  'player.edit',
+  'player.associate'
 ]);
