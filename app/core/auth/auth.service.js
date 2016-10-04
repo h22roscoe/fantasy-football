@@ -17,11 +17,13 @@ function Auth($q, $http, Me, $rootScope) {
   
   $rootScope.$on('pageLoaded', function() {
     var tempMe = JSON.parse(sessionStorage.getItem('Me'));
-    Me.loggedIn = tempMe.loggedIn;
-    Me.admin = tempMe.admin;
-    Me.username = tempMe.username;
-    Me.player = tempMe.player;
-    Me.team = tempMe.team;
+    if (tempMe) {
+      Me.loggedIn = tempMe.loggedIn;
+      Me.admin = tempMe.admin;
+      Me.username = tempMe.username;
+      Me.player = tempMe.player;
+      Me.team = tempMe.team;
+    }
   });
   
   // Return available functions for use in the controllers

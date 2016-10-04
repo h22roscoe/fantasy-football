@@ -24,8 +24,8 @@ angular
         .when('/create-player', {
           template: '<player-create></player-create>',
           resolve: {
-            access: ['Auth', '$q', function(Auth, $q) {
-              return Auth.player() ? $q.reject(Auth.UNAUTHORIZED) : Auth.OK;
+            access: ['Auth', function(Auth) {
+              return Auth.isAdmin();
             }]
           }
         })

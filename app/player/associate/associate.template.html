@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <div uib-alert
+       ng-repeat="alert in $ctrl.alerts"
+       ng-class="'alert-' + (alert.type || 'danger')"
+       close="$ctrl.closeAlert($index)">{{ alert.msg }}</div>
+  <form name="$ctrl.associateForm" ng-submit="$ctrl.onSubmit()" novalidate>
+    <div class="form-group">
+      <label for="player">Which player are you?</label>
+      <select
+        class="form-control"
+        id="player"
+        ng-model="$ctrl.player"
+        ng-options="player.name for player in $ctrl.players | filter: $ctrl.noOwner"
+        required>
+      </select>
+    </div>
+    <button
+      type="submit"
+      class="btn btn-default">Associate your player!
+    </button>
+  </form>
+</div>
