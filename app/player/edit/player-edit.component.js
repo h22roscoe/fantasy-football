@@ -64,6 +64,7 @@ function PlayerEditController($routeParams, $location, Player, POINTS) {
     var newPoints = 0;
 
     newPoints += points.APPEARANCE * self.player.appearances;
+    newPoints += points.SUB * self.player.subs;
     newPoints += points.GOAL * self.player.goals;
     newPoints += points.ASSIST * self.player.assists;
     newPoints += points.CLEANSHEET * self.player.cleansheets;

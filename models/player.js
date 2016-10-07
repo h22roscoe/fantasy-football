@@ -14,6 +14,7 @@ var playerSchema = new Schema({
   },
   xi: Number,
   appearances: Number,
+  subs: Number,
   goals: Number,
   owngoals: Number,
   assists: Number,

@@ -54,6 +54,17 @@
           required />
       </div>
       <div class="form-group">
+        <label class="control-label" for="subs">Sub appearances</label>
+        <input
+          class="form-control"
+          type="number"
+          min="0"
+          id="subs"
+          ng-change="$ctrl.onChange()"
+          ng-model="$ctrl.player.subs"
+          required />
+      </div>
+      <div class="form-group">
         <label class="control-label" for="goals">Goals</label>
         <input
           class="form-control"

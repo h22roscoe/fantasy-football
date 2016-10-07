@@ -5,6 +5,7 @@ module.exports = function(Player) {
     player.position = position;
     player.xi = parseInt(xi);
     player.appearances = 0;
+    player.subs = 0;
     player.goals = 0;
     player.owngoals = 0;
     player.assists = 0;

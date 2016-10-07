@@ -5,6 +5,7 @@ angular
   .constant('POINTS', {
     'GK': {
       'APPEARANCE': 2,
+      'SUB': 1,
       'GOAL': 10,
       'ASSIST': 6,
       'CLEANSHEET': 8,
@@ -15,6 +16,7 @@ angular
     },
     'DEF': {
       'APPEARANCE': 2,
+      'SUB': 1,
       'GOAL': 8,
       'ASSIST': 4,
       'CLEANSHEET': 8,
@@ -25,6 +27,7 @@ angular
     },
     'MID': {
       'APPEARANCE': 2,
+      'SUB': 1,
       'GOAL': 5,
       'ASSIST': 3,
       'CLEANSHEET': 0,
@@ -35,6 +38,7 @@ angular
     },
     'ATT': {
       'APPEARANCE': 2,
+      'SUB': 1,
       'GOAL': 4,
       'ASSIST': 3,
       'CLEANSHEET': 0,

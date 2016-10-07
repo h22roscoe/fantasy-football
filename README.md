@@ -15,8 +15,8 @@ over the season and create teams of other IC players to rank them.
 * __Higher priority:__ Add some actual UI to this. ~~And some client side validation for the forms.~~
 * Change user password.
 * ~~Logout button.~~
-* Search for certain xi.
-* Sub appearances.
+* ~~Search for certain xi.~~
+* ~~Sub appearances.~~
 * ~~Add players without user let them associate with user.~~
 * ~~The forms for creating a team.~~
 * ~~The admin forms to update players points, goals etc.~~
