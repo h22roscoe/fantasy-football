@@ -3,11 +3,24 @@
     <div class="col-sm-2 col-sm-offset-2">
       <!--Sidebar content-->
       <search query="$ctrl.query" order="$ctrl.orderProp"></search>
+      <div class="form-group">
+        <label class="control-label">Choose XI:</label>
+        <select class="form-control" ng-model="$ctrl.xi">
+          <option value="all">All</option>
+          <option value="1">1st</option>
+          <option value="2">2nd</option>
+          <option value="3">3rd</option>
+          <option value="4">4th</option>
+          <option value="5">5th</option>
+          <option value="6">6th</option>
+          <option value="7">7th</option>
+        </select>
+      </div>
 
       <p class="text-center" ng-if="$ctrl.isLoggedIn && !$ctrl.player()">
         <player-associate></player-associate>
       </p>
-      
+
       <p class="text-center" ng-if="$ctrl.isAdmin">
         Add new player <a href="#!/create-player">here</a>!
       </p>
@@ -39,7 +52,7 @@
           <th>OGs</th>
         </thead>
         <tbody>
-          <tr ng-repeat="player in $ctrl.players | filter: $ctrl.query | orderBy: $ctrl.orderProp : $ctrl.orderProp === 'points'">
+          <tr ng-repeat="player in $ctrl.players | filter: $ctrl.query | filter: $ctrl.inXi | orderBy: $ctrl.orderProp : $ctrl.orderProp === 'points'">
             <td>
               <a ng-href="#!/players/{{ player._id }}">{{ player.name }}</a>
             </td>

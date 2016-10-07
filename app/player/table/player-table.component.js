@@ -15,6 +15,11 @@ function PlayerTableController(Player, Auth) {
   self.player = Auth.player;
   self.players = Player.query();
   self.orderProp = 'points';
+  self.xi = 'all';
+
+  self.inXi = function(player) {
+    return self.xi === 'all' ? true : player.xi == self.xi;
+  };
 
   self.delete = function(player) {
     var sure = confirm('Are you sure you want to delete this player?');
