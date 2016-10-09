@@ -49,6 +49,27 @@
           Password should only include letters, numbers and/or underscores.
         </span>
       </div>
+      <div
+        class="form-group"
+        ng-class="{
+          'has-error': $ctrl.registerForm.cpassword.$error.match && $ctrl.registerForm.cpassword.$dirty
+        }">
+        <label class="control-label" for="cpassword">Confirm password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="cpassword"
+          name="cpassword"
+          placeholder="Confirm password"
+          ng-model="$ctrl.cpassword"
+          ng-pattern="'\\w+'"
+          pw-check="password"
+          required />
+        <span class="help-block"
+              ng-show="$ctrl.registerForm.cpassword.$error.match && $ctrl.registerForm.cpassword.$dirty">
+          Passwords must match.
+        </span>
+      </div>
       <button
         type="submit"
         class="btn btn-default">Register!</button>
