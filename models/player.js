@@ -13,6 +13,7 @@ var playerSchema = new Schema({
     enum: ['Goalkeeper', 'Defender', 'Midfielder', 'Attacker']
   },
   xi: Number,
+  value: Number,
   appearances: Number,
   subs: Number,
   goals: Number,

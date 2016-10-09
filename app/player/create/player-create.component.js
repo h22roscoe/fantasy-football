@@ -23,10 +23,11 @@ function PlayerCreateCtrl($location, Player) {
   self.player.name = '';
   self.player.position = 'Goalkeeper';
   self.player.xi = 1;
+  self.player.value = 0;
 
   self.onSubmit = function() {
     if (self.playerForm.$valid) {
-      self.player.$save(function(response) {
+      self.player.$save(function() {
         $location.path('/players');
       });
     }

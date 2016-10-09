@@ -22,6 +22,7 @@
           Name must be the first and second name separated by a space
         </span>
       </div>
+
       <div class="form-group">
         <label class="control-label" for="position">Position</label>
         <select
@@ -32,6 +33,7 @@
           required>
         </select>
       </div>
+
       <div class="form-group">
         <label class="control-label" for="xi">XI</label>
         <select
@@ -42,6 +44,27 @@
           required>
         </select>
       </div>
+
+      <label class="control-label" for="value">Value</label>
+      <div
+        class="form-group input-group"
+        ng-class="{
+          'has-error': $ctrl.playerForm.value.$invalid && $ctrl.playerForm.value.$dirty
+        }">
+        <span class="input-group-addon">£</span>
+        <input
+          class="form-control"
+          type="number"
+          min="0"
+          max="10"
+          name="value"
+          id="value"
+          ng-model="$ctrl.player.value"
+          required>
+        </input>
+        <span class="input-group-addon">Mil</span>
+      </div>
+
       <div class="form-group">
         <label class="control-label" for="apps">Appearances</label>
         <input
@@ -53,6 +76,7 @@
           ng-model="$ctrl.player.appearances"
           required />
       </div>
+
       <div class="form-group">
         <label class="control-label" for="subs">Sub appearances</label>
         <input
@@ -64,6 +88,7 @@
           ng-model="$ctrl.player.subs"
           required />
       </div>
+
       <div class="form-group">
         <label class="control-label" for="goals">Goals</label>
         <input
@@ -75,6 +100,7 @@
           ng-model="$ctrl.player.goals"
           required />
       </div>
+
       <div class="form-group">
         <label class="control-label" for="assists">Assists</label>
         <input
@@ -86,6 +112,7 @@
           ng-model="$ctrl.player.assists"
           required />
       </div>
+
       <div class="form-group">
         <label class="control-label" for="cleansheets">Clean sheets</label>
         <input
@@ -97,6 +124,7 @@
           ng-model="$ctrl.player.cleansheets"
           required />
       </div>
+
       <div class="form-group">
         <label class="control-label" for="motms">Man of the matches</label>
         <input
@@ -108,6 +136,7 @@
           ng-model="$ctrl.player.motms"
           required />
       </div>
+
       <div class="form-group">
         <label class="control-label" for="owngoals">Own goals</label>
         <input
@@ -119,6 +148,7 @@
           ng-model="$ctrl.player.owngoals"
           required />
       </div>
+
       <div class="form-group">
         <label class="control-label" for="yellowcards">Yellows</label>
         <input
@@ -130,6 +160,7 @@
           ng-model="$ctrl.player.yellowcards"
           required />
       </div>
+
       <div class="form-group">
         <label class="control-label" for="redcards">Reds</label>
         <input
@@ -141,6 +172,7 @@
           ng-model="$ctrl.player.redcards"
           required />
       </div>
+
       <button
         type="submit"
         class="btn btn-primary">Update this player!

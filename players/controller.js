@@ -1,9 +1,10 @@
 module.exports = function(Player) {
-  function create(name, position, xi) {
+  function create(name, position, xi, value) {
     var player = new Player();
     player.name = name;
     player.position = position;
     player.xi = parseInt(xi);
+    player.value = parseInt(value);
     player.appearances = 0;
     player.subs = 0;
     player.goals = 0;

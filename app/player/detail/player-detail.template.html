@@ -1,6 +1,7 @@
 <div class="container-fluid well">
   <div class="col-sm-6">
     <h1>{{ $ctrl.player.name }}</h1>
+    <h4>{{ $ctrl.player.owner.username }}</h4>
     <h4>{{ $ctrl.player.position }} in the
       <ng-pluralize
         count="$ctrl.player.xi"
@@ -10,8 +11,9 @@
         '3': '3rd',
         'other': '{}th'
       }">
-      </ng-pluralize> team</h4>
-    <h4>Owner is {{ $ctrl.player.owner.username }}</h4>
+      </ng-pluralize> team
+    </h4>
+    <h4>{{ $ctrl.player.value | currency : "£" : 0 }} Mil</h4>
 
     <p><strong>Points</strong>: {{ $ctrl.player.points }}</p>
 

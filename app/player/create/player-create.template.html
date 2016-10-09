@@ -22,8 +22,9 @@
           Name must be the first and second name separated by a space
         </span>
       </div>
+
+      <label class="control-label" for="position">Position</label>
       <div class="form-group">
-        <label class="control-label" for="position">Position</label>
         <select
           class="form-control"
           id="position"
@@ -32,8 +33,9 @@
           required>
         </select>
       </div>
+
+      <label class="control-label" for="xi">XI</label>
       <div class="form-group">
-        <label class="control-label" for="xi">XI</label>
         <select
           class="form-control"
           id="xi"
@@ -42,6 +44,27 @@
           required>
         </select>
       </div>
+
+      <label class="control-label" for="value">Value</label>
+      <div
+        class="form-group input-group"
+        ng-class="{
+          'has-error': $ctrl.playerForm.value.$invalid && $ctrl.playerForm.value.$dirty
+        }">
+        <span class="input-group-addon">£</span>
+        <input
+          class="form-control"
+          type="number"
+          min="0"
+          max="10"
+          name="value"
+          id="value"
+          ng-model="$ctrl.player.value"
+          required>
+        </input>
+        <span class="input-group-addon">Mil</span>
+      </div>
+
       <button
         type="submit"
         class="btn btn-default">Create new player!</button>

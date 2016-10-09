@@ -7,11 +7,12 @@ angular
     '$http',
     'Me',
     '$rootScope',
+    '$location',
     Auth
   ]);
 
-function Auth($q, $http, Me, $rootScope) {
-  $rootScope.$on('pageRefresh', function saveState(e) {
+function Auth($q, $http, Me, $rootScope, $location) {
+  $rootScope.$on('pageRefresh', function saveState() {
     sessionStorage.setItem('Me', JSON.stringify(Me));
   });
 
@@ -125,6 +126,8 @@ function Auth($q, $http, Me, $rootScope) {
         Me.username = null;
         Me.player = null;
         Me.team = null;
+
+        $location.path('/');
       });
   }
 }

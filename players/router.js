@@ -9,7 +9,8 @@ router.post('/', function(req, res) {
   var name = req.body.name;
   var position = req.body.position;
   var xi = req.body.xi;
-  var player = players.create(name, position, xi);
+  var value = req.body.value;
+  var player = players.create(name, position, xi, value);
 
   player.save(function(err) {
     if (err) {
