@@ -10,6 +10,7 @@ angular.module('fantasyFootball', [
   'dndLists',
   'ui.bootstrap',
   'core',
+  'rules',
   'forms',
   'player',
   'team'

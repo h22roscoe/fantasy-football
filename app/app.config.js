@@ -29,6 +29,9 @@ angular
             }]
           }
         })
+        .when('/rules', {
+          template: '<rules></rules>'
+        })
         .when('/players', {
           template: '<player-table></player-table>'
         })
@@ -66,11 +69,11 @@ angular
           $location.path('/login');
         }
       });
-    
+
     $rootScope.$on('$routeChangeStart', function() {
         $rootScope.$broadcast('pageLoaded');
     });
-      
+
     $window.onbeforeunload = function() {
       $rootScope.$broadcast('pageRefresh');
     };
