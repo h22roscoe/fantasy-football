@@ -13,12 +13,14 @@
       <table class="table table-striped table-responsive">
         <thead class="teams">
           <th>Team name</th>
+          <th>Value</th>
           <th>Owner</th>
           <th>Points</th>
         </thead>
         <tbody>
           <tr ng-repeat="team in $ctrl.teams | filter: $ctrl.query | orderBy: $ctrl.orderProp : $ctrl.orderProp === 'points'">
             <td><a href="#!/teams/{{ team._id }}">{{ team.name }}</a></td>
+            <td>{{ team.value | currency : "£" }} Mil</td>
             <td>{{ team.owner.username }}</td>
             <td>{{ team.points }}</td>
           </tr>

@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 // Define the schema for our user model
 var teamSchema = mongoose.Schema({
   name: String,
+  value: Number,
   formation: {
     type: String,
     enum: ['4-4-2', '4-5-1', '4-3-3', '3-4-3', '3-5-2']

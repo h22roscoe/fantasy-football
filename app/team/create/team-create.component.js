@@ -12,7 +12,7 @@ function TeamCreateCtrl(Team, Player, User, $location) {
 
   self.alerts = [];
 
-   self.addAlert = function(msg, type) {
+  self.addAlert = function(msg, type) {
     self.alerts.push({
       msg: msg,
       type: type
@@ -22,6 +22,8 @@ function TeamCreateCtrl(Team, Player, User, $location) {
   self.closeAlert = function(index) {
     self.alerts.splice(index, 1);
   };
+
+  self.maxValue = 100;
 
   self.formations = [
     '4-4-2',
@@ -83,6 +85,9 @@ function TeamCreateCtrl(Team, Player, User, $location) {
     players: []
   };
 
+  self.team.value = sumOfPlayers('value');
+  self.team.points = sumOfPlayers('points');
+
   self.formationChange = function() {
     var regex = /^(\d)-(\d)-(\d)$/;
     var match = self.team.formation.match(regex);
@@ -94,21 +99,29 @@ function TeamCreateCtrl(Team, Player, User, $location) {
   };
 
   self.onSubmit = function() {
-    if (!lengthsMatch()) {
-      self.addAlert('The number of players must match the chosen formation');
+    var predErrorMap = [
+      lengthsMatch(), 'The number of players must match the chosen formation',
+      self.teamForm.$valid, 'You must fill in the team name.',
+      lessThanMaxValue(), 'Your team value must be less than £' + self.maxValue + ' Mil'
+    ];
 
-      if (self.teamForm.$invalid) {
-        self.addAlert('You must fill in the team name.');
+    var i = 0;
+    var anyFails = false;
+    while (i < predErrorMap.length) {
+      if (!predErrorMap[i]) {
+        self.addAlert(predErrorMap[i + 1]);
+        anyFails = true;
       }
 
-      return;
+      i += 2;
     }
 
-    if (self.teamForm.$invalid) {
-      self.addAlert('You must fill in the team name.');
-      return;
+    if (anyFails) {
+      return; // Don't submit
     }
 
+    self.team.value = self.team.value();
+    self.team.points = self.team.points();
     self.team.goalkeepers = extractListOfIds(self.team.goalkeepers.players);
     self.team.defenders = extractListOfIds(self.team.defenders.players);
     self.team.midfielders = extractListOfIds(self.team.midfielders.players);
@@ -120,6 +133,26 @@ function TeamCreateCtrl(Team, Player, User, $location) {
       });
     });
   };
+
+  function sumOfPlayers(prop) {
+    var addValue = function(a, b) {
+      return a + b[prop];
+    };
+
+    return function() {
+      var val = 0;
+      val += self.team.goalkeepers.players.reduce(addValue, 0);
+      val += self.team.defenders.players.reduce(addValue, 0);
+      val += self.team.midfielders.players.reduce(addValue, 0);
+      val += self.team.attackers.players.reduce(addValue, 0);
+
+      return val;
+    };
+  }
+
+  function lessThanMaxValue() {
+    return self.team.value() < self.maxValue;
+  }
 
   function extractListOfIds(arr) {
     var idArr = [];

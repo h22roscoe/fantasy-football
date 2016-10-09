@@ -8,12 +8,24 @@ var router = express.Router();
 router.post('/', function(req, res) {
   var name = req.body.name;
   var formation = req.body.formation;
+  var value = req.body.value;
+  var points = req.body.points;
   var gks = req.body.goalkeepers;
   var defs = req.body.defenders;
   var mids = req.body.midfielders;
   var atts = req.body.attackers;
 
-  var newTeam = teams.create(name, formation, gks, defs, mids, atts);
+  var newTeam = teams.create(
+    name,
+    formation,
+    value,
+    points,
+    gks,
+    defs,
+    mids,
+    atts
+  );
+
   newTeam.save(function(err) {
     if (err) {
       res.status(500).json({
@@ -28,15 +40,17 @@ router.post('/', function(req, res) {
 });
 
 router.get('/', function(req, res) {
+  teams.gatherPoints();
+
   teams.findAll().then(function(ts) {
-    teams.gatherPoints();
     res.json(ts);
   });
 });
 
 router.get('/:id', function(req, res) {
+  teams.gatherPoints();
+
   teams.findById(req.params.id).then(function(team) {
-    teams.gatherPoints();
     res.json(team);
   });
 });

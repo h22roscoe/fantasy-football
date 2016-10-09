@@ -2,6 +2,9 @@
   <h1>
     <strong>{{ $ctrl.team.name }}</strong>
   </h1>
+  <p>
+    <strong>Value</strong>: {{ $ctrl.team.value | currency : "£" }} Mil
+  </p>
 
   <p>
     <strong>Points</strong>: {{ $ctrl.team.points }}

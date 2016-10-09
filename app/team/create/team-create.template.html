@@ -5,6 +5,12 @@
          ng-repeat="alert in $ctrl.alerts"
          ng-class="'alert-' + (alert.type || 'danger')"
          close="$ctrl.closeAlert($index)">{{ alert.msg }}</div>
+    <div class="well">
+      <div class="panel-body">
+        <h4><strong>Value:</strong> {{ $ctrl.team.value() | currency : "£" }} Mil</h4>
+        <h4><strong>Points:</strong> {{ $ctrl.team.points() }}</h4>
+      </div>
+    </div>
     <form ng-submit="$ctrl.onSubmit()" name="$ctrl.teamForm" novalidate>
       <div class="form-group">
         <label for="name" class="control-label">Name</label>
