@@ -62,10 +62,11 @@ module.exports = function(Team) {
       }
     }], function(err, result) {
       if (err) {
+        console.log(err);
         return;
       }
 
-      updateTeamsWithPoints(result);
+      updateTeams(result);
     });
   }
 
@@ -85,7 +86,7 @@ module.exports = function(Team) {
     findById: findById
   };
 
-  function updateTeamsWithPoints(result) {
+  function updateTeams(result) {
     for (var i = 0; i < result.length; i++) {
       var teamPoints = result[i];
       Team.findById(teamPoints._id, function(err, team) {

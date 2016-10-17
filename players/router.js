@@ -3,6 +3,9 @@ var express = require('express');
 var Player = require('../models/player');
 var players = require('./controller')(Player);
 
+var Team = require('../models/team');
+var teams = require('../teams/controller')(Team);
+
 var router = express.Router();
 
 router.post('/', function(req, res) {
@@ -32,6 +35,7 @@ router.put('/:id', function(req, res) {
     });
 
     player.save(function(err) {
+      teams.gatherPoints();
       if (err) {
         res.status(500).json({
           err: err

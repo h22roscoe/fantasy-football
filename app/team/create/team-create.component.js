@@ -151,7 +151,7 @@ function TeamCreateCtrl(Team, Player, User, $location) {
   }
 
   function lessThanMaxValue() {
-    return self.team.value() < self.maxValue;
+    return self.team.value() <= self.maxValue;
   }
 
   function extractListOfIds(arr) {
