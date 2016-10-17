@@ -86,23 +86,23 @@ module.exports = function(Team) {
     findById: findById
   };
 
-  function updateTeams(result) {
-    for (var i = 0; i < result.length; i++) {
-      var teamPoints = result[i];
-      Team.findById(teamPoints._id, function(err, team) {
+  function updateTeams(results) {
+    results.forEach((result) => {
+      var teamPromise = Team.findById(result._id).exec();
+      updateTeam(result, teamPromise);
+    });
+  }
+  
+  function updateTeam(result, teamPromise) {
+    teamPromise.then((team) => {
+      team.points = result.totalPoints;
+      team.value = result.totalValue;
+
+      team.save((err) => {
         if (err) {
           throw err;
         }
-
-        team.points = teamPoints.totalPoints;
-        team.value = teamPoints.totalValue;
-
-        team.save(function(err) {
-          if (err) {
-            throw err;
-          }
-        });
       });
-    }
+    });
   }
 };
